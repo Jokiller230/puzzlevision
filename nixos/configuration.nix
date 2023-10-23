@@ -107,13 +107,13 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-  }
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users = [
+  users.users = {
     jo = {
       isNormalUser = true;
       description = "Jo";
@@ -126,14 +126,16 @@
     work = {
       isNormalUser = true;
       description = "Work";
+      initialPassword = "fortnite";
       extraGroups = [ "networkmanager" ];
       packages = with pkgs; [
         jetbrains.webstorm
         jetbrains.phpstorm
         teams-for-linux
+        enpass
       ];
     };
-  ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -144,6 +146,7 @@
 
     # Other packages
     nano
+    git
     vscodium
     firefox
     thunderbird
