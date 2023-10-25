@@ -11,9 +11,6 @@
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
@@ -40,10 +37,24 @@
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Deduplicate and optimize nix store
+      substituters = [
+        "https://cache.nixos.org?priority=10"
+        "https://nix-community.cachix.org"
+      ];
+
       auto-optimise-store = true;
+      builders-use-substitutes = true;
+      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+      keep-derivations = true;
+      keep-outputs = true;
+      max-jobs = "auto";
+      warn-dirty = false;
+    };
+
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 3d";
     };
   };
 
@@ -51,12 +62,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.hostName = "nixos";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -77,19 +83,6 @@
     LC_PAPER = "de_DE.UTF-8";
     LC_TELEPHONE = "de_DE.UTF-8";
     LC_TIME = "de_DE.UTF-8";
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "";
   };
 
   # Configure console keymap
@@ -120,6 +113,8 @@
       extraGroups = [ "networkmanager" "wheel" ];
       packages = with pkgs; [
         discord
+        # ciscoPacketTracer8
+        wireshark
       ];
     };
 
@@ -140,16 +135,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # GNOME packages (extensions, themes, etc...)
-    gnome.gnome-tweaks
-    adw-gtk3
-
-    # Other packages
     nano
     git
     vscodium
     firefox
     thunderbird
+
+    gnome.gnome-tweaks
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
