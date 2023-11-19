@@ -12,6 +12,12 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Catppuccinifier
+    catppuccinifier = {
+      url = "github:lighttigerXIV/catppuccinifier";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 
@@ -24,6 +30,7 @@
     self,
     nixpkgs,
     home-manager,
+    catppuccinifier,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -33,7 +40,7 @@
     nixosConfigurations = {
       # FIXME replace with your hostname
       nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs outputs catppuccinifier;};
         # > Our main nixos configuration file <
         modules = [
           ./nixos/configuration.nix

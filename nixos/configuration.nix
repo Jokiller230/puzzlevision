@@ -3,6 +3,7 @@
   lib,
   config,
   pkgs,
+  catppuccinifier,
   ...
 }: {
   # You can import other NixOS modules here
@@ -37,11 +38,6 @@
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     settings = {
-      substituters = [
-        "https://cache.nixos.org?priority=10"
-        "https://nix-community.cachix.org"
-      ];
-
       auto-optimise-store = true;
       builders-use-substitutes = true;
       experimental-features = [ "nix-command" "flakes" "repl-flake" ];
@@ -57,6 +53,8 @@
       options = "--delete-older-than 3d";
     };
   };
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -102,19 +100,49 @@
     pulse.enable = true;
   };
 
+  # Enable bluetooth on boot
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
+  networking.wg-quick = {
+    interfaces.homelab = {
+      privateKey = "kJ+2MOoYbtI6K00pJbVQshD7bXx/pjKw01wlMih9FFI=";
+      address = [ "10.8.0.2/24" ];
+      dns = [ "1.1.1.1" ];
+
+      peers = [
+        # For a client configuration, one peer entry for the server will suffice.
+        {
+          # Public key of the server (not a file path).
+          publicKey = "MTUi5FzlUQX1Vl2PLC72hnZnREn5kYRGqS6QSnaFeyQ=";
+          presharedKey = "Spzeg7KwMXuczdkpMygmzix5QBkgTOrR3lLlO7862yw=";
+          allowedIPs = [ "0.0.0.0/0" "::/0" ];
+          endpoint = "jo-server.duckdns.org:51820";
+          persistentKeepalive = 0;
+        }
+      ];
+    };
+  };
+
+  # Enable docker
+  virtualisation.docker.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     jo = {
       isNormalUser = true;
       description = "Jo";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" ];
       packages = with pkgs; [
         discord
-        # ciscoPacketTracer8
+        ciscoPacketTracer8
         wireshark
+        joplin-desktop
+        teamspeak_client
+	      virtualbox
       ];
     };
 
@@ -132,16 +160,29 @@
     };
   };
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     nano
-    git
-    vscodium
     firefox
     thunderbird
+    vlc
+    libreoffice
+    wineWowPackages.waylandFull
+    xorg.xf86inputlibinput
+    gimp
+    ungoogled-chromium
 
-    gnome.gnome-tweaks
+    # For development
+    vscodium
+    git
+    nodejs_20
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

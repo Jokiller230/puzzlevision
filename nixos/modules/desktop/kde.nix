@@ -17,4 +17,11 @@
     layout = "de";
     xkbVariant = "";
   };
+
+  environment.systemPackages = with pkgs; [
+    lightly-boehs
+    kde-rounded-corners
+  ];
+
+  programs.kdeconnect.enable = true;
 }
