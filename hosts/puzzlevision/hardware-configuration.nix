@@ -8,33 +8,42 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "vmd" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "vmd" "nvme" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/9469c51e-bfcf-4d70-88e8-96e3cec4fbda";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/864b1287-89fd-4cc0-98a5-40a3caf804c6";
+      fsType = "btrfs";
+      options = [ "subvol=@" ];
     };
+
+  boot.initrd.luks.devices."luks-5fd4fc76-d5c5-46c3-b952-1a7a7ff3a1fc".device = "/dev/disk/by-uuid/5fd4fc76-d5c5-46c3-b952-1a7a7ff3a1fc";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/7526-929F";
+    { device = "/dev/disk/by-uuid/2429-4141";
       fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/49ae48db-5d1e-421b-90c6-7e092847636c"; }
-    ];
+  fileSystems."/var/lib/docker/btrfs" =
+    { device = "/@/var/lib/docker/btrfs";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.br-9b746f4e7e2f.useDHCP = lib.mkDefault true;
+  # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

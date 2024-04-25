@@ -53,14 +53,18 @@
       options = "--delete-older-than 3d";
     };
   };
-
+  
+  # Install the latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Improve SSD performance
+  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos";
+  networking.hostName = "puzzlevision";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -104,45 +108,36 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
-  networking.wg-quick = {
-    interfaces.homelab = {
-      privateKey = "kJ+2MOoYbtI6K00pJbVQshD7bXx/pjKw01wlMih9FFI=";
-      address = [ "10.8.0.2/24" ];
-      dns = [ "1.1.1.1" ];
-
-      peers = [
-        # For a client configuration, one peer entry for the server will suffice.
-        {
-          # Public key of the server (not a file path).
-          publicKey = "MTUi5FzlUQX1Vl2PLC72hnZnREn5kYRGqS6QSnaFeyQ=";
-          presharedKey = "Spzeg7KwMXuczdkpMygmzix5QBkgTOrR3lLlO7862yw=";
-          allowedIPs = [ "0.0.0.0/0" "::/0" ];
-          endpoint = "jo-server.duckdns.org:51820";
-          persistentKeepalive = 0;
-        }
-      ];
-    };
-  };
-
   # Enable docker
   virtualisation.docker.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Configure keymap in X11
+  services.xserver = {
+    xkb.layout = "de";
+    xkb.variant = "";
+  };
+
+  # Define a user account.
   users.users = {
     jo = {
       isNormalUser = true;
       description = "Jo";
-      extraGroups = [ "networkmanager" "wheel" "docker" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" "tty" "dialout" ];
       packages = with pkgs; [
-        discord
-        ciscoPacketTracer8
-        wireshark
-        joplin-desktop
-        teamspeak_client
-	      virtualbox
+        spotify
+        qflipper
+        wineWowPackages.waylandFull
+        vesktop
+        avra
+        avrdude
+        jetbrains.phpstorm
+        teams-for-linux
+        enpass
+        thunderbird
+        kde-rounded-corners
       ];
     };
 
@@ -152,10 +147,10 @@
       initialPassword = "fortnite";
       extraGroups = [ "networkmanager" ];
       packages = with pkgs; [
-        jetbrains.webstorm
         jetbrains.phpstorm
         teams-for-linux
         enpass
+        thunderbird
       ];
     };
   };
@@ -171,18 +166,12 @@
   environment.systemPackages = with pkgs; [
     nano
     firefox
-    thunderbird
     vlc
     libreoffice
-    wineWowPackages.waylandFull
-    xorg.xf86inputlibinput
-    gimp
-    ungoogled-chromium
 
     # For development
-    vscodium
     git
-    nodejs_20
+    bun
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

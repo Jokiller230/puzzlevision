@@ -2,7 +2,6 @@
 
 Jo's NixOS configuration
 
-
 ## Deployment
 
 Run this to apply your system configuration.
