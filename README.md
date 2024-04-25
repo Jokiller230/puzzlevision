@@ -1,6 +1,6 @@
 # nix-config
 
-Jo's NixOS configuration
+Jo's absolutely insane NixOS configuration - not in the good way
 
 ## Deployment
 
