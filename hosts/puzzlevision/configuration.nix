@@ -3,7 +3,7 @@
   lib,
   config,
   pkgs,
-  catppuccinifier,
+  outputs,
   ...
 }: {
   # You can import other NixOS modules here
@@ -11,18 +11,11 @@
     # If you want to use modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
-
-    # Import your generated (nixos-generate-config) hardware configuration
+    outputs.nixosModules.desktop.kde
     ./hardware-configuration.nix
   ];
 
   nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-    ];
-    # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
     };
@@ -61,8 +54,21 @@
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    enable = true;
+    devices = [ "nodev" ];
+    efiInstallAsRemovable = true;
+    efiSupport = true;
+
+    extraEntries = ''
+      menuentry "Reboot" {
+        reboot
+      }
+      menuentry "Poweroff" {
+        halt
+      }
+    '';
+  };
 
   networking.hostName = "puzzlevision";
 
@@ -90,6 +96,10 @@
   # Configure console keymap
   console.keyMap = "de";
 
+  # Enable the TLP service for improved battery management
+  services.tlp.enable = true;
+  services.power-profiles-daemon.enable = false;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -111,14 +121,16 @@
   # Enable docker
   virtualisation.docker.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
   # Configure keymap in X11
   services.xserver = {
     xkb.layout = "de";
     xkb.variant = "";
   };
+
+  # Configure fish as the default shell
+  environment.shells = with pkgs; [ fish ];
+  users.defaultUserShell = pkgs.fish;
+  programs.fish.enable = true;
 
   # Define a user account.
   users.users = {
@@ -126,19 +138,6 @@
       isNormalUser = true;
       description = "Jo";
       extraGroups = [ "networkmanager" "wheel" "docker" "tty" "dialout" ];
-      packages = with pkgs; [
-        spotify
-        qflipper
-        wineWowPackages.waylandFull
-        vesktop
-        avra
-        avrdude
-        jetbrains.phpstorm
-        teams-for-linux
-        enpass
-        thunderbird
-        kde-rounded-corners
-      ];
     };
 
     work = {
@@ -161,8 +160,6 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     nano
     firefox
@@ -172,6 +169,9 @@
     # For development
     git
     bun
+
+    # Home manager
+    home-manager
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

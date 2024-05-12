@@ -7,16 +7,13 @@
 }: {
   # You can import other home-manager modules here
   imports = [
-    # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
 
   nixpkgs = {
-    # You can add overlays here
     overlays = [];
 
-    # Configure your nixpkgs instance
+    # Configuring nixpkgs instance
     config = {
       allowUnfree = true;
 
@@ -37,15 +34,44 @@
 
     workspace = {
       clickItemTo = "select";
-      iconTheme = "Tela-Blue-Dark";
+      iconTheme = "Tela-blue-dark";
     };
   };
 
+  home.packages = with pkgs; [
+    kdePackages.sierra-breeze-enhanced
+    spotify
+    qflipper
+    wineWowPackages.waylandFull
+    vesktop
+    avra
+    avrdude
+    jetbrains.phpstorm
+    teams-for-linux
+    enpass
+    thunderbird
+    kde-rounded-corners
+  ];
+
   # home.file.".config/gtk-4.0/gtk.css".source = "${orchis}/share/themes/Orchis-Green-Dark-Compact/gtk-4.0/gtk.css";
 
-  # Enable home-manager and git
+  # Enable home-manager
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+
+  # Enable and configure git
+  programs.git = {
+    enable = true;
+
+    userEmail = "reckers.johannes@proton.me";
+    userName = "Jo";
+
+    # Enable git-credential-helper
+    extraConfig = {
+      credential.helper = "${
+          pkgs.git.override { withLibsecret = true; }
+        }/bin/git-credential-libsecret";
+    };
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

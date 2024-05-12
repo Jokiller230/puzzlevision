@@ -19,7 +19,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, ... } @inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, nixos-cosmic, ... } @inputs:
   let
     inherit (self) outputs;
 
@@ -46,10 +46,8 @@
     nixosConfigurations = {
       puzzlevision = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-
         modules = [
           ./hosts/puzzlevision/configuration.nix
-          ./modules/nixos/desktop/kde.nix
         ];
       };
     };
@@ -60,9 +58,8 @@
       "jo@puzzlevision" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
-        # > Our main home-manager configuration file <
         modules = [
-          ./home-manager/puzzlevision/home.nix
+          ./users/jo_puzzlevision/home.nix
         ];
       };
     };
