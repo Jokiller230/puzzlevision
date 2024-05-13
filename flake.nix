@@ -17,9 +17,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    # Haumea (map directory structure into an attribute set)
+    haumea = {
+          url = "github:nix-community/haumea/v0.2.2";
+          inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, nixos-cosmic, ... } @inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, haumea, ... } @inputs:
   let
     inherit (self) outputs;
 
@@ -35,11 +41,20 @@
     # My custom packages
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
+    # External resources (wallpapers, icons, dotfiles)
+    resources = import ./resources;
+
     # My reusable modules for nixos
-    nixosModules = import ./modules/nixos;
+    nixosModules = haumea.lib.load {
+      src = ./modules/nixos;
+      inputs = { inherit inputs outputs; pkgs = nixpkgs.legacyPackages.x86_64-linux; };
+    };
 
     # My reusable modules for home-manager
-    homeManagerModules = import ./modules/home-manager;
+    homeManagerModules = haumea.lib.load {
+      src = ./modules/home-manager;
+      inputs = { inherit inputs outputs; pkgs = nixpkgs.legacyPackages.x86_64-linux; };
+    };
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'

@@ -1,18 +1,23 @@
 {
   "nodes": {
-    "flake-compat": {
-      "flake": false,
+    "haumea": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1688025799,
-        "narHash": "sha256-ktpB4dRtnksm9F5WawoIkEneh1nrEvuxb5lJFt1iOyw=",
+        "lastModified": 1685133229,
+        "narHash": "sha256-FePm/Gi9PBSNwiDFq3N+DWdfxFq0UKsVVTJS3cQPn94=",
         "owner": "nix-community",
-        "repo": "flake-compat",
-        "rev": "8bf105319d44f6b9f0d764efa4fdef9f1cc9ba1c",
+        "repo": "haumea",
+        "rev": "34dd58385092a23018748b50f9b23de6266dffc2",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "repo": "flake-compat",
+        "ref": "v0.2.2",
+        "repo": "haumea",
         "type": "github"
       }
     },
@@ -37,40 +42,7 @@
         "type": "github"
       }
     },
-    "nixos-cosmic": {
-      "inputs": {
-        "flake-compat": "flake-compat",
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1715262380,
-        "narHash": "sha256-jz4zg7xz14PTkrTiH96tVDvCxftpDVp6vRxnO7OVReA=",
-        "path": "/nix/store/gz6hf4bgagrqvkl7p7gxpznnlqgvyyjy-source",
-        "rev": "1914ef3d3bbbf79892b48e9162b47f64ff99bcd5",
-        "type": "path"
-      },
-      "original": {
-        "id": "nixos-cosmic",
-        "type": "indirect"
-      }
-    },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1715266358,
-        "narHash": "sha256-doPgfj+7FFe9rfzWo1siAV2mVCasW+Bh8I1cToAXEE4=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f1010e0469db743d14519a1efd37e23f8513d714",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
       "locked": {
         "lastModified": 1715087517,
         "narHash": "sha256-CLU5Tsg24Ke4+7sH8azHWXKd0CFd4mhLWfhYgUiDBpQ=",
@@ -111,9 +83,9 @@
     },
     "root": {
       "inputs": {
+        "haumea": "haumea",
         "home-manager": "home-manager",
-        "nixos-cosmic": "nixos-cosmic",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "plasma-manager": "plasma-manager"
       }
     }

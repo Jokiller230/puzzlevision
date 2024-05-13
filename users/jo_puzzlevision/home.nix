@@ -3,17 +3,15 @@
   lib,
   config,
   pkgs,
+  outputs,
   ...
 }: {
   # You can import other home-manager modules here
   imports = [
-    inputs.plasma-manager.homeManagerModules.plasma-manager
+    ./desktop/kde.nix
   ];
 
   nixpkgs = {
-    overlays = [];
-
-    # Configuring nixpkgs instance
     config = {
       allowUnfree = true;
 
@@ -28,18 +26,8 @@
     homeDirectory = "/home/jo";
   };
 
-  # Plasma configuration
-  programs.plasma = {
-    enable = true;
-
-    workspace = {
-      clickItemTo = "select";
-      iconTheme = "Tela-blue-dark";
-    };
-  };
-
+  # General packages
   home.packages = with pkgs; [
-    kdePackages.sierra-breeze-enhanced
     spotify
     qflipper
     wineWowPackages.waylandFull
@@ -50,7 +38,6 @@
     teams-for-linux
     enpass
     thunderbird
-    kde-rounded-corners
   ];
 
   # home.file.".config/gtk-4.0/gtk.css".source = "${orchis}/share/themes/Orchis-Green-Dark-Compact/gtk-4.0/gtk.css";
