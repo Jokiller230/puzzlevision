@@ -49,7 +49,7 @@
   programs.git = {
     enable = true;
 
-    userEmail = "reckers.johannes@proton.me";
+    userEmail = "jo@thevoid.cafe";
     userName = "Jo";
 
     # Enable git-credential-helper
