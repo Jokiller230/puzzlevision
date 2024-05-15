@@ -16,4 +16,10 @@
 
   # Enable KDE-Connect
   programs.kdeconnect.enable = true;
+
+  # On-screen keyboard and automatic screen rotation dependencies
+  environment.systemPackages = with pkgs; [
+    maliit-keyboard
+    iio-sensor-proxy
+  ];
 }
