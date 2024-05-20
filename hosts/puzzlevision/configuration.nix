@@ -96,9 +96,8 @@
   # Configure console keymap
   console.keyMap = "de";
 
-  # Enable the TLP service for improved battery management
-  services.tlp.enable = true;
-  services.power-profiles-daemon.enable = false;
+  # Enable the power-profiles-daemon service for improved battery health
+  services.power-profiles-daemon.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -118,6 +117,9 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
+  # Enable automatic screen rotation and similar features
+  hardware.sensor.iio.enable = true;
+
   # Enable docker
   virtualisation.docker.enable = true;
 
@@ -136,28 +138,24 @@
   users.users = {
     jo = {
       isNormalUser = true;
-      description = "Jo";
+      description = "Personal account for general tasks";
+      initialPassword = "jo";
       extraGroups = [ "networkmanager" "wheel" "docker" "tty" "dialout" ];
     };
 
     work = {
       isNormalUser = true;
-      description = "Work";
-      initialPassword = "fortnite";
-      extraGroups = [ "networkmanager" ];
-      packages = with pkgs; [
-        jetbrains.phpstorm
-        teams-for-linux
-        enpass
-        thunderbird
-      ];
+      description = "Work account";
+      initialPassword = "work";
+      extraGroups = [ "networkmanager" "wheel" "docker" ];
     };
-  };
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    gaming = {
+      isNormalUser = true;
+      description = "Gaming account";
+      initialPassword = "gaming";
+      extraGroups = [ "networkmanager" "wheel" ];
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -165,13 +163,7 @@
     firefox
     vlc
     libreoffice
-
-    # For development
-    git
-    bun
-
-    # Home manager
-    home-manager
+    spotify
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -1,6 +1,9 @@
 {
+  inputs,
   pkgs,
-  outputs
+  outputs,
+  lib,
+  ...
 }: {
   home.packages = with pkgs; [
     tela-icon-theme

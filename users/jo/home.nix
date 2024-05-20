@@ -6,9 +6,9 @@
   outputs,
   ...
 }: {
-  # You can import other home-manager modules here
   imports = [
     ./desktop/kde.nix
+    outputs.homeManagerModules.development.ssh
   ];
 
   nixpkgs = {
@@ -28,19 +28,18 @@
 
   # General packages
   home.packages = with pkgs; [
-    spotify
     qflipper
     wineWowPackages.waylandFull
     vesktop
+
+    # For development
     avra
     avrdude
+    vscodium
     jetbrains.phpstorm
-    teams-for-linux
-    enpass
-    thunderbird
+    git
+    bun
   ];
-
-  # home.file.".config/gtk-4.0/gtk.css".source = "${orchis}/share/themes/Orchis-Green-Dark-Compact/gtk-4.0/gtk.css";
 
   # Enable home-manager
   programs.home-manager.enable = true;
@@ -52,17 +51,40 @@
     userEmail = "jo@thevoid.cafe";
     userName = "Jo";
 
-    # Enable git-credential-helper
     extraConfig = {
-      credential.helper = "${
-          pkgs.git.override { withLibsecret = true; }
-        }/bin/git-credential-libsecret";
+      user = {
+        signingkey = "$HOME/.ssh/id_ed25519";
+      };
+
+      init = {
+        defaultBranch = "main";
+      };
+
+      color = {
+        ui = true;
+      };
+    };
+  };
+
+  programs.gh = {
+    enable = true;
+
+    gitCredentialHelper = {
+      enable = true;
+
+      hosts = [
+        "https://github.com"
+        "https://gist.github.com"
+        "https://git.thevoid.cafe"
+        "https://gitlab.org"
+        "https://git.semiko.dev"
+        "https://bitbucket.org"
+      ];
     };
   };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
 }

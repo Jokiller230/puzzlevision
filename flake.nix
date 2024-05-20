@@ -20,8 +20,8 @@
 
     # Haumea (map directory structure into an attribute set)
     haumea = {
-          url = "github:nix-community/haumea/v0.2.2";
-          inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/haumea/v0.2.2";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -38,23 +38,17 @@
     # It takes each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    # My custom packages
+    # My custom packagess
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
     # External resources (wallpapers, icons, dotfiles)
     resources = import ./resources;
 
     # My reusable modules for nixos
-    nixosModules = haumea.lib.load {
-      src = ./modules/nixos;
-      inputs = { inherit inputs outputs; pkgs = nixpkgs.legacyPackages.x86_64-linux; };
-    };
+    nixosModules = import ./modules/nixos;
 
     # My reusable modules for home-manager
-    homeManagerModules = haumea.lib.load {
-      src = ./modules/home-manager;
-      inputs = { inherit inputs outputs; pkgs = nixpkgs.legacyPackages.x86_64-linux; };
-    };
+    homeManagerModules = import ./modules/home-manager;
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
@@ -62,6 +56,7 @@
       puzzlevision = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
+          home-manager.nixosModules.home-manager
           ./hosts/puzzlevision/configuration.nix
         ];
       };
@@ -74,7 +69,23 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          ./users/jo_puzzlevision/home.nix
+          ./users/jo/home.nix
+        ];
+      };
+
+      "work@puzzlevision" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          ./users/work/home.nix
+        ];
+      };
+
+      "gaming@puzzlevision" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          ./users/gaming/home.nix
         ];
       };
     };
