@@ -8,10 +8,10 @@
 }: {
   # You can import other NixOS modules here
   imports = [
-    # If you want to use modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
-    outputs.nixosModules.desktop.kde
+    inputs.hardware.nixosModules.common-pc-laptop
+    inputs.hardware.nixosModules.common-cpu-intel
+    inputs.hardware.nixosModules.common-pc-laptop-ssd
+    outputs.nixosModules.desktop.gnome
     ./hardware-configuration.nix
   ];
 
@@ -46,12 +46,15 @@
       options = "--delete-older-than 3d";
     };
   };
+
+  # Set hostname
+  networking.hostName = "puzzlevision";
+
+  # Enable networking
+  networking.networkmanager.enable = true;
   
   # Install the latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  # Improve SSD performance
-  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
 
   # Bootloader.
   boot.loader.grub = {
@@ -69,11 +72,6 @@
       }
     '';
   };
-
-  networking.hostName = "puzzlevision";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -114,8 +112,16 @@
   };
 
   # Enable bluetooth on boot
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+
+    settings = {
+      General = {
+        Disable = "Handsfree";
+      };
+    };
+  };
 
   # Enable automatic screen rotation and similar features
   hardware.sensor.iio.enable = true;
@@ -134,11 +140,11 @@
   users.defaultUserShell = pkgs.fish;
   programs.fish.enable = true;
 
-  # Define a user account.
+  # Define user accounts
   users.users = {
     jo = {
       isNormalUser = true;
-      description = "Personal account for general tasks";
+      description = "Jo";
       initialPassword = "jo";
       extraGroups = [ "networkmanager" "wheel" "docker" "tty" "dialout" ];
     };

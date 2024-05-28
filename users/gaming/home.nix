@@ -30,6 +30,7 @@
     lutris
     vesktop
     steam
+    lunar-client
   ];
 
   # Enable home-manager

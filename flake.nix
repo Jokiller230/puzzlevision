@@ -18,14 +18,14 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    # Haumea (map directory structure into an attribute set)
-    haumea = {
-      url = "github:nix-community/haumea/v0.2.2";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    hardware.url = "github:NixOS/nixos-hardware/master";
+
+    catppuccin.url = "github:catppuccin/nix";
+
+    nixpkgs-catppuccin.url = "github:isabelroses/nixpkgs/update-catppuccin";
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, haumea, ... } @inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, hardware, catppuccin, nixpkgs-catppuccin, ... } @inputs:
   let
     inherit (self) outputs;
 

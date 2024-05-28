@@ -7,7 +7,8 @@
   ...
 }: {
   imports = [
-    ./desktop/kde.nix
+    ./desktop/gnome.nix
+    outputs.homeManagerModules.themes.catppuccin.global
     outputs.homeManagerModules.development.ssh
   ];
 
@@ -31,6 +32,7 @@
     qflipper
     wineWowPackages.waylandFull
     vesktop
+    lunar-client
 
     # For development
     avra
@@ -38,7 +40,11 @@
     vscodium
     jetbrains.phpstorm
     git
-    bun
+    nodejs_22
+
+    # Work stuff for when I'm not actually working
+    teams-for-linux
+    enpass
   ];
 
   # Enable home-manager
