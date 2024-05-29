@@ -21,11 +21,9 @@
     hardware.url = "github:NixOS/nixos-hardware/master";
 
     catppuccin.url = "github:catppuccin/nix";
-
-    nixpkgs-catppuccin.url = "github:isabelroses/nixpkgs/update-catppuccin";
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, hardware, catppuccin, nixpkgs-catppuccin, ... } @inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, hardware, catppuccin, ... } @inputs:
   let
     inherit (self) outputs;
 

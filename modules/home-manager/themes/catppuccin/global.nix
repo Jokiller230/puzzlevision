@@ -12,6 +12,6 @@
   catppuccin = {
     enable = true;
     accent = "blue";
-    flavor = "macchiato";
+    flavor = "frappe";
   };
 }

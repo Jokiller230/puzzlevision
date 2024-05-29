@@ -5,6 +5,10 @@
   lib,
   ...
 }: {
+  imports = [
+    outputs.homeManagerModules.themes.catppuccin.gnome
+  ];
+
   home.packages = with pkgs.gnomeExtensions; [
     dash-to-dock
     user-themes
@@ -12,11 +16,6 @@
     appindicator
     unite
   ];
-
-  gtk = {
-    enable = true;
-    catppuccin.enable = true;
-  };
 
   # Use `dconf watch /` to track stateful changes you are doing, then set them here.
   dconf.settings = {
@@ -43,11 +42,6 @@
 
     "org/gnome/desktop/wm/preferences" = {
       workspace-names = [ "Main" ];
-    };
-
-    "org/gnome/desktop/background" = {
-      picture-uri = "${outputs.resources.wallpapers}/animals_at_campfire.jpg";
-      picture-uri-dark = "${outputs.resources.wallpapers}/animals_at_campfire.jpg";
     };
 
     "org/gnome/shell/extensions/unite" = {

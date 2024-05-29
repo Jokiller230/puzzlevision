@@ -68,22 +68,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-catppuccin": {
-      "locked": {
-        "lastModified": 1716835396,
-        "narHash": "sha256-H2dN5tooIaHqbU52ldreAhbxE33fxASflPqvMsoQFQc=",
-        "owner": "isabelroses",
-        "repo": "nixpkgs",
-        "rev": "a554569da3b72f2896aa26537a4339ac45a15f66",
-        "type": "github"
-      },
-      "original": {
-        "owner": "isabelroses",
-        "ref": "update-catppuccin",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "plasma-manager": {
       "inputs": {
         "home-manager": [
@@ -113,7 +97,6 @@
         "hardware": "hardware",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-catppuccin": "nixpkgs-catppuccin",
         "plasma-manager": "plasma-manager"
       }
     }
