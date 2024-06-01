@@ -115,12 +115,24 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
+    package = pkgs.bluez;
 
     settings = {
       General = {
         Disable = "Handsfree";
+        ControllerMode = "dual";
+        FastConnectable = "true";
+        Experimental = "true";
+        KernelExperimental = "true";
       };
     };
+  };
+
+  services.blueman.enable = true;
+
+  programs.steam = {
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
   # Enable automatic screen rotation and similar features
@@ -170,6 +182,10 @@
     vlc
     libreoffice
     spotify
+
+    # Bluetooth
+    bluez
+    bluez-tools
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

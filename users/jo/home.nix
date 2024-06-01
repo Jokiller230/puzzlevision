@@ -33,6 +33,7 @@
     wineWowPackages.waylandFull
     vesktop
     lunar-client
+    steam
 
     # For development
     avra
