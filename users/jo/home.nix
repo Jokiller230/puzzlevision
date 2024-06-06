@@ -27,6 +27,17 @@
     homeDirectory = "/home/jo";
   };
 
+  # Flatpak packages
+  services.flatpak = {
+    enable = true;
+    update.auto.enable = true;
+    uninstallUnmanaged = true;
+
+    packages = [
+      "com.jeffser.Alpaca"
+    ];
+  };
+
   # General packages
   home.packages = with pkgs; [
     qflipper
@@ -34,18 +45,22 @@
     vesktop
     lunar-client
     steam
+    g4music
 
     # For development
     avra
     avrdude
-    vscodium
     jetbrains.phpstorm
     git
     nodejs_22
+    bun
 
     # Work stuff for when I'm not actually working
     teams-for-linux
     enpass
+
+    # Notes and Organisation
+    obsidian
   ];
 
   # Enable home-manager

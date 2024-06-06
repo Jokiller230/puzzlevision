@@ -21,9 +21,11 @@
     hardware.url = "github:NixOS/nixos-hardware/master";
 
     catppuccin.url = "github:catppuccin/nix";
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, hardware, catppuccin, ... } @inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, hardware, catppuccin, nix-flatpak, ... } @inputs:
   let
     inherit (self) outputs;
 
@@ -68,6 +70,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           ./users/jo/home.nix
+          nix-flatpak.homeManagerModules.nix-flatpak
         ];
       };
 

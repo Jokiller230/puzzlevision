@@ -19,6 +19,21 @@
     config = {
       allowUnfree = true;
     };
+
+    overlays = [
+      (final: prev: {
+        linuxPackages_latest = prev.linuxPackages_latest.extend (lpfinal: lpprev: {
+          rtl8821ce = lpprev.rtl8821ce.overrideAttrs ({src, ...}: {
+            version = "${lpprev.kernel.version}-unstable-2024-03-26";
+            src = final.fetchFromGitHub {
+              inherit (src) owner repo;
+              rev = "f119398d868b1a3395f40c1df2e08b57b2c882cd";
+              hash = "sha256-EfpKa5ZRBVM5T8EVim3cVX1PP1UM9CyG6tN5Br8zYww=";
+            };
+          });
+        });
+      })
+    ];
   };
 
   nix = {
@@ -55,6 +70,15 @@
   
   # Install the latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Network card driver
+  boot.extraModulePackages = [
+    pkgs.linuxPackages_latest.rtl8821ce
+  ];
+
+  boot.blacklistedKernelModules = [
+    "rtw88_8821ce"
+  ];
 
   # Bootloader.
   boot.loader.grub = {
@@ -129,6 +153,9 @@
   };
 
   services.blueman.enable = true;
+
+  # Enable flatpak
+  services.flatpak.enable = true;
 
   programs.steam = {
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
