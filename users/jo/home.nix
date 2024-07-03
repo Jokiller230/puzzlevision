@@ -8,6 +8,7 @@
 }: {
   imports = [
     ./desktop/gnome.nix
+    ./apps/fish.nix
     outputs.homeManagerModules.themes.catppuccin.global
     outputs.homeManagerModules.development.ssh
   ];
@@ -54,6 +55,10 @@
     git
     nodejs_22
     bun
+    termius
+    blackbox-terminal
+    forge-sparks
+    devenv
 
     # Work stuff for when I'm not actually working
     teams-for-linux
@@ -61,6 +66,9 @@
 
     # Notes and Organisation
     obsidian
+
+    # File synchronization
+    celeste
   ];
 
   # Enable home-manager

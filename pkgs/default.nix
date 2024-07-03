@@ -9,8 +9,4 @@ pkgs: {
   gnomeExtensions = {
     rounded-window-corners = pkgs.callPackage ./gnomeExtensions/rounded-window-corners.nix { };
   };
-
-  kernelPackages = {
-    rtl8821ce = pkgs.callPackage ./kernelPackages/rtl8821ce.nix { };
-  };
 }

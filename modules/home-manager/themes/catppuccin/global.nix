@@ -5,13 +5,13 @@
   lib,
   ...
 }: {
-  imports = [
-    inputs.catppuccin.homeManagerModules.catppuccin
-  ];
-
   catppuccin = {
     enable = true;
     accent = "blue";
     flavor = "frappe";
+
+    pointerCursor.enable = true;
+    pointerCursor.accent = "blue";
+    pointerCursor.flavor = "frappe";
   };
 }

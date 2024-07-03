@@ -5,8 +5,30 @@
   lib,
   ...
 }: {
-  gtk = {
+  gtk = with pkgs; {
     enable = true;
+
+    font = {
+      name = "Cantarell";
+      size = 12;
+      package = cantarell-fonts;
+    };
+
+    catppuccin = {
+      icon.enable = true;
+      icon.accent = "blue";
+      icon.flavor = "frappe";
+    };
+
+    theme = {
+      name = "Colloid-Dark-Catppuccin";
+      package = colloid-gtk-theme.override {
+        themeVariants = ["default"];
+        colorVariants = ["dark"];
+        sizeVariants = ["standard"];
+        tweaks = ["catppuccin"];
+      };
+    };
   };
 
   dconf.settings = {
@@ -17,7 +39,7 @@
     };
 
     "org/gnome/shell/extensions/user-theme" = {
-      name = "Catppuccin-Frappe-Standard-Blue-Dark";
+      name = "Colloid-Dark-Catppuccin";
     };
     # ---------------------- Theming END
   };

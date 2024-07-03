@@ -71,6 +71,7 @@
         modules = [
           ./users/jo/home.nix
           nix-flatpak.homeManagerModules.nix-flatpak
+          catppuccin.homeManagerModules.catppuccin
         ];
       };
 

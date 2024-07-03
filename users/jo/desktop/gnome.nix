@@ -21,6 +21,7 @@
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
+      cursor-theme = "catppuccin-frappe-blue-cursors";
     };
 
     "org/gnome/shell" = {
