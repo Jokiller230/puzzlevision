@@ -15,6 +15,7 @@
     blur-my-shell
     appindicator
     unite
+    color-picker
   ];
 
   # Use `dconf watch /` to track stateful changes you are doing, then set them here.
@@ -38,6 +39,7 @@
         "blur-my-shell@aunetx"
         "appindicatorsupport@rgcjonas.gmail.com"
         "unite@hardpixel.eu"
+        "color-picker@tuberry"
       ];
     };
 

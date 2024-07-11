@@ -9,6 +9,8 @@
   imports = [
     ./desktop/gnome.nix
     ./apps/fish.nix
+    ./apps/blackbox.nix
+    ./apps/librewolf.nix
     outputs.homeManagerModules.themes.catppuccin.global
     outputs.homeManagerModules.development.ssh
   ];
@@ -36,6 +38,7 @@
 
     packages = [
       "com.jeffser.Alpaca"
+      "dev.aunetx.deezer"
     ];
   };
 
@@ -47,6 +50,7 @@
     lunar-client
     steam
     g4music
+    librewolf
 
     # For development
     avra

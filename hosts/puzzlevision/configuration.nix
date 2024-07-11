@@ -213,6 +213,10 @@
     # Bluetooth
     bluez
     bluez-tools
+
+    # Fonts
+    noto-fonts
+    noto-fonts-color-emoji
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
