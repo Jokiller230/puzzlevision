@@ -2,87 +2,60 @@
   description = "Jo's NixOS configuration";
 
   inputs = {
-    # Nixpkgs
+    # Nixpkgs instance.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Home manager
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
+    # Snowfall lib imposes an opinionated file-structure, which makes things a little easier sometimes.
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Home manager for managing the /home directory.
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Hardware specific tweaks and performance optimizations.
     hardware.url = "github:NixOS/nixos-hardware/master";
 
+    # Catppuccin theme nix configuration.
     catppuccin.url = "github:catppuccin/nix";
 
+    # Declarative management of Flatpak packages.
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
   };
 
-  outputs = { self, nixpkgs, home-manager, hardware, catppuccin, nix-flatpak, ... } @inputs:
-  let
-    inherit (self) outputs;
+  outputs = inputs:
+    inputs.snowfall-lib.mkFlake {
+      inherit inputs; # Providing flake inputs to Snowfall Lib.
+      src = ./.; # "src" must point to the root of the flake.
 
-    # Supported systems for this flake
-    systems = [
-      "x86_64-linux"
-    ];
+      snowfall = {
+        # "root" can be used, to tell Snowfall Lib where to look for Nix files.
+        # root = ./nix;
 
-    # Function that generates an attribute by calling a function you pass to it
-    # It takes each system as an argument
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-  in {
-    # My custom packagess
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+        # Namespace for this flake's packages, library and overlays.
+        namespace = "puzzlevision";
 
-    # External resources (wallpapers, icons, dotfiles)
-    resources = import ./resources;
-
-    # My reusable modules for nixos
-    nixosModules = import ./modules/nixos;
-
-    # My reusable modules for home-manager
-    homeManagerModules = import ./modules/home-manager;
-
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosConfigurations = {
-      puzzlevision = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          home-manager.nixosModules.home-manager
-          ./hosts/puzzlevision/configuration.nix
-        ];
+        meta = {
+          name = "jos-nixos-configuration"; # Used in certain places, like documentations. No spaces.
+          title = "Jo's NixOS configuration"; # Basically just for decorational purposes.
+        };
       };
+
+      channels-config = {
+        allowUnfree = true; # Allow unfree packages.
+      };
+
+      # Apply some home-manager modules globally.
+      homes.modules = with inputs; [
+        nix-flatpak.homeManagerModules.nix-flatpak
+      ];
+
+      homes.users."jo@puzzlevision".modules = with inputs; [
+        catppuccin.homeManagerModules.catppuccin
+      ];
     };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      "jo@puzzlevision" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./users/jo/home.nix
-          nix-flatpak.homeManagerModules.nix-flatpak
-          catppuccin.homeManagerModules.catppuccin
-        ];
-      };
-
-      "work@puzzlevision" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./users/work/home.nix
-        ];
-      };
-
-      "gaming@puzzlevision" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./users/gaming/home.nix
-        ];
-      };
-    };
-  };
 }
