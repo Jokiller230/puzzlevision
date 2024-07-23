@@ -11,13 +11,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Plasma manager
-    plasma-manager = {
-      url = "github:pjones/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
     hardware.url = "github:NixOS/nixos-hardware/master";
 
     catppuccin.url = "github:catppuccin/nix";
@@ -25,7 +18,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, hardware, catppuccin, nix-flatpak, ... } @inputs:
+  outputs = { self, nixpkgs, home-manager, hardware, catppuccin, nix-flatpak, ... } @inputs:
   let
     inherit (self) outputs;
 

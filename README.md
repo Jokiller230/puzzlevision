@@ -1,6 +1,6 @@
 # nix-config
 
-Jo's absolutely insane NixOS configuration - not in the good way
+Jo's absolutely insane NixOS configuration - as of july 2024
 
 ## Deployment
 
