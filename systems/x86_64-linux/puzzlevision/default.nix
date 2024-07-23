@@ -24,7 +24,7 @@
     inputs.hardware.nixosModules.common-pc-laptop
     inputs.hardware.nixosModules.common-cpu-intel
     inputs.hardware.nixosModules.common-pc-laptop-ssd
-    inputs.nixosModules.common.gnome
+    # FIXME(@jo): Remember to take a look at how module imports work in Snowfall Lib.
   ];
 
   nix = {
@@ -55,7 +55,7 @@
   };
 
   # Set hostname
-  networking.hostname = "puzzlevision";
+  networking.hostName = "puzzlevision";
 
   # Enable networking through networkmanager (required for most desktop environments).
   networking.networkmanager.enable = true;
