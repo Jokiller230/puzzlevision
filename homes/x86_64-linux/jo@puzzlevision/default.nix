@@ -19,12 +19,6 @@
   config,
   ...
 }: {
-  imports = [
-    inputs.homeModules.themes.catppuccin
-    inputs.homeModules.themes.catppuccin.gnome
-    inputs.homeModules.development.ssh
-  ];
-
   # Flatpak configuration.
   services.flatpak = {
     enable = true;
@@ -67,4 +61,6 @@
     ### Backups & Synchronization
     celeste
   ];
+
+  home.stateVersion = "24.05";
 }

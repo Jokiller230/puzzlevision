@@ -13,13 +13,5 @@
   config,
   ...
 }: {
-  catppuccin = {
-    enable = true;
-    accent = "blue";
-    flavor = "frappe";
-
-    pointerCursor.enable = true;
-    pointerCursor.accent = "blue";
-    pointerCursor.flavor = "frappe";
-  };
+  home.file.".config/fish/themes/Catppuccin\ Frappe.theme".source = lib.snowfall.fs.get-file "resources/apps/fish/Catppuccin\ Frappe.theme";
 }

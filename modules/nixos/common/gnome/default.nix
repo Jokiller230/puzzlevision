@@ -13,6 +13,8 @@
   config,
   ...
 }: {
+  services.xserver.enable = true;
+
   # Enable GNOME and GDM.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -22,13 +24,13 @@
     gedit
     cheese
     geary
+    yelp # Help view
+    epiphany # Gnome web
   ]) ++ (with pkgs.gnome; [
     gnome-music
-    epiphany # Gnome web
     tali # Poker game
     iagno # Go game
     hitori # Sudoku game
-    yelp # Help view
     gnome-contacts
     gnome-initial-setup
   ]);
@@ -43,6 +45,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    gnome.gnome-tweaks
+    gnome-tweaks
   ];
 }

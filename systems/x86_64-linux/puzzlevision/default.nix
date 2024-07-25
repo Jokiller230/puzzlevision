@@ -24,22 +24,30 @@
     inputs.hardware.nixosModules.common-pc-laptop
     inputs.hardware.nixosModules.common-cpu-intel
     inputs.hardware.nixosModules.common-pc-laptop-ssd
-    # FIXME(@jo): Remember to take a look at how module imports work in Snowfall Lib.
   ];
 
+  nixpkgs = {
+    overlays = [
+      (final: prev: {
+        linuxPackages_latest = prev.linuxPackages_latest.extend (lpfinal: lpprev: {
+          rtl8821ce = lpprev.rtl8821ce.overrideAttrs ({src, ...}: {
+            version = "${lpprev.kernel.version}-unstable-2024-03-26";
+            src = final.fetchFromGitHub {
+              inherit (src) owner repo;
+              rev = "f119398d868b1a3395f40c1df2e08b57b2c882cd";
+              hash = "sha256-EfpKa5ZRBVM5T8EVim3cVX1PP1UM9CyG6tN5Br8zYww=";
+            };
+          });
+        });
+      })
+    ];
+  };
+
   nix = {
-    # Add flake inputs as registries.
-    # Keeps nix3 commands consistent with flake.
-    registry = lib.mapAttrs (_: value: {flake = value;});
-
-    # Add inputs to system's legacy channels.
-    # Makes legacy nix commands consistent with flake as well.
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-
     settings = {
       auto-optimise-store = true;
       builders-use-substitutes = true;
-      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+      experimental-features = [ "nix-command" "flakes" ];
       keep-derivations = true;
       keep-outputs = true;
       max-jobs = "auto";
@@ -48,7 +56,7 @@
 
     # Garbage collection configuration.
     gc = {
-      automatic = true;
+      automatic = false;
       dates = "daily";
       options = "--delete-older-than 3d";
     };
@@ -150,12 +158,17 @@
   hardware.sensor.iio.enable = true;
 
   # Configure system-wide default shell.
-  environment.shells = with pkgs; [ zsh ];
-  users.defaultUserShell = pkgs.zsh;
-  programs.zsh.enable = true;
+  environment.shells = with pkgs; [ fish ];
+  users.defaultUserShell = pkgs.fish;
+  programs.fish.enable = true;
 
   # Configure users.
   snowfallorg.users.jo.admin = true;
+
+  # Configure home-manager
+  home-manager = {
+    backupFileExtension = "homeManagerBackup";
+  };
 
   # Provide users with some sane default packages.
   environment.systemPackages = with pkgs; [
@@ -173,5 +186,5 @@
     noto-fonts-color-emoji
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "23.05";
 }

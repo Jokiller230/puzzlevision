@@ -21,26 +21,10 @@
 
   boot.initrd.luks.devices."luks-5fd4fc76-d5c5-46c3-b952-1a7a7ff3a1fc".device = "/dev/disk/by-uuid/5fd4fc76-d5c5-46c3-b952-1a7a7ff3a1fc";
 
-  fileSystems."/var/lib/docker/btrfs" =
-    { device = "/@/@/var/lib/docker/btrfs";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/2429-4141";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
-    };
-
-  fileSystems."/var/lib/docker/overlay2/eec00b6d746d533d213790aa0c8e5cca329148c50c0ab1b035020d27e218ed16/merged" =
-    { device = "overlay";
-      fsType = "overlay";
-    };
-
-  fileSystems."/var/lib/docker/overlay2/bc060caf80f8891cd68f21563b8ece131b24b28772c2971a703bac1f5b54e8d1/merged" =
-    { device = "overlay";
-      fsType = "overlay";
     };
 
   swapDevices = [ ];
