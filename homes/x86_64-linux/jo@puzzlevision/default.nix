@@ -19,6 +19,10 @@
   config,
   ...
 }: {
+  imports = [
+    ./apps/gnome.nix
+  ];
+
   # Flatpak configuration.
   services.flatpak = {
     enable = true;

@@ -56,7 +56,7 @@
 
     # Garbage collection configuration.
     gc = {
-      automatic = false;
+      automatic = true;
       dates = "daily";
       options = "--delete-older-than 3d";
     };
