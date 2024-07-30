@@ -16,10 +16,10 @@
   catppuccin = {
     enable = true;
     accent = "blue";
-    flavor = "frappe";
+    flavor = "macchiato";
 
     pointerCursor.enable = true;
     pointerCursor.accent = "blue";
-    pointerCursor.flavor = "frappe";
+    pointerCursor.flavor = "macchiato";
   };
 }

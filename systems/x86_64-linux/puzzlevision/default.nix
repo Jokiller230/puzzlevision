@@ -18,7 +18,10 @@
   # All other arguments come from the system system.
   config,
   ...
-}: {
+}:
+with lib;
+with lib.${namespace};
+{
   imports = [
     ./hardware-configuration.nix
     inputs.hardware.nixosModules.common-pc-laptop
@@ -125,6 +128,9 @@
   # Enable printing.
   services.printing.enable = true;
 
+  # Enable docker
+  virtualisation.docker.enable = true;
+
   # Sound configuration based on pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -151,11 +157,17 @@
     };
   };
 
+  # Enable Gnome
+  puzzlevision.desktop.gnome.enable = true;
+
   # Enable flatpak support.
   services.flatpak.enable = true;
 
   # Enable iio-sensor for automatic screen rotation and similar features.
   hardware.sensor.iio.enable = true;
+
+  # Enable support for flipper zero devices
+  hardware.flipperzero.enable = true;
 
   # Configure system-wide default shell.
   environment.shells = with pkgs; [ fish ];
@@ -164,6 +176,9 @@
 
   # Configure users.
   snowfallorg.users.jo.admin = true;
+
+  users.users.jo.isNormalUser = true;
+  users.users.jo.extraGroups = [ "dialout" "docker" ];
 
   # Configure home-manager
   home-manager = {

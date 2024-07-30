@@ -51,7 +51,6 @@
     git
     nodejs_22
     bun
-    kitty
     forge-sparks
     devenv
 
