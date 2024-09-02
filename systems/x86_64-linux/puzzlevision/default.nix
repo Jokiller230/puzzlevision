@@ -29,23 +29,6 @@ with lib.${namespace};
     inputs.hardware.nixosModules.common-pc-laptop-ssd
   ];
 
-  nixpkgs = {
-    overlays = [
-      (final: prev: {
-        linuxPackages_latest = prev.linuxPackages_latest.extend (lpfinal: lpprev: {
-          rtl8821ce = lpprev.rtl8821ce.overrideAttrs ({src, ...}: {
-            version = "${lpprev.kernel.version}-unstable-2024-03-26";
-            src = final.fetchFromGitHub {
-              inherit (src) owner repo;
-              rev = "f119398d868b1a3395f40c1df2e08b57b2c882cd";
-              hash = "sha256-EfpKa5ZRBVM5T8EVim3cVX1PP1UM9CyG6tN5Br8zYww=";
-            };
-          });
-        });
-      })
-    ];
-  };
-
   nix = {
     settings = {
       auto-optimise-store = true;
@@ -121,6 +104,9 @@ with lib.${namespace};
 
   # Set console keymap.
   console.keyMap = "de";
+  services.xserver = {
+    xkb.layout = "de";
+  };
 
   # Enable the power-profiles-daemon service for improved battery management.
   services.power-profiles-daemon.enable = true;
@@ -182,7 +168,7 @@ with lib.${namespace};
 
   # Configure home-manager
   home-manager = {
-    backupFileExtension = "homeManagerBackup";
+    backupFileExtension = "homeManagerBackupFile69";
   };
 
   # Provide users with some sane default packages.
@@ -190,6 +176,8 @@ with lib.${namespace};
     ### General
     nano
     firefox
+    chromium
+    lutris
     vlc
     spotify
 

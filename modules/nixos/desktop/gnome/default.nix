@@ -25,21 +25,23 @@ in {
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.desktopManager.gnome.enable = true;
 
-    environment.gnome.excludePackages =  (with pkgs; [
+    environment.gnome.excludePackages = with pkgs; [
       gnome-tour
       gedit
       cheese
       geary
       yelp # Help view
       epiphany # Gnome web
-    ]) ++ (with pkgs.gnome; [
+      gnome-console
+      gnome-terminal
       gnome-music
       tali # Poker game
       iagno # Go game
       hitori # Sudoku game
       gnome-contacts
       gnome-initial-setup
-    ]);
+      gnome-system-monitor
+    ];
 
     programs.dconf.enable = true;
 
@@ -52,6 +54,8 @@ in {
 
     environment.systemPackages = with pkgs; [
       gnome-tweaks
+      blackbox-terminal # Terminal app
+      resources # System resource manager
     ];
   };
 }

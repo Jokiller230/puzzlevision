@@ -26,34 +26,39 @@
       icon = {
         enable = true;
         accent = "blue";
-        flavor = "frappe";
+        flavor = "macchiato";
       };
     };
 
     theme = {
-      name = "Colloid-Dark-Catppuccin";
-      package = pkgs.colloid-gtk-theme.override {
-        themeVariants = ["default"];
-        colorVariants = ["dark"];
-        sizeVariants = ["standard"];
-        tweaks = ["catppuccin"];
+      #name = "Colloid-Dark-Catppuccin";
+      #package = pkgs.colloid-gtk-theme.override {
+        #themeVariants = ["default"];
+        #colorVariants = ["dark"];
+        #sizeVariants = ["standard"];
+        #tweaks = ["catppuccin"];
+      #};
+
+      name = "Graphite-teal-Dark-nord";
+      package = pkgs.graphite-gtk-theme.override {
+          themeVariants = ["blue" "teal"];
+          colorVariants = ["dark"];
+          sizeVariants = ["standard"];
+          tweaks = ["nord"];
+          withGrub = true;
+          grubScreens = ["1080p"];
       };
     };
   };
 
   dconf.settings = {
-    "org/gnome/desktop/background" = {
-      picture-uri = lib.snowfall.fs.get-file "resources/wallpapers/pond_sidewalk_dusk.jpg";
-      picture-uri-dark = lib.snowfall.fs.get-file "resources/wallpapers/pond_sidewalk_dusk.jpg";
-    };
-
     "org/gnome/shell/extensions/user-theme" = {
-      name = "Colloid-Dark-Catppuccin";
+      name = "Graphite-teal-Dark-nord";
     };
 
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      cursor-theme = "catppuccin-frappe-blue-cursors";
+      cursor-theme = "catppuccin-macchiato-blue-cursors";
     };
   };
 }

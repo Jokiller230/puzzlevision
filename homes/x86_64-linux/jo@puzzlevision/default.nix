@@ -18,7 +18,7 @@
   # All other arguments come from the home home.
   config,
   ...
-}: {
+}: with lib; with lib.${namespace}; {
   imports = [
     ./apps/gnome.nix
   ];
@@ -43,6 +43,8 @@
     lunar-client
     steam
     g4music
+    blanket
+    bitwarden-desktop
 
     ### Development
     avra
@@ -51,8 +53,12 @@
     git
     nodejs_22
     bun
-    forge-sparks
     devenv
+    zed-editor
+
+    ### Rust development specific
+    rustup
+    jetbrains.rust-rover
 
     ### Work
     teams-for-linux
@@ -61,9 +67,11 @@
     ### Notes & Organisation
     obsidian
 
-    ### Backups & Synchronization
-    celeste
+    ### Virtual Reality
+    sidequest
   ];
+
+  puzzlevision.apps.zed-editor.enable = true;
 
   home.stateVersion = "24.05";
 }

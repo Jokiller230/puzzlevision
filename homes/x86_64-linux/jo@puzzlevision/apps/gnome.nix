@@ -24,6 +24,11 @@
 
   # Use `dconf watch /` to track stateful changes you are doing, then set them here.
   dconf.settings = {
+    "org/gnome/desktop/background" = {
+      picture-uri = lib.snowfall.fs.get-file "resources/wallpapers/maid_in_forest_with_lantern.jpg";
+      picture-uri-dark = lib.snowfall.fs.get-file "resources/wallpapers/maid_in_forest_with_lantern.jpg";
+    };
+
     "org/gnome/shell" = {
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
