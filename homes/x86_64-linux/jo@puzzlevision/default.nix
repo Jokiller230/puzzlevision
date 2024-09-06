@@ -18,7 +18,18 @@
   # All other arguments come from the home home.
   config,
   ...
-}: with lib; with lib.${namespace}; {
+}: with lib; with lib.${namespace};
+let
+    zed-fhs = pkgs.buildFHSUserEnv {
+        name = "zed";
+        targetPkgs = pkgs:
+        with pkgs; [
+            zed-editor
+        ];
+        runScript = "zed";
+    };
+in
+{
   imports = [
     ./apps/gnome.nix
   ];
@@ -54,7 +65,7 @@
     nodejs_22
     bun
     devenv
-    zed-editor
+    zed-fhs
 
     ### Rust development specific
     rustup
@@ -71,7 +82,7 @@
     sidequest
   ];
 
-  puzzlevision.apps.zed-editor.enable = true;
+  #lib.puzzlevision.apps.zed-editor.enable = true;
 
   home.stateVersion = "24.05";
 }

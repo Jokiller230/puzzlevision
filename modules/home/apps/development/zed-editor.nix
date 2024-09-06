@@ -27,8 +27,6 @@ let
 in {
     options.${namespace}.apps.zed-editor = { enable = mkEnableOption "zed-editor"; };
 
-    home.packages = [zed-fhs];
-
     config = mkIf cfg.enable {
         home.packages = [zed-fhs];
     };

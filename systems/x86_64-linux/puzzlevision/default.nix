@@ -29,35 +29,11 @@ with lib.${namespace};
     inputs.hardware.nixosModules.common-pc-laptop-ssd
   ];
 
-  nix = {
-    settings = {
-      auto-optimise-store = true;
-      builders-use-substitutes = true;
-      experimental-features = [ "nix-command" "flakes" ];
-      keep-derivations = true;
-      keep-outputs = true;
-      max-jobs = "auto";
-      warn-dirty = false;
-    };
-
-    # Garbage collection configuration.
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 3d";
-    };
-  };
-
   # Set hostname
+  # Todo: move to common/networking module
   networking.hostName = "puzzlevision";
 
-  # Enable networking through networkmanager (required for most desktop environments).
-  networking.networkmanager.enable = true;
-
   boot = {
-    # Always run the latest kernel.
-    kernelPackages = pkgs.linuxPackages_latest;
-
     # Configure additional kernel modules.
     extraModulePackages = [
       pkgs.linuxPackages_latest.rtl8821ce # Use custom network-card driver.
@@ -66,23 +42,6 @@ with lib.${namespace};
     blacklistedKernelModules = [
       "rtw88_8821ce" # Block the default network-card driver.
     ];
-
-    # Grub configuration.
-    loader.grub = {
-      enable = true;
-      devices = [ "nodev" ];
-      efiInstallAsRemovable = true;
-      efiSupport = true;
-
-      extraEntries = ''
-        menuentry "Reboot" {
-          reboot
-        }
-        menuentry "Poweroff" {
-          halt
-        }
-      '';
-    };
   };
 
   # Set timezone.
@@ -127,24 +86,8 @@ with lib.${namespace};
     pulse.enable = true;
   };
 
-  # Bluetooth configuration.
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    package = pkgs.bluez;
-
-    settings = {
-      General = {
-        ControllerMode = "dual";
-        FastConnectable = "true";
-        Experimental = "true";
-        KernelExperimental = "true";
-      };
-    };
-  };
-
-  # Enable Gnome
-  puzzlevision.desktop.gnome.enable = true;
+  # Set system Type
+  puzzlevision.archetypes.workstation.enable = true;
 
   # Enable flatpak support.
   services.flatpak.enable = true;
@@ -177,7 +120,6 @@ with lib.${namespace};
     nano
     firefox
     chromium
-    lutris
     vlc
     spotify
 
