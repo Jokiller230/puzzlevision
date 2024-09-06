@@ -20,13 +20,13 @@ in {
     enable = mkEnableOption "Modify the standard kernel settings";
     version = mkOption {
       type = lib.types.str;
-      default = "latest";
-      example = "latest";
-      description = "Set the kernel version to be used by your system"
+      default = "linuxPackages_latest";
+      example = "linuxPackages_latest";
+      description = "Set the kernel version to be used by your system";
     };
   };
 
   config = mkIf cfg.enable {
-    kernelPackages = pkgs.linuxPackages_${cfg.version};
+    boot.kernelPackages = pkgs.${cfg.version};
   };
 }
