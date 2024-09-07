@@ -28,6 +28,7 @@ in {
         hardware.enable = true; # Common hardware support and tweaks
         fonts.enable = true; # Common fonts and font management tweaks
         audio.enable = true; # Audio setup
+        locale.enable = true; # Locale settings
       };
 
       desktop.gnome.enable = true;
