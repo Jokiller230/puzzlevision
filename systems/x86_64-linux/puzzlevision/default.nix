@@ -98,11 +98,6 @@ with lib.${namespace};
   # Enable support for flipper zero devices
   hardware.flipperzero.enable = true;
 
-  # Configure system-wide default shell.
-  environment.shells = with pkgs; [ fish ];
-  users.defaultUserShell = pkgs.fish;
-  programs.fish.enable = true;
-
   # Configure users.
   snowfallorg.users.jo.admin = true;
 
@@ -111,7 +106,7 @@ with lib.${namespace};
 
   # Configure home-manager
   home-manager = {
-    backupFileExtension = "homeManagerBackupFile69";
+    backupFileExtension = "homeManagerBackupFile";
   };
 
   # Provide users with some sane default packages.

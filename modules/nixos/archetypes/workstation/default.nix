@@ -32,6 +32,7 @@ in {
         networking.enable = true; # Networkmanager configuration
         kernel.enable = true; # Kernel modifications
         bluetooth.enable = true; # Bluetooth support
+        shell.enable = true; # Shell environment configuration
       };
 
       desktop.gnome.enable = true;

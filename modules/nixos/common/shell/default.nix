@@ -14,19 +14,21 @@
   ...
 }: with lib; with lib.${namespace};
 let
-  cfg = config.${namespace}.common.kernel;
+  cfg = config.${namespace}.common.shell;
 in {
-  options.${namespace}.common.kernel = {
-    enable = mkEnableOption "Modify the standard kernel settings";
-    version = mkOption {
+  options.${namespace}.common.shell = {
+    enable = mkEnableOption "Modify the standard shell options";
+    package = mkOption {
       type = types.str;
-      default = "linuxPackages_latest";
-      example = "linuxPackages_latest";
-      description = "Set the kernel version to be used by your system";
+      default = "fish";
+      example = "fish";
+      description = "Select an appropriate shell environment (bash, fish, zsh...)";
     };
   };
 
   config = mkIf cfg.enable {
-    boot.kernelPackages = pkgs.${cfg.version};
+    environment.shells = with pkgs; [ ${cfg.package} ];
+    users.defaultUserShell = pkgs.${cfg.package};
+    programs.${cfg.package}.enable = true;
   };
 }
