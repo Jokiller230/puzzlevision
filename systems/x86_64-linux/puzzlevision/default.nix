@@ -1,21 +1,8 @@
 {
-  # Snowfall Lib provides a customized `lib` instance with access to your flake's library
-  # as well as the libraries available from your flake's inputs.
   lib,
-  # Instance of `pkgs` with overlays and custom packages applied.
   pkgs,
-  # All flake inputs.
   inputs,
-
-  # Additional metadata, provided by Snowfall Lib.
-  namespace, # The flake namespace, set in flake.nix. If not set, defaults to "internal".
-  system, # The system architecture for this host (eg. `x86_64-linux`).
-  target, # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format, # A normalized name for the system target (eg. `iso`).
-  virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
-  systems, # An attribute map of your defined hosts.
-
-  # All other arguments come from the system system.
+  namespace,
   config,
   ...
 }:
@@ -76,27 +63,11 @@ with lib.${namespace};
   # Enable docker
   virtualisation.docker.enable = true;
 
-  # Sound configuration based on pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   # Set system Type
   puzzlevision.archetypes.workstation.enable = true;
 
   # Enable flatpak support.
   services.flatpak.enable = true;
-
-  # Enable iio-sensor for automatic screen rotation and similar features.
-  hardware.sensor.iio.enable = true;
-
-  # Enable support for flipper zero devices
-  hardware.flipperzero.enable = true;
 
   # Configure users.
   snowfallorg.users.jo.admin = true;
@@ -117,13 +88,6 @@ with lib.${namespace};
     chromium
     vlc
     spotify
-
-    ### Bluetooth
-    bluez
-
-    ### Fonts
-    noto-fonts
-    noto-fonts-color-emoji
   ];
 
   system.stateVersion = "23.05";

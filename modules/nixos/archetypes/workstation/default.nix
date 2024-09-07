@@ -1,15 +1,7 @@
 {
   lib,
   pkgs,
-  inputs,
-
-  namespace, # The flake namespace, set in flake.nix. If not set, defaults to "internal".
-  system, # The system architecture for this host (eg. `x86_64-linux`).
-  target, # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format, # A normalized name for the system target (eg. `iso`).
-  virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
-  systems, # An attribute map of your defined hosts.
-
+  namespace,
   config,
   ...
 }: with lib; with lib.${namespace};
@@ -20,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.sessionVariables = {
-      NIXOS_OZONE_WL = "1"; # Chromium/Electron native Wayland support
+      NIXOS_OZONE_WL = "0"; # Chromium/Electron native Wayland support (Buggy)
       MOZ_ENABLE_WAYLAND = "1"; # Firefox native Wayland support
     };
 
@@ -33,6 +25,9 @@ in {
         kernel.enable = true; # Kernel modifications
         bluetooth.enable = true; # Bluetooth support
         shell.enable = true; # Shell environment configuration
+        hardware.enable = true; # Common hardware support and tweaks
+        fonts.enable = true; # Common fonts and font management tweaks
+        audio.enable = true; # Audio setup
       };
 
       desktop.gnome.enable = true;
