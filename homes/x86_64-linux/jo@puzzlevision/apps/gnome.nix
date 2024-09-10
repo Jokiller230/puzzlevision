@@ -20,6 +20,7 @@
     appindicator
     unite
     color-picker
+    clipboard-history
   ];
 
   # Use `dconf watch /` to track stateful changes you are doing, then set them here.
@@ -44,6 +45,7 @@
         "appindicatorsupport@rgcjonas.gmail.com"
         "unite@hardpixel.eu"
         "color-picker@tuberry"
+        "clipboard-history@alexsaveau.dev"
       ];
     };
 

@@ -18,17 +18,11 @@ let
 in {
   options.${namespace}.common.shell = {
     enable = mkEnableOption "Modify the standard shell options";
-    package = mkOption {
-      type = types.str;
-      default = "fish";
-      example = "fish";
-      description = "Select an appropriate shell environment (bash, fish, zsh...)";
-    };
   };
 
   config = mkIf cfg.enable {
-    environment.shells = with pkgs; [ ${cfg.package} ];
-    users.defaultUserShell = pkgs.${cfg.package};
-    programs.${cfg.package}.enable = true;
+    environment.shells = with pkgs; [ fish ];
+    users.defaultUserShell = pkgs.fish;
+    programs.fish.enable = true;
   };
 }

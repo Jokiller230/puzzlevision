@@ -31,29 +31,19 @@
     };
 
     theme = {
-      #name = "Colloid-Dark-Catppuccin";
-      #package = pkgs.colloid-gtk-theme.override {
-        #themeVariants = ["default"];
-        #colorVariants = ["dark"];
-        #sizeVariants = ["standard"];
-        #tweaks = ["catppuccin"];
-      #};
-
-      name = "Graphite-teal-Dark-nord";
-      package = pkgs.graphite-gtk-theme.override {
-          themeVariants = ["blue" "teal"];
-          colorVariants = ["dark"];
-          sizeVariants = ["standard"];
-          tweaks = ["nord"];
-          withGrub = true;
-          grubScreens = ["1080p"];
+      name = "Colloid-Dark-Catppuccin";
+      package = pkgs.colloid-gtk-theme.override {
+        themeVariants = ["default"];
+        colorVariants = ["dark"];
+        sizeVariants = ["standard"];
+        tweaks = ["catppuccin"];
       };
     };
   };
 
   dconf.settings = {
     "org/gnome/shell/extensions/user-theme" = {
-      name = "Graphite-teal-Dark-nord";
+      name = "Colloid-Dark-Catppuccin";
     };
 
     "org/gnome/desktop/interface" = {

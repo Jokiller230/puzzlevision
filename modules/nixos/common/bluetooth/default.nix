@@ -11,7 +11,7 @@ in {
   options.${namespace}.common.bluetooth = { enable = mkEnableOption "Enable bluetooth support on your current system"; };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ bluez ];
+    environment.systemPackages = with pkgs; [ bluez blueman ];
 
     hardware.bluetooth = {
       enable = true;
@@ -24,6 +24,7 @@ in {
           FastConnectable = "true";
           Experimental = "true";
           KernelExperimental = "true";
+          Disable= "Handsfree";
         };
       };
     };

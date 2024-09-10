@@ -49,9 +49,9 @@ in {
     };
 
     # Set console keymap.
-    console.keyMap = ${cfg.keymap};
+    console.keyMap = cfg.keymap;
     services.xserver = {
-      xkb.layout = ${cfg.keymap};
+      xkb.layout = cfg.keymap;
     };
   };
 }

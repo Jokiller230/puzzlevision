@@ -19,7 +19,10 @@ in {
     # Enable modules
     puzzlevision = {
       common = {
-        nix.enable = true; # Standard Nix configuration
+        nix = {
+          enable = true; # Standard Nix configuration
+          use-lix = true;
+        };
         grub.enable = true; # Bootloader grub
         networking.enable = true; # Networkmanager configuration
         kernel.enable = true; # Kernel modifications

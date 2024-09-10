@@ -7,16 +7,16 @@
   ...
 }: with lib; with lib.${namespace};
 let
-  cfg = config.${namespace}.system.fonts;
+  cfg = config.${namespace}.common.fonts;
 in {
-  options.${namespace}.system.fonts = {
+  options.${namespace}.common.fonts = {
     enable = mkEnableOption "Enable system font management";
-    fonts = mkOption {
-      type = types.package;
-      default = [ ];
-      example = [ noto-fonts noto-fonts-emoji ];
-      description = "Install additional font packages";
-    }
+    #fonts = mkOption {
+    #  type = types.package;
+    #  default = noto-fonts;
+    #  example = [ noto-fonts noto-fonts-emoji ];
+    #  description = "Install additional font packages";
+    #};
   };
 
   config = mkIf cfg.enable {
@@ -31,7 +31,7 @@ in {
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-emoji
-      (nerdfonts.override { fonts = [ "Hack" ]; })
-    ] ++ cfg.fonts;
+      nerdfonts
+    ]; # ++ cfg.fonts;
   };
 }
