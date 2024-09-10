@@ -69,7 +69,7 @@ in
 
     ### Rust development specific
     rustup
-    jetbrains.rust-rover
+    gcc
 
     ### Work
     teams-for-linux
@@ -82,7 +82,7 @@ in
     sidequest
   ];
 
-  #lib.puzzlevision.apps.zed-editor.enable = true;
+  #puzzlevision.apps.zed-editor.enable = true;
 
   home.stateVersion = "24.05";
 }

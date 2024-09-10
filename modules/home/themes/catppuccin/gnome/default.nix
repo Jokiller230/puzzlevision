@@ -46,6 +46,11 @@
       name = "Colloid-Dark-Catppuccin";
     };
 
+    "org/gnome/desktop/background" = {
+      picture-uri = lib.snowfall.fs.get-file "resources/wallpapers/catppuccin_blue_cat.png";
+      picture-uri-dark = lib.snowfall.fs.get-file "resources/wallpapers/catppuccin_blue_cat.png";
+    };
+
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       cursor-theme = "catppuccin-macchiato-blue-cursors";
