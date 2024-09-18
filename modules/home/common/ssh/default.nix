@@ -36,6 +36,6 @@ in {
         identitiesOnly = true;
         user = "git";
       };
-     };
+    };
   };
 }

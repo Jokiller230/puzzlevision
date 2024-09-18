@@ -18,36 +18,16 @@ with lib.${namespace};
 
   # Set hostname
   # Todo: move to common/networking module
-  networking.hostName = "puzzlevision";
-
-  boot = {
-    # Configure additional kernel modules.
-    extraModulePackages = [
-      pkgs.linuxPackages_latest.rtl8821ce # Use custom network-card driver.
-    ];
-
-    blacklistedKernelModules = [
-      "rtw88_8821ce" # Block the default network-card driver.
-    ];
-  };
+  networking.hostName = "absolutesolver";
 
   # Set timezone.
   time.timeZone = "Europe/Berlin";
-
-  # Enable the power-profiles-daemon service for improved battery management.
-  services.power-profiles-daemon.enable = true;
-
-  # Enable printing.
-  services.printing.enable = true;
 
   # Enable docker
   virtualisation.docker.enable = true;
 
   # Set system Type
-  puzzlevision.archetypes.workstation.enable = true;
-
-  # Enable flatpak support.
-  services.flatpak.enable = true;
+  puzzlevision.archetypes.server.enable = true;
 
   # Configure users.
   snowfallorg.users.jo.admin = true;
@@ -63,11 +43,8 @@ with lib.${namespace};
   environment.systemPackages = with pkgs; [
     ### General
     nano
-    firefox
-    chromium
-    vlc
-    spotify
+    vim
   ];
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "24.05";
 }

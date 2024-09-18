@@ -7,7 +7,7 @@
   ...
 }: with lib; with lib.${namespace};
 let
-  cfg = config.${namespace}.apps.zed-editor;
+  cfg = config.${namespace}.apps.development.zed-editor;
 
   zed-fhs = pkgs.buildFHSUserEnv {
     name = "zed";

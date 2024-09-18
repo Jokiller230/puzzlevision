@@ -12,7 +12,6 @@ in {
 
   config = mkIf cfg.enable {
     hardware.sensor.iio.enable = true; # Enable iio-sensor for automatic screen rotation and similar features.
-
     hardware.flipperzero.enable = true; # Enable support for the flipperzero device.
   };
 }
