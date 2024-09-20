@@ -1,6 +1,6 @@
-# nix-config
+# Puzzlevision
 
-Jo's absolutely insane NixOS configuration - as of August 2024
+Non-stop entertainment! The wackiest NixOS configuration to-date.
 
 ## Deployment
 
