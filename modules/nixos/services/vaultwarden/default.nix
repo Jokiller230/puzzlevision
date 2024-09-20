@@ -16,8 +16,5 @@ in {
       hostname = hostname;
       # Todo: continue writing vaultwarden config
     };
-
-    # Todo: figure out "traefik" as a service and how to configure it per-service
-    # Todo: setup age-nix or sops-nix for secret management
   };
 }
