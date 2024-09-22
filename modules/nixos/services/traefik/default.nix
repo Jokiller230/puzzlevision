@@ -48,6 +48,7 @@ in {
             acme = {
               email = "johannesreckers2006@gmail.com";
               storage = "/var/lib/traefik/acme.json";
+              caServer: "https://acme-staging-v02.api.letsencrypt.org/directory";
               dnsChallenge = {
                 provider = "cloudflare";
                 resolvers = ["1.1.1.1:53" "8.8.8.8:53"];
