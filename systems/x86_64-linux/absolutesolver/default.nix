@@ -21,8 +21,8 @@
   sops.age.generateKey = true;
 
   # Sops keys
-  sops.secrets."cloudflare/api_email" = {};
-  sops.secrets."cloudflare/api_key" = {};
+  sops.secrets."services/cloudflare/api_email" = {};
+  sops.secrets."services/cloudflare/api_key" = {};
 
   # Set hostname
   # Todo: move to common/networking module
