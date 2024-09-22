@@ -11,6 +11,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Secret management tool
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Home manager for managing the /home directory.
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -49,12 +55,14 @@
         allowUnfree = true; # Allow unfree packages.
       };
 
+      # Apply some NixOS modules globally.
+      systems.modules.nixos = with inputs; [
+        sops-nix.nixosModules.sops
+      ];
+
       # Apply some home-manager modules globally.
       homes.modules = with inputs; [
         nix-flatpak.homeManagerModules.nix-flatpak
-      ];
-
-      homes.users."jo@puzzlevision".modules = with inputs; [
         catppuccin.homeManagerModules.catppuccin
       ];
     };

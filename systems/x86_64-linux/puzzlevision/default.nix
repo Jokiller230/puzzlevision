@@ -5,9 +5,7 @@
   namespace,
   config,
   ...
-}:
-with lib;
-with lib.${namespace};
+}: with lib; with lib.${namespace};
 {
   imports = [
     ./hardware-configuration.nix
@@ -43,8 +41,10 @@ with lib.${namespace};
   # Enable docker
   virtualisation.docker.enable = true;
 
-  # Set system Type
-  puzzlevision.archetypes.workstation.enable = true;
+  # Set system configuration
+  puzzlevision = {
+    archetypes.workstation.enable = true;
+  };
 
   # Enable flatpak support.
   services.flatpak.enable = true;
@@ -67,6 +67,10 @@ with lib.${namespace};
     chromium
     vlc
     spotify
+
+    ## Security
+    pinentry-tty
+    gnupg
   ];
 
   system.stateVersion = "23.05";

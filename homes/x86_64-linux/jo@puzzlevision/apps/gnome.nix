@@ -20,19 +20,19 @@
     "org/gnome/shell" = {
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
-        "firefox.desktop"
+        "chromium-browser.desktop"
         "spotify.desktop"
         "phpstorm.desktop"
       ];
 
       enabled-extensions = [
-        "user-theme@gnome-shell-extensions.gcampax.github.com"
-        "dash-to-dock@micxgx.gmail.com"
-        "blur-my-shell@aunetx"
-        "appindicatorsupport@rgcjonas.gmail.com"
-        "unite@hardpixel.eu"
-        "color-picker@tuberry"
-        "clipboard-history@alexsaveau.dev"
+        pkgs.gnomeExtensions.unite.extensionUuid
+        pkgs.gnomeExtensions.color-picker.extensionUuid
+        pkgs.gnomeExtensions.clipboard-history.extensionUuid
+        pkgs.gnomeExtensions.blur-my-shell.extensionUuid
+        pkgs.gnomeExtensions.user-themes.extensionUuid
+        pkgs.gnomeExtensions.dash-to-dock.extensionUuid
+        pkgs.gnomeExtensions.appindicator.extensionUuid
       ];
     };
 

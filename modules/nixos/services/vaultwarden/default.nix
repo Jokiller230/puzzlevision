@@ -1,7 +1,8 @@
 {
+  lib,
   namespace,
-  hostname,
   config,
+  host,
   ...
 }: with lib; with lib.${namespace};
 let
@@ -13,7 +14,7 @@ in {
     virtualisation.oci-containers.containers.vaultwarden = {
       image = "vaultwarden/server";
       autoStart = true;
-      hostname = hostname;
+      hostname = host;
       # Todo: continue writing vaultwarden config
     };
   };

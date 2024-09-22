@@ -26,8 +26,8 @@ in {
         locale.enable = true;
       };
     };
-  };
 
-  # Enable SSH for remote login
-  services.openssh.enable = true;
+    # Enable SSH for remote login
+    services.openssh.enable = true;
+  };
 }

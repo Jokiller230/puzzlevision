@@ -5,9 +5,7 @@
   namespace,
   config,
   ...
-}:
-with lib;
-with lib.${namespace};
+}: with lib; with lib.${namespace};
 {
   imports = [
     ./hardware-configuration.nix
@@ -26,24 +24,34 @@ with lib.${namespace};
   # Enable docker
   virtualisation.docker.enable = true;
 
-  # Set system Type
-  puzzlevision.archetypes.server.enable = true;
+  # Set system configuration
+  puzzlevision = {
+    archetypes.server.enable = true;
+
+    services = {
+      traefik.enable = true;
+    };
+  };
 
   # Configure users.
-  snowfallorg.users.jo.admin = true;
-  users.users.jo.isNormalUser = true;
-  users.users.jo.extraGroups = [ "dialout" "docker" ];
+  snowfallorg.users.cyn.admin = true;
+  users.users.cyn.isNormalUser = true;
+  users.users.cyn.extraGroups = [ "dialout" "docker" ];
 
   # Configure home-manager
   home-manager = {
     backupFileExtension = "homeManagerBackup";
   };
 
-  # Provide users with some sane default packages.
+  # Install required system packages
   environment.systemPackages = with pkgs; [
     ### General
     nano
     vim
+
+    ## Runtimes
+    nodejs_22
+    bun
   ];
 
   system.stateVersion = "24.05";

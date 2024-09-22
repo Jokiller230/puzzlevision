@@ -19,20 +19,13 @@
   config,
   ...
 }: with lib; with lib.${namespace};
-let
-    zed-fhs = pkgs.buildFHSUserEnv {
-        name = "zed";
-        targetPkgs = pkgs:
-        with pkgs; [
-            zed-editor
-        ];
-        runScript = "zed";
-    };
-in
 {
   imports = [
     ./apps/gnome.nix
   ];
+
+  themes.catppuccin.gtk.enable = true;
+  apps.zed-editor.enable = true;
 
   # Flatpak configuration.
   services.flatpak = {
@@ -56,6 +49,7 @@ in
     g4music
     blanket
     bitwarden-desktop
+    kitty
 
     ### Development
     avra
@@ -65,7 +59,6 @@ in
     nodejs_22
     bun
     devenv
-    zed-fhs
 
     ### Rust development specific
     rustup

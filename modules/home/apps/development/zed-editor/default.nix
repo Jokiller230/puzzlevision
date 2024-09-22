@@ -7,7 +7,7 @@
   ...
 }: with lib; with lib.${namespace};
 let
-  cfg = config.${namespace}.apps.development.zed-editor;
+  cfg = config.apps.zed-editor;
 
   zed-fhs = pkgs.buildFHSUserEnv {
     name = "zed";
@@ -18,7 +18,7 @@ let
     runScript = "zed";
   };
 in {
-  options.${namespace}.apps.zed-editor = { enable = mkEnableOption "zed-editor"; };
+  options.apps.zed-editor = { enable = mkEnableOption "zed-editor"; };
 
   config = mkIf cfg.enable {
     home.packages = [zed-fhs];

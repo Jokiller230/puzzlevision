@@ -1,0 +1,7 @@
+keys:
+  - &jo D94C5D66B93C7C7B855F8FF08FBFDF2DB9BBAAF9
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - pgp:
+          - *jo

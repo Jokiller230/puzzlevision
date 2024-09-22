@@ -1,6 +1,6 @@
 {
+  lib,
   namespace,
-  hostname,
   config,
   ...
 }: with lib; with lib.${namespace};
