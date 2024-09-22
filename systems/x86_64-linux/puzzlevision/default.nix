@@ -14,6 +14,13 @@
     inputs.hardware.nixosModules.common-pc-laptop-ssd
   ];
 
+  # Configure Sops
+  sops.defaultSopsFile = lib.snowfall.fs.get-file "secrets/default.yaml";
+  sops.age.keyFile = "/var/lib/sops-nix/key.txt"; # The main AGE key is expected in this location, it is only needed for this system.
+
+  # Sops keys
+  sops.secrets."user/jo/password_hash".neededForUsers = true;
+
   # Set hostname
   # Todo: move to common/networking module
   networking.hostName = "puzzlevision";
@@ -53,6 +60,7 @@
   snowfallorg.users.jo.admin = true;
   users.users.jo.isNormalUser = true;
   users.users.jo.extraGroups = [ "dialout" "docker" ];
+  users.users.jo.hashedPasswordFile = config.sops.secrets."user/jo/password_hash".path;
 
   # Configure home-manager
   home-manager = {

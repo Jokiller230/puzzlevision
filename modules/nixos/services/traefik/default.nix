@@ -14,7 +14,8 @@ in {
 
     systemd.services.traefik = {
       environment = {
-        CF_API_EMAIL = "johannesreckers2006@gmail.com";
+        CF_API_EMAIL = config.sops.secrets."cloudflare/api_email".path;
+        CF_API_KEY = config.sops.secrets."cloudflare/api_key".path;
       };
     };
 
@@ -96,6 +97,5 @@ in {
     };
 
     # Todo: continue with "traefik" configuration and test it on a running system
-    # Todo: setup sops-nix for secret management
   };
 }

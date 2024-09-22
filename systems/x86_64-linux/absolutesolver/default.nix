@@ -14,6 +14,12 @@
     inputs.hardware.nixosModules.common-pc-laptop-ssd
   ];
 
+  # Setup Sops
+  sops.defaultSopsFile = lib.snowfall.fs.get-file "secrets/default.yaml";
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
+  sops.age.generateKey = true;
+
   # Set hostname
   # Todo: move to common/networking module
   networking.hostName = "absolutesolver";
