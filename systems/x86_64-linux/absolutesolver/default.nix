@@ -27,10 +27,6 @@
   # Set system configuration
   puzzlevision = {
     archetypes.server.enable = true;
-
-    services = {
-      traefik.enable = true;
-    };
   };
 
   # Configure users.
