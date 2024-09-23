@@ -26,7 +26,6 @@ in {
       devices = [ "nodev" ];
       efiInstallAsRemovable = true;
       efiSupport = true;
-      version = 2;
 
       extraEntries = ''
         menuentry "Reboot" {

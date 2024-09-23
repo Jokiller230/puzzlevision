@@ -59,7 +59,7 @@ in {
             acme = {
               email = cfg.cloudflareEmail;
               storage = "/var/lib/traefik/acme.json";
-              caServer = "https://acme-staging-v02.api.letsencrypt.org/directory";
+              #caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"; # Uncomment this when testing stuff!
               dnsChallenge = {
                 provider = "cloudflare";
               };
