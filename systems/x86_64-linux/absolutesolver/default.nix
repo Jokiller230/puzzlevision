@@ -30,8 +30,11 @@
   # Set timezone.
   time.timeZone = "Europe/Berlin";
 
-  # Enable docker
-  virtualisation.docker.enable = true;
+  # Enable docker and set it as the OCI container backend
+  virtualisation = {
+    docker.enable = true;
+    oci-containers.backend = "docker";
+  };
 
   # Set system configuration
   puzzlevision = {
