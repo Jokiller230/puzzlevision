@@ -45,6 +45,8 @@
         enable = true;
         cloudflareEmail = "johannesreckers2006@gmail.com";
       };
+
+      vaultwarden.enable = true;
     };
   };
 
