@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     sops.secrets.vaultwarden = {
       sopsFile = lib.snowfall.fs.get-file "secrets/vaultwarden.service.env";
-      format = "env";
+      format = "dotenv";
     };
 
     # Ensure directories exists before OCI container is launched.
