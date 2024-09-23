@@ -27,7 +27,7 @@ in {
       autoStart = true;
       hostname = host;
       labels = {
-        "traefik.enable" = true;
+        "traefik.enable" = "true";
         "traefik.http.routers.vaultwarden.entrypoints" = "websecure";
         "traefik.http.routers.vaultwarden.rule" = "Host(`vault.thevoid.cafe`)";
       };
