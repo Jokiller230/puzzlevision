@@ -21,7 +21,6 @@
   sops.age.generateKey = true;
 
   # Sops keys
-  sops.secrets."services/cloudflare/api_email" = {};
   sops.secrets."services/cloudflare/api_key" = {};
 
   # Set hostname
@@ -37,6 +36,13 @@
   # Set system configuration
   puzzlevision = {
     archetypes.server.enable = true;
+
+    services = {
+      traefik = {
+        enable = true;
+        cloudflareEmail = "johannesreckers2006@gmail.com";
+      };
+    };
   };
 
   # Configure users.

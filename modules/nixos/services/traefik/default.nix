@@ -7,25 +7,36 @@
 let
   cfg = config.${namespace}.services.traefik;
 in {
-  options.${namespace}.services.traefik = { enable = mkEnableOption "Enable the Traefik service."; };
+  options.${namespace}.services.traefik = {
+    enable = mkEnableOption "Enable the Traefik service.";
+    cloudflareEmail = mkOption {
+      type = types.str;
+      default = "system@thevoid.cafe";
+      example = "system@thevoid.cafe";
+      description = "Specify the E-Mail associated with your Cloudflare account for ACME.";
+    };
+  };
 
   config = mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [80 443];
+    networking.firewall.allowedTCPPorts = [80 8080 443]; # http, dashboard, https
 
     systemd.services.traefik = {
       environment = {
-        CF_API_EMAIL = config.sops.secrets."cloudflare/api_email".path;
-        CF_API_KEY = config.sops.secrets."cloudflare/api_key".path;
+        CF_API_EMAIL = cfg.cloudflareEmail;
+      };
+      serviceConfig = {
+        EnvironmentFile = [config.sops.secrets."services/cloudflare/api_key".path];
       };
     };
 
     services.traefik = {
       enable = true;
+      group = "docker";
 
       staticConfigOptions = {
         log = {
           level = "INFO";
-          filePath = "/var/log/traefik.log";
+          filePath = "/var/lib/traefik/traefik.log";
           noColor = false;
           maxSize = 100;
           compress = true;
@@ -46,12 +57,11 @@ in {
         certificatesResolvers = {
           letsencrypt = {
             acme = {
-              email = "johannesreckers2006@gmail.com";
+              email = cfg.cloudflareEmail;
               storage = "/var/lib/traefik/acme.json";
               caServer = "https://acme-staging-v02.api.letsencrypt.org/directory";
               dnsChallenge = {
                 provider = "cloudflare";
-                resolvers = ["1.1.1.1:53" "8.8.8.8:53"];
               };
             };
           };
@@ -96,7 +106,5 @@ in {
         };
       };
     };
-
-    # Todo: continue with "traefik" configuration and test it on a running system
   };
 }
