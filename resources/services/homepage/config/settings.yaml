@@ -11,7 +11,7 @@ background:
 favicon: /images/logo.png
 
 theme: dark
-color: zinc
+color: slate
 iconStyle: theme
 
 layout:
