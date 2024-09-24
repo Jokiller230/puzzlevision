@@ -16,7 +16,7 @@ in {
       "d /var/lib/containers/homepage/config 0700 root root -"
       "d /var/lib/containers/homepage/images 0700 root root -"
 
-      "f /var/lib/containers/homepage 0700 root root - - - exec cp -r ${homepageConfigDirectory}/* /var/lib/containers/homepage"
+      "d /var/lib/containers/homepage 0700 root root - - - exec cp -r ${homepageConfigDirectory}/* /var/lib/containers/homepage"
     ];
 
     virtualisation.oci-containers.containers.homepage = {
