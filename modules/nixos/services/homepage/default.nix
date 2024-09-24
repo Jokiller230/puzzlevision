@@ -18,8 +18,8 @@ in {
       "d /var/lib/containers/homepage/images 0700 root root -"
     ];
 
+    # Copy files from homepageConfigDirectory to the target directory
     system.activationScripts.homepage = ''
-      # Copy files from homepageConfigDirectory to the target directory
       cp -r ${homepageConfigDirectory}/* /var/lib/containers/homepage/
     '';
 
