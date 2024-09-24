@@ -13,11 +13,15 @@ in {
 
   config = mkIf cfg.enable {
     systemd.tmpfiles.rules = [
+      "d /var/lib/containers/homepage 0700 root root -"
       "d /var/lib/containers/homepage/config 0700 root root -"
       "d /var/lib/containers/homepage/images 0700 root root -"
-
-      "d /var/lib/containers/homepage 0700 root root - - - exec cp -r ${homepageConfigDirectory}/* /var/lib/containers/homepage"
     ];
+
+    system.activationScripts.homepage = ''
+      # Copy files from homepageConfigDirectory to the target directory
+      cp -r ${homepageConfigDirectory}/* /var/lib/containers/homepage/
+    '';
 
     virtualisation.oci-containers.containers.homepage = {
       image = "ghcr.io/gethomepage/homepage:latest";
