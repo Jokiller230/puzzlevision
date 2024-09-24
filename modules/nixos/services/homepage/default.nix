@@ -15,7 +15,7 @@ in {
     systemd.tmpfiles.rules = [
       "d /var/lib/containers/homepage 0700 root root -"
       "d /var/lib/containers/homepage/config 0700 root root -"
-      "d /var/lib/containers/homepage/images 0700 root root -"
+      "d /var/lib/containers/homepage/images 0755 root root -"
     ];
 
     # Copy files from homepageConfigDirectory to the target directory
