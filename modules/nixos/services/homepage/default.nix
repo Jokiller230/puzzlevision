@@ -19,7 +19,7 @@ in {
       "f /var/lib/containers/homepage 0700 root root - - - exec cp -r ${homepageConfigDirectory}/* /var/lib/containers/homepage"
     ];
 
-    virtualisation.oci-containers.containers.vaultwarden = {
+    virtualisation.oci-containers.containers.homepage = {
       image = "ghcr.io/gethomepage/homepage:latest";
       autoStart = true;
       hostname = host;
