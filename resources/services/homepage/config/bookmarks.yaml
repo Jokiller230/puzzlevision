@@ -1,0 +1,30 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/bookmarks
+
+- IT:
+    - Github:
+        - abbr: GH
+          href: https://github.com/
+    - Codeberg:
+        - icon: mdi-image-filter-hdr-outline
+          href: https://codeberg.org/
+    - Stackoverflow:
+        - abbr: SO
+          href: https://stackoverflow.com/
+
+- Social:
+    - Reddit:
+        - abbr: RE
+          href: https://reddit.com/
+    - Whatsapp:
+        - icon: mdi-chat-outline
+          href: https://web.whatsapp.com/
+
+- Fun:
+    - YouTube:
+        - icon: mdi-video-vintage
+          href: https://youtube.com/
+    - A-Dark-Room:
+        - icon: mdi-campfire
+          href: https://adarkroom.doublespeakgames.com/

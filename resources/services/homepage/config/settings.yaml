@@ -1,0 +1,54 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/settings
+
+title: Jo's Home
+background:
+  image: /images/blossoms.png
+  blur: md
+  opacity: 45
+
+favicon: /images/logo.png
+
+theme: dark
+color: zinc
+iconStyle: theme
+
+layout:
+  Media:
+    style: row
+    columns: 1
+  Utilities:
+    style: column
+    columns: 2
+  Entertainment:
+    style: column
+    column: 3
+  System:
+    style: column
+    columns: 3
+  Development:
+    style: row
+    columns: 2
+  Social:
+    style: column
+    columns: 3
+  IT:
+    style: column
+    columns: 3
+  Fun:
+    style: column
+    columns: 3
+
+headerStyle: clean
+
+target: _blank
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: false
+  hideVisitURL: false
+
+hideVersion: true
+
+showStats: false

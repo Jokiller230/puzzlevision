@@ -47,6 +47,7 @@
       };
 
       vaultwarden.enable = true;
+      homepage.enable = true;
     };
   };
 
