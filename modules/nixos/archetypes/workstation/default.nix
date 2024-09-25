@@ -12,7 +12,6 @@ in {
 
   config = mkIf cfg.enable {
     environment.sessionVariables = {
-      NIXOS_OZONE_WL = "0"; # Chromium/Electron native Wayland support (Buggy)
       MOZ_ENABLE_WAYLAND = "1"; # Firefox native Wayland support
     };
 
