@@ -30,9 +30,8 @@ in {
       "d /var/lib/containers/sharkey 0700 991 991 -"
     ];
 
-    # Copy files from homepageConfigDirectory to the target directory
-    system.activationScripts.homepage = ''
-      cp -r ${homepageConfigDirectory}/* /var/lib/containers/sharkey/
+    system.activationScripts.sharkey-web = ''
+      cp ${config.sops.secrets.sharkey-config.path} /var/lib/containers/sharkey/.config/default.yml
     '';
 
     virtualisation.oci-containers.containers.sharkey-web = {
