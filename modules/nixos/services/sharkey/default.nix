@@ -65,17 +65,17 @@ in {
     };
 
     virtualisation.oci-containers.containers.sharkey-redis = {
-      image = "docker.io/redis:7.0-alpine"
+      image = "docker.io/redis:7.0-alpine";
       autoStart = true;
       hostname = host;
       volumes = [
         "/var/lib/containers/sharkey/redis:/data:rw"
       ];
       extraOptions = ["--network=sharknet"]; # Todo: implement healthcheck
-    }
+    };
 
     virtualisation.oci-containers.containers.sharkey-meilisearch = {
-      image = "getmeili/meilisearch:v1.3.4"
+      image = "getmeili/meilisearch:v1.3.4";
       autoStart = true;
       hostname = host;
       volumes = [
@@ -89,10 +89,10 @@ in {
         config.sops.secrets.sharkey-meilisearch.path
       ];
       extraOptions = ["--network=sharknet"];
-    }
+    };
 
     virtualisation.oci-containers.containers.sharkey-db = {
-      image = "docker.io/postgres:16.1-alpine"
+      image = "docker.io/postgres:16.1-alpine";
       autoStart = true;
       hostname = host;
       volumes = [
@@ -102,7 +102,7 @@ in {
         config.sops.secrets.sharkey-docker-config.path
       ];
       extraOptions = ["--network=sharknet"]; # Todo: implement healthcheck
-    }
+    };
 
     # W.I.P Todo: finish Sharkey service
   };
