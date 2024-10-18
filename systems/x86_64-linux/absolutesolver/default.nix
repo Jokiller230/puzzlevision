@@ -52,6 +52,15 @@
     };
   };
 
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "*/5 * * * * cyn docker exec -u www-data nextcloud-nextcloud-1 php /var/www/html/cron.php"
+      "*/15 * * * * cyn docker exec -u www-data nextcloud-nextcloud-1 php /var/www/nextcloud/occ preview:pre-generate"
+      #"*/30 * * * * cyn /home/jo/tools/FediFetcher/FediFetcher.sh"
+    ];
+  };
+
   # Configure users.
   snowfallorg.users.cyn.admin = true;
   users.users.cyn.isNormalUser = true;
