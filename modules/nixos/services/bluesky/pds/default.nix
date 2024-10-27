@@ -19,7 +19,10 @@ in {
     };
 
     systemd.tmpfiles.rules = [
-      "d /var/lib/containers/bluesky-pds 0700 root root -"
+      "d /var/lib/containers/bluesky 0700 root root -"
+      "d /var/lib/containers/bluesky/pds 0700 root root -"
+      "d /var/lib/containers/bluesky/pds/data 0700 root root -"
+      "d /var/lib/containers/bluesky/pds/blobs 0700 root root -"
     ];
 
     virtualisation.oci-containers.containers.bluesky-pds = {
@@ -32,11 +35,11 @@ in {
       labels = {
         "traefik.enable" = "true";
         "traefik.http.routers.bluesky-pds.entrypoints" = "websecure";
-        "traefik.http.routers.bluesky-pds.rule" = "Host(`bsky.thevoid.cafe`)";
+        "traefik.http.routers.bluesky-pds.rule" = "Host(`*.bsky.thevoid.cafe`)";
         "traefik.http.services.bluesky-pds.loadbalancer.server.port" = "2583";
       };
       volumes = [
-        "/var/lib/containers/bluesky-pds:/pds"
+        "/var/lib/containers/bluesky/pds:/pds"
       ];
       extraOptions = ["--network=proxy"];
     };

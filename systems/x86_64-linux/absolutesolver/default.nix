@@ -49,6 +49,7 @@
       vaultwarden.enable = true;
       homepage.enable = true;
       duckdns.enable = true;
+      bluesky.pds.enable = true;
     };
   };
 
