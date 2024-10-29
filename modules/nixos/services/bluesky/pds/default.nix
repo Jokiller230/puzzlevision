@@ -21,7 +21,6 @@ in {
     systemd.tmpfiles.rules = [
       "d /var/lib/containers/bluesky 0700 root root -"
       "d /var/lib/containers/bluesky/pds 0700 root root -"
-      "d /var/lib/containers/bluesky/pds/data 0700 root root -"
       "d /var/lib/containers/bluesky/pds/blobs 0700 root root -"
     ];
 

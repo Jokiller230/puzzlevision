@@ -91,6 +91,7 @@ in {
               }
               {
                 main = "thevoid.cafe";
+                sans = ["*.thevoid.cafe"];
               }
               {
                 main = "reckers.dev";
