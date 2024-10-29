@@ -34,7 +34,7 @@ in {
       labels = {
         "traefik.enable" = "true";
         "traefik.http.routers.bluesky-pds.entrypoints" = "websecure";
-        "traefik.http.routers.bluesky-pds.rule" = "HostRegexp(`{subdomain:[a-zA-Z0-9-]+}.bsky.thevoid.cafe`)";
+        "traefik.http.routers.bluesky-pds.rule" = "Host(`bsky.thevoid.cafe`) || HostRegexp(`.+\.bsky\.thevoid\.cafe`)";
         "traefik.http.middlewares.bluesky-pds-header.headers.customrequestheaders.Host" = "{host}";
         "traefik.http.services.bluesky-pds.loadbalancer.server.port" = "2583";
       };
