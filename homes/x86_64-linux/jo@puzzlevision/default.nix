@@ -22,10 +22,10 @@
 {
   imports = [
     ./apps/gnome.nix
+    ./apps/vscodium.nix
   ];
 
   themes.catppuccin.gtk.enable = true;
-  apps.zed-editor.enable = true;
 
   # Flatpak configuration.
   services.flatpak = {
@@ -33,9 +33,7 @@
     update.auto.enable = true;
     uninstallUnmanaged = true;
 
-    packages = [
-      "com.jeffser.Alpaca"
-    ];
+    packages = [];
   };
 
   # Declare user packages.
@@ -47,18 +45,18 @@
     lunar-client
     steam
     g4music
-    blanket
     bitwarden-desktop
-    kitty
 
     ### Development
     avra
     avrdude
     jetbrains.phpstorm
+    jetbrains.pycharm-community
     git
     nodejs_22
     bun
     devenv
+    python39
 
     ### Rust development specific
     rustup

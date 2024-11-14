@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs instance.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # Snowfall lib imposes an opinionated file-structure, which makes things a little easier sometimes.
     snowfall-lib = {
@@ -24,13 +24,19 @@
     };
 
     # Hardware specific tweaks and performance optimizations.
-    hardware.url = "github:NixOS/nixos-hardware/master";
+    hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
 
     # Catppuccin theme nix configuration.
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+    };
 
     # Declarative management of Flatpak packages.
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
+    };
   };
 
   outputs = inputs:

@@ -79,6 +79,9 @@
     ## Security
     pinentry-tty
     gnupg
+
+    ## Development
+    arduino-ide
   ];
 
   system.stateVersion = "23.05";
