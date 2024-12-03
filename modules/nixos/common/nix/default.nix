@@ -22,6 +22,7 @@ in {
         keep-derivations = true;
         keep-outputs = true;
         max-jobs = "auto";
+        warn-dirty = false;
       };
 
       # Garbage collection configuration.

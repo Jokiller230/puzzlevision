@@ -51,6 +51,7 @@
   # Set system configuration
   puzzlevision = {
     archetypes.workstation.enable = true;
+    security.yubikey.enable = true;
   };
 
   # Enable flatpak support.

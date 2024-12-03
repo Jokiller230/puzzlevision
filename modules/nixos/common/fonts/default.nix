@@ -8,14 +8,14 @@
 let
   cfg = config.${namespace}.common.fonts;
 in {
-  options.${namespace}.common.fonts = {
+  options.${namespace}.common.fonts = with types; {
     enable = mkEnableOption "Enable system font management";
-    #fonts = mkOption {
-    #  type = types.package;
-    #  default = noto-fonts;
-    #  example = [ noto-fonts noto-fonts-emoji ];
-    #  description = "Install additional font packages";
-    #};
+    fonts = mkOption {
+      type = listOf package;
+      default = with pkgs; [ noto-fonts noto-fonts-cjk-sans noto-fonts-cjk-serif noto-fonts-emoji nerdfonts ];
+      example = [ noto-fonts noto-fonts-emoji ];
+      description = "Install additional font packages";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -25,12 +25,6 @@ in {
 
     environment.systemPackages = with pkgs; [ font-manager ];
 
-    fonts.packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-emoji
-      nerdfonts
-    ]; # ++ cfg.fonts;
+    fonts.packages = cfg.fonts;
   };
 }
