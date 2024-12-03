@@ -3,7 +3,6 @@
   pkgs,
   namespace,
   config,
-  options,
   ...
 }: with lib; with lib.${namespace};
 let

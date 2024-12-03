@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  inputs,
   namespace,
   ...
 }: with lib; with lib.${namespace};

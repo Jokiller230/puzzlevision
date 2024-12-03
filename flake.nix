@@ -45,9 +45,6 @@
       src = ./.; # "src" must point to the root of the flake.
 
       snowfall = {
-        # "root" can be used, to tell Snowfall Lib where to look for Nix files.
-        # root = ./nix;
-
         # Namespace for this flake's packages, library and overlays.
         namespace = "puzzlevision";
 
@@ -58,7 +55,7 @@
       };
 
       channels-config = {
-        allowUnfree = true; # Allow unfree packages.
+        allowUnfree = true;
       };
 
       # Apply some NixOS modules globally.

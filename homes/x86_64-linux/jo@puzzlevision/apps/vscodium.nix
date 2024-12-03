@@ -1,8 +1,5 @@
 {
-  lib,
   pkgs,
-  inputs,
-  config,
   ...
 }: {
   programs.vscode = {
@@ -23,6 +20,7 @@
     userSettings = {
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
+      "workbench.colorTheme" = "Catppuccin Macchiato";
     };
   };
 }

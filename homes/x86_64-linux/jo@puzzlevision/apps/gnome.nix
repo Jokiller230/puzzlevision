@@ -1,8 +1,5 @@
 {
-  lib,
   pkgs,
-  inputs,
-  config,
   ...
 }: {
   home.packages = with pkgs.gnomeExtensions; [
