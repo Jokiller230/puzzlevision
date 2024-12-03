@@ -156,8 +156,8 @@ in
       };
 
       "org/gnome/desktop/background" = {
-        picture-uri = lib.snowfall.fs.get-file "resources/wallpapers/blossoms.png";
-        picture-uri-dark = lib.snowfall.fs.get-file "resources/wallpapers/blossoms.png";
+        picture-uri = lib.snowfall.fs.get-file "resources/wallpapers/catppuccin_blue_cat.png";
+        picture-uri-dark = lib.snowfall.fs.get-file "resources/wallpapers/catppuccin_blue_cat.png";
       };
 
       "org/gnome/desktop/interface" = {

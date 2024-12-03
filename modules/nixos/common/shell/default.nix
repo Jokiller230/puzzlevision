@@ -2,6 +2,7 @@
   lib,
   namespace,
   config,
+  pkgs,
   ...
 }: with lib; with lib.${namespace};
 let
