@@ -9,7 +9,7 @@
     enable = true;
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
-      wakatime.vscode-wakatime # Wakatime for coding statistics
+      # wakatime.vscode-wakatime # Wakatime for coding statistics
       vue.volar # Vue support
       svelte.svelte-vscode # Svelte support
       pkief.material-icon-theme # Material icons
@@ -20,5 +20,9 @@
       catppuccin.catppuccin-vsc # Catppuccin theme
       jnoortheen.nix-ide # Nix language support
     ];
+    userSettings = {
+      "nix.enableLanguageServer" = true;
+      "nix.serverPath" = "nil";
+    };
   };
 }

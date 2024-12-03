@@ -57,6 +57,7 @@
     bun
     devenv
     python39
+    nil
 
     ### Rust development specific
     rustup

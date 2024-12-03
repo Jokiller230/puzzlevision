@@ -32,6 +32,11 @@ in {
         options = "--delete-older-than 3d";
       };
 
+      extraOptions = ''
+        extra-substituters = https://devenv.cachix.org
+        extra-trusted-public-keys = devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=
+      '';
+
       package = mkIf cfg.use-lix pkgs.lix; # Enable LIX
     };
   };
