@@ -4,6 +4,7 @@
   inputs,
   namespace,
   config,
+  system,
   ...
 }: with lib; with lib.${namespace};
 {
@@ -72,8 +73,8 @@
   environment.systemPackages = with pkgs; [
     ### General
     nano
-    firefox
     chromium
+    inputs.zen-browser.packages."${system}".specific
     vlc
     spotify
 

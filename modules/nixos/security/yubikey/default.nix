@@ -21,7 +21,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ yubikey-manager yubioath-flutter ];
-    
+
     services.udev.packages = [ pkgs.yubikey-personalization ];
     services.pcscd.enable = true;
 
@@ -30,11 +30,9 @@ in
       enableSSHSupport = true;
     };
 
-    security.pam.yubico = {
-      enable = true;
-      debug = false;
-      mode = "challenge-response";
-      id = cfg.key-id;
+    security.pam.services = {
+      login.u2fAuth = true;
+      sudo.u2fAuth = true;
     };
   };
 }
