@@ -73,17 +73,12 @@
   environment.systemPackages = with pkgs; [
     ### General
     nano
-    chromium
     inputs.zen-browser.packages."${system}".specific
     vlc
-    spotify
 
     ## Security
     pinentry-tty
     gnupg
-
-    ## Development
-    arduino-ide
   ];
 
   system.stateVersion = "23.05";
