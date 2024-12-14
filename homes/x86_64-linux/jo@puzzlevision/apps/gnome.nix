@@ -17,8 +17,8 @@
     "org/gnome/shell" = {
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
-        "chromium-browser.desktop"
-        "spotify.desktop"
+        "obsidian.desktop"
+        "zen.desktop"
         "phpstorm.desktop"
       ];
 
