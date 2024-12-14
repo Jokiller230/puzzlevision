@@ -10,8 +10,8 @@ let
   css = pkgs.writeTextFile {
     name = "gtk-css";
     text = ''
-      @define-color accent_color ${config.palette.blue.hex};
-      @define-color accent_bg_color ${config.palette.blue.hex};
+      @define-color accent_color ${config.palette.maroon.hex};
+      @define-color accent_bg_color ${config.palette.maroon.hex};
       @define-color accent_fg_color ${config.palette.base.hex};
       @define-color destructive_color ${config.palette.red.hex};
       @define-color destructive_bg_color ${config.palette.red.hex};
@@ -128,8 +128,8 @@ in
       catppuccin = {
         icon = {
           enable = true;
-          accent = "blue";
-          flavor = "macchiato";
+          accent = "maroon";
+          flavor = "mocha";
         };
       };
 
@@ -156,8 +156,8 @@ in
       };
 
       "org/gnome/desktop/background" = {
-        picture-uri = lib.snowfall.fs.get-file "resources/wallpapers/catppuccin_blue_cat.png";
-        picture-uri-dark = lib.snowfall.fs.get-file "resources/wallpapers/catppuccin_blue_cat.png";
+        picture-uri = lib.snowfall.fs.get-file "resources/wallpapers/mocha-vibrant-colours.png";
+        picture-uri-dark = lib.snowfall.fs.get-file "resources/wallpapers/mocha-vibrant-colours.png";
       };
 
       "org/gnome/desktop/interface" = {
