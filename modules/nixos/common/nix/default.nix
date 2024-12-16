@@ -11,6 +11,7 @@ in {
   options.${namespace}.common.nix = {
     enable = mkEnableOption "Overwrite the default Nix configuration.";
     use-lix = mkEnableOption "Enable Lix as an alternative to CppNix.";
+    use-nixld = mkEnableOption "Enable the use of dynamically linked executables on nix based systems.";
   };
 
   config = mkIf cfg.enable {
@@ -38,6 +39,15 @@ in {
       '';
 
       package = mkIf cfg.use-lix pkgs.lix; # Enable LIX
+    };
+
+    # Dynamic libraries for unpackaged programs
+    programs.nix-ld = mkIf cfg.use-nixld {
+      enable = true;
+      libraries = with pkgs; [
+        glibc
+        libcxx
+      ];
     };
   };
 }

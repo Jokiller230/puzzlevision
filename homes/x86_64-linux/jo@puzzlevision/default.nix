@@ -25,6 +25,9 @@
     packages = [];
   };
 
+  # TODO: look at git-sync for syncing stuff like obsidian vaults.
+  programs.git-credential-oauth.enable = true;
+
   # Declare user packages.
   home.packages = with pkgs; [
     ### General
@@ -46,6 +49,7 @@
     bun
     devenv
     python39
+    poetry
     nil
     zed-editor
     bruno
