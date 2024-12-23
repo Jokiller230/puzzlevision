@@ -52,11 +52,17 @@
   # Set system configuration
   puzzlevision = {
     archetypes.workstation.enable = true;
-    security.yubikey.enable = true;
+    security.yubikey = {
+        enable = true;
+        enable-agent = true;
+    };
   };
 
   # Enable flatpak support.
   services.flatpak.enable = true;
+
+  # Set trusted users (Primarily used for cachix)
+  nix.settings.trusted-users = [ "root" "jo" ];
 
   # Configure users.
   snowfallorg.users.jo.admin = true;
