@@ -38,12 +38,12 @@
     steam
     g4music
     bitwarden-desktop
+    youtube-music
 
     ### Development
     avra
     avrdude
     jetbrains.phpstorm
-    jetbrains.pycharm-community
     git
     nodejs_22
     bun
@@ -53,10 +53,6 @@
     nil
     zed-editor
     bruno
-
-    ### Rust development specific
-    rustup
-    gcc
 
     ### Work
     teams-for-linux
