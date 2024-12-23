@@ -2,37 +2,8 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs.gnomeExtensions; [
-    dash-to-dock
-    user-themes
-    blur-my-shell
-    appindicator
-    unite
-    color-picker
-    clipboard-history
-  ];
-
   # Use `dconf watch /` to track stateful changes you are doing, then set them here.
   dconf.settings = {
-    "org/gnome/shell" = {
-      favorite-apps = [
-        "org.gnome.Nautilus.desktop"
-        "obsidian.desktop"
-        "zen.desktop"
-        "phpstorm.desktop"
-      ];
-
-      enabled-extensions = [
-        pkgs.gnomeExtensions.unite.extensionUuid
-        pkgs.gnomeExtensions.color-picker.extensionUuid
-        pkgs.gnomeExtensions.clipboard-history.extensionUuid
-        pkgs.gnomeExtensions.blur-my-shell.extensionUuid
-        pkgs.gnomeExtensions.user-themes.extensionUuid
-        pkgs.gnomeExtensions.dash-to-dock.extensionUuid
-        pkgs.gnomeExtensions.appindicator.extensionUuid
-      ];
-    };
-
     "org/gnome/desktop/wm/preferences" = {
       workspace-names = [ "Main" ];
     };
