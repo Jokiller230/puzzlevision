@@ -43,6 +43,21 @@
     };
   };
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://cache.nixos.org"
+      "https://devenv.cachix.org"
+      "https://shopware.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      "shopware.cachix.org-1:IDifwLVQaaDU2qhlPkJsWJp/Pq0PfzHPIB90hBOhL3k="
+    ];
+  };
+
   outputs = inputs:
     inputs.snowfall-lib.mkFlake {
       inherit inputs; # Providing flake inputs to Snowfall Lib.

@@ -12,6 +12,7 @@ in {
   config = mkIf cfg.enable {
     environment.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1"; # Firefox native Wayland support
+      NIXOS_OZONE_WL = "1"; # Native Wayland in Chromium and Electron based applications
     };
 
     # Enable modules
@@ -20,6 +21,7 @@ in {
         nix = {
           enable = true; # Standard Nix configuration
           use-lix = true;
+          use-nixld = true;
         };
         grub.enable = true; # Bootloader grub
         networking.enable = true; # Networkmanager configuration
@@ -30,6 +32,10 @@ in {
         fonts.enable = true; # Common fonts and font management tweaks
         audio.enable = true; # Audio setup
         locale.enable = true; # Locale settings
+      };
+
+      tools = {
+        cachix.enable = true;
       };
 
       desktop.gnome.enable = true;
