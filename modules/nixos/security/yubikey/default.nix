@@ -7,7 +7,7 @@
 }: with lib; with lib.${namespace};
 let
   cfg = config.${namespace}.security.yubikey;
-in 
+in
 {
   options.${namespace}.security.yubikey = with types; {
     enable = mkEnableOption "Enable the Yubikey as a security device.";
@@ -17,6 +17,7 @@ in
       example = [ "123456" "1234567" ];
       description = "Register additional Yubikey IDs.";
     };
+    enable-agent = mkEnableOption "Enable the Yubikey agent";
   };
 
   config = mkIf cfg.enable {
@@ -33,6 +34,17 @@ in
     security.pam.services = {
       login.u2fAuth = true;
       sudo.u2fAuth = true;
+    };
+
+    services.yubikey-agent.enable = cfg.enable-agent;
+
+    programs.ssh.extraConfig = mkIf cfg.enable-agent ''
+        Host *
+            IdentityAgent /usr/local/var/run/yubikey-agent.sock
+    '';
+
+    environment.sessionVariables = mkIf cfg.enable-agent {
+        SSH_AUTH_SOCK = "/usr/local/var/run/yubikey-agent.sock";
     };
   };
 }
