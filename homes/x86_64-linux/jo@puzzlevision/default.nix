@@ -5,11 +5,12 @@
   ...
 }: with lib; with lib.${namespace};
 {
-  imports = [
-    ./apps/vscodium.nix
-  ];
-
-  themes.catppuccin.gtk.enable = true;
+  puzzlevision = {
+    themes.catppuccin = {
+      gtk.enable = true;
+      black-box.enable = true;
+    };
+  };
 
   home.file."~/.config/Yubico/u2f_keys".text = ''
     jo:gtKwCQKVw5O4IkWg8J8o7vHIo3hStmOqVcnmk97E335DwHnPUMIDTMnD46qEn/1tucTZlYfGABfzVVG+iYeUOA==,fVRFZb9iBiqjOXvk5Gm9ygO/O4huEUR1Uq3DGBlnS1RtqqK0shif8aOlNLkmn8Xe9+x4HYIeNEX4fc8Z7Y2Hgw==,es256,+presence
