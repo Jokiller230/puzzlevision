@@ -6,7 +6,6 @@
 }: with lib; with lib.${namespace};
 {
   imports = [
-    ./apps/gnome.nix
     ./apps/vscodium.nix
   ];
 
