@@ -101,10 +101,10 @@ let
     '';
   };
 
-  cfg = config.themes.catppuccin.gtk;
+  cfg = config.${namespace}.themes.catppuccin.gtk;
 in
 {
-  options.themes.catppuccin.gtk = { enable = mkEnableOption "Enable the Catppuccin theme for GTK"; };
+  options.${namespace}.themes.catppuccin.gtk = { enable = mkEnableOption "Enable the Catppuccin theme for GTK"; };
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
@@ -120,17 +120,9 @@ in
       enable = true;
 
       font = {
-        name = "Ubuntu";
+        name = "Poppins";
         size = 12;
-        package = pkgs.ubuntu-sans;
-      };
-
-      catppuccin = {
-        icon = {
-          enable = true;
-          accent = "maroon";
-          flavor = "mocha";
-        };
+        package = pkgs.poppins;
       };
 
       theme = {
@@ -147,6 +139,16 @@ in
 
       gtk4 = {
         extraCss = ''@import url("${css}");'';
+      };
+    };
+
+    catppuccin = {
+      gtk = {
+        icon = {
+          enable = true;
+          accent = "maroon";
+          flavor = "mocha";
+        };
       };
     };
 

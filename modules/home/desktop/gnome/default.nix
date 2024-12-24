@@ -1,17 +1,16 @@
 {
   lib,
   pkgs,
-  host,
   config,
   osConfig,
   namespace,
   ...
 }: with lib; with lib.${namespace};
 let
-  cfg = config.${host}.desktop.gnome;
+  cfg = config.${namespace}.desktop.gnome;
 in
 {
-  options.${host}.desktop.gnome = with types; {
+  options.${namespace}.desktop.gnome = with types; {
     enabled-extensions = mkOption {
       type = listOf package;
       default = with pkgs.gnomeExtensions; [ dash-to-dock user-themes blur-my-shell appindicator unite color-picker clipboard-history ];

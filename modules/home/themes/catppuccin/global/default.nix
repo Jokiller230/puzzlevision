@@ -6,8 +6,8 @@
     accent = "blue";
     flavor = "macchiato";
 
-    pointerCursor.enable = true;
-    pointerCursor.accent = "blue";
-    pointerCursor.flavor = "macchiato";
+    cursors.enable = true;
+    cursors.accent = "blue";
+    cursors.flavor = "macchiato";
   };
 }
