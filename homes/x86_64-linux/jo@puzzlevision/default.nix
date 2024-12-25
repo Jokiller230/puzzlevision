@@ -53,6 +53,7 @@
     nil
     zed-editor
     bruno
+    deno
 
     ### Work
     teams-for-linux
