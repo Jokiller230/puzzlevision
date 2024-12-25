@@ -39,6 +39,7 @@ in
         };
       };
     };
+    wallpaper = mkOpt str (builtins.toString ./background.png) "Specify the path of your prefered Gnome wallpaper.";
   };
 
   config = mkIf osConfig.${namespace}.desktop.gnome.enable {
@@ -65,6 +66,10 @@ in
         hide-activities-button = "never";
         autofocus-windows = true;
         notifications-position = "right";
+      };
+      "org/gnome/desktop/background" = {
+        picture-uri = cfg.wallpaper;
+        picture-uri-dark = cfg.wallpaper;
       };
     };
   };
