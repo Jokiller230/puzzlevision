@@ -39,7 +39,7 @@ in
         };
       };
     };
-    wallpaper = mkOpt str (builtins.toString ./background.png) "Specify the path of your prefered Gnome wallpaper.";
+    wallpaper = mkOpt str (builtins.toString ./wallpapers/rocket-launch.jpg) "Specify the path of your prefered Gnome wallpaper.";
   };
 
   config = mkIf osConfig.${namespace}.desktop.gnome.enable {
@@ -66,6 +66,12 @@ in
         hide-activities-button = "never";
         autofocus-windows = true;
         notifications-position = "right";
+      };
+      "org/gnome/shell/extensions/blur-my-shell/applications" = {
+        blur = true;
+        sigma = 30;
+        opacity = 230;
+        enable-all = true;
       };
       "org/gnome/desktop/background" = {
         picture-uri = cfg.wallpaper;
