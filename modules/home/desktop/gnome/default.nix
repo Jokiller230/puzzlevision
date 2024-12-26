@@ -38,6 +38,9 @@ in
           description = "Specify when Unite should hide window titlebars.";
         };
       };
+      blur-my-shell = {
+        enable-blur = mkOpt bool true "Whether to enable blur-my-shell application blur.";
+      };
     };
     wallpaper = mkOpt str (builtins.toString ./wallpapers/rocket-launch.jpg) "Specify the path of your prefered Gnome wallpaper.";
   };
@@ -67,7 +70,7 @@ in
         autofocus-windows = true;
         notifications-position = "right";
       };
-      "org/gnome/shell/extensions/blur-my-shell/applications" = {
+      "org/gnome/shell/extensions/blur-my-shell/applications" = mkIf cfg.extensions.blur-my-shell.enable-blur {
         blur = true;
         sigma = 30;
         opacity = 230;
