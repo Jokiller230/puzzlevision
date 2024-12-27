@@ -11,7 +11,7 @@ in {
     enable = mkEnableOption "Enable the Traefik service.";
     cloudflareEmail = mkOption {
       type = types.str;
-      default = "system@thevoid.cafe";
+      default = config.${namespace}.admin.email;
       example = "system@thevoid.cafe";
       description = "Specify the E-Mail associated with your Cloudflare account for ACME.";
     };

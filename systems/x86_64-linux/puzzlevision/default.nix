@@ -53,8 +53,8 @@
   puzzlevision = {
     archetypes.workstation.enable = true;
     security.yubikey = {
-        enable = true;
-        enable-agent = true;
+      enable = true;
+      enable-agent = true;
     };
   };
 
