@@ -79,7 +79,8 @@
   environment.systemPackages = with pkgs; [
     ### General
     nano
-    inputs.zen-browser.packages."${system}".specific
+    inputs.zen-browser.packages."${system}".default
+    inputs.ghostty.packages.x86_64-linux.default
     vlc
 
     ## Security

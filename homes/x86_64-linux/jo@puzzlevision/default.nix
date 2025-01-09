@@ -8,7 +8,6 @@
   puzzlevision = {
     themes.catppuccin = {
       gtk.enable = true;
-      black-box.enable = true;
     };
   };
 
@@ -44,6 +43,7 @@
     avra
     avrdude
     jetbrains.phpstorm
+    jetbrains-toolbox
     git
     nodejs_22
     bun

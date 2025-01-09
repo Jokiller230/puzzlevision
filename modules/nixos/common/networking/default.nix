@@ -15,7 +15,6 @@ in {
   config = mkIf cfg.enable {
     networking.networkmanager = {
       enable = true;
-      wifi.powersave = false;
     };
   };
 }

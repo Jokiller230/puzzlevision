@@ -10,7 +10,7 @@ in {
   options.${namespace}.common.audio = { enable = mkEnableOption "whether to enable common audio support and tweaks"; };
 
   config = mkIf cfg.enable {
-    hardware.pulseaudio.enable = false;
+    services.pulseaudio.enable = false;
 
     security.rtkit.enable = true;
     services.pipewire = {

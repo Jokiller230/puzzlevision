@@ -6,41 +6,26 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # Snowfall lib imposes an opinionated file-structure, which makes things a little easier sometimes.
-    snowfall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    snowfall-lib = { url = "github:snowfallorg/lib"; inputs.nixpkgs.follows = "nixpkgs"; };
 
     # Secret management tool
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    sops-nix = { url = "github:Mic92/sops-nix"; inputs.nixpkgs.follows = "nixpkgs"; };
 
     # Home manager for managing the /home directory.
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
 
     # Hardware specific tweaks and performance optimizations.
-    hardware = {
-      url = "github:NixOS/nixos-hardware/master";
-    };
+    hardware = { url = "github:NixOS/nixos-hardware/master"; };
 
     # Catppuccin theme nix configuration.
-    catppuccin = {
-      url = "github:catppuccin/nix";
-    };
+    catppuccin = { url = "github:catppuccin/nix"; inputs.nixpkgs.follows = "nixpkgs"; };
 
     # Declarative management of Flatpak packages.
-    nix-flatpak = {
-      url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
-    };
+    nix-flatpak = { url = "github:gmodena/nix-flatpak/?ref=v0.4.1"; };
 
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-    };
+    # Apps
+    zen-browser = { url = "github:0xc000022070/zen-browser-flake"; inputs.nixpkgs.follows = "nixpkgs"; };
+    ghostty = { url = "github:ghostty-org/ghostty"; };
   };
 
   nixConfig = {
