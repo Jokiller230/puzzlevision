@@ -33,3 +33,24 @@ The main goals of this rewritten flake are:
 - improved secrets management
 - keeping external assets closer to their related nix file, e.g. wallpapers in
 the desktop modules folder
+
+## 🏗️ Structure
+The structure this flake aims to build on is relatively simple to grasp.
+
+```
+flake.nix  --> The flake.
+/systems   --> NixOS configurations for various types of systems, using easy-hosts.
+/modules   --> Modules that are mapped to their corresponding easy-hosts class (and home modules).
+  /nixos   --> (example) Modules specific to the nixos class configured in easy-hosts.
+/homes     --> Directory for home-manager configurations, not specific to the system type.
+/lib       --> A place for custom lib attributes exposed on the flake namespace (lib.puzzlevision.mkOpt).
+(more...)  --> Additional directories have been considered (e.g. shells), but as of right now, they serve no use to me.
+```
+
+## 🎨 Credits
+Parts of this flake were inspired by the likes of:
+
+- [isabelroses](https://github.com/isabelroses)
+- [uncenter](https://github.com/uncenter)
+
+Many thanks to their hard work!
