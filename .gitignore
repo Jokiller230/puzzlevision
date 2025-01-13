@@ -1,3 +1,6 @@
 ### Buid-VM outputs
 *.qcow2
 /result
+
+### Jetbrains
+/.idea
