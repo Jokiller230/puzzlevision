@@ -75,6 +75,7 @@ in
         sigma = 30;
         opacity = 230;
         enable-all = true;
+        dynamic-opacity = false;
       };
       "org/gnome/desktop/background" = {
         picture-uri = cfg.wallpaper;

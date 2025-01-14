@@ -46,7 +46,6 @@ in {
 
     environment.systemPackages = with pkgs; [
       gnome-tweaks
-      blackbox-terminal # Terminal app
       resources # System resource manager
     ];
   };

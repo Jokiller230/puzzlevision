@@ -1,2 +1,6 @@
 ### Jetbrains
 /.idea
+
+# Nix build-vm ouputs
+*.qcow2
+/result
