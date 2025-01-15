@@ -53,4 +53,9 @@ Parts of this flake were inspired by the likes of:
 - [isabelroses](https://github.com/isabelroses)
 - [uncenter](https://github.com/uncenter)
 
-Many thanks to their hard work!
+and documentations such as:
+
+- [flake-parts](https://flake.parts)
+- [NixOS and Flakes book](https://nixos-and-flakes.thiscute.world)
+
+many thanks to their hard work!

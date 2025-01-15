@@ -3,29 +3,31 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    easy-hosts.url = "github:isabelroses/easy-hosts";
 
-    # Flake parts, a library that provides utilites for creating flakes
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    # Provides an easy interface for loading systems from a directory
-    easy-hosts.url = "github:isabelroses/easy-hosts";
-
-    #
     home-manager = {
-    url = "github:nix-community/home-manager";
-    inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      debug = true;
+
       imports = [
-        ./systems
+        ./modules/flake
       ];
 
       systems = [ "x86_64-linux" ];
+      flake = {
+        # Exposing the flake namespace
+        namespace = "puzzlevision";
+      };
     };
 }
