@@ -38,6 +38,8 @@
     g4music
     bitwarden-desktop
     youtube-music
+    ungoogled-chromium
+    firefox
 
     ### Development
     avra

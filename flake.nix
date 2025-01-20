@@ -17,6 +17,12 @@
     # Hardware specific tweaks and performance optimizations.
     hardware = { url = "github:NixOS/nixos-hardware/master"; };
 
+    # Support for ElanTech fingerprint scanner 04f3:0c00
+    elanmoc2 = {
+      url = "github:sandptel/elanmoc2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Catppuccin theme nix configuration.
     catppuccin = { url = "github:catppuccin/nix"; inputs.nixpkgs.follows = "nixpkgs"; };
 

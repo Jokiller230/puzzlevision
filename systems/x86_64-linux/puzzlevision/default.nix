@@ -13,6 +13,7 @@
     inputs.hardware.nixosModules.common-pc-laptop
     inputs.hardware.nixosModules.common-cpu-intel
     inputs.hardware.nixosModules.common-pc-laptop-ssd
+    inputs.elanmoc2.nixosModules.elanmoc2
   ];
 
   # Configure Sops
@@ -45,6 +46,9 @@
 
   # Enable printing.
   services.printing.enable = true;
+
+  # Enable fingerprint support for ElanTech scanner 04f3:0c00
+  services.fprintd.elanmoc2.enable=true;
 
   # Enable docker
   virtualisation.docker.enable = true;
