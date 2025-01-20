@@ -4,7 +4,6 @@
   inputs,
   namespace,
   config,
-  system,
   ...
 }: with lib; with lib.${namespace};
 {
@@ -48,7 +47,7 @@
   services.printing.enable = true;
 
   # Enable fingerprint support for ElanTech scanner 04f3:0c00
-  services.fprintd.elanmoc2.enable=true;
+  services.fprintd.elanmoc2.enable = true;
 
   # Enable docker
   virtualisation.docker.enable = true;
@@ -83,7 +82,6 @@
   environment.systemPackages = with pkgs; [
     ### General
     nano
-    inputs.zen-browser.packages."${system}".default
     inputs.ghostty.packages.x86_64-linux.default
     vlc
 
