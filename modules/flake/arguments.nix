@@ -36,7 +36,6 @@ in
   _module.args = {
     namespace = config.flake.namespace;
 
-
     puzzlelib = loadLibs ../../lib;
 
     # Initialize nixpkgs instance with custom overlays.
