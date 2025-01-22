@@ -5,7 +5,18 @@
   ...
 }:
 let
-  # Recursive function to load all `default.nix` files and merge them into a single attr. set
+  ## Recursive loading of libraries, similar to snowfall lib.
+  ## Logical flow: read files => merge all file outputs to single attr. set
+  ## The directory in question is flake-root => lib
+  ## The directory structure is:
+  ## lib/
+  ##   => libname
+  ##     => default.nix
+  ##   => libname2
+  ##     => default.nix
+  ##
+  ## The structure of multiple libs is simply for organization and the attrs. of all default.nix files should still be merged
+  ## into a single set.
   loadLibs = directory:
     builtins.foldl' (acc: name:
       let
@@ -25,18 +36,7 @@ in
   _module.args = {
     namespace = config.flake.namespace;
 
-    ## Recursive loading of libraries, similar to snowfall lib.
-    ## Logical flow: read files => merge all file outputs to single attr. set
-    ## The directory in question is flake-root => lib
-    ## The directory structure is:
-    ## lib/
-    ##   => libname
-    ##     => default.nix
-    ##   => libname2
-    ##     => default.nix
-    ##
-    ## The structure of multiple libs is simply for organization and the attrs. of all default.nix files should still be merged
-    ## into a single set.
+
     puzzlelib = loadLibs ../../lib;
 
     # Initialize nixpkgs instance with custom overlays.
