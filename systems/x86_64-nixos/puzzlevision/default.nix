@@ -7,6 +7,13 @@
     ./hardware.nix
   ];
 
+  virtualisation.vmVariant = {
+    virtualisation = {
+      cores = 6;
+      memorySize = 2048;
+    };
+  };
+
   # Todo: pass a set of users to enable from within easy-hosts and automatically map the corresponding home-manager configurations
   # ${namespace} = {
   #   mainUser = "jo";
@@ -18,7 +25,7 @@
 
   # Enable Plasma6
   services.xserver.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   environment.systemPackages = with pkgs; [

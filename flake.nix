@@ -16,7 +16,7 @@
     };
   };
 
-  outputs = inputs@{ flake-parts, ... }:
+  outputs = { flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       debug = true;
 
