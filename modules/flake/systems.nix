@@ -1,6 +1,8 @@
 {
+  lib,
   inputs,
   namespace,
+  puzzlelib,
   ...
 }:
 {
@@ -12,19 +14,16 @@
 
     shared = {
       specialArgs = {
-        inherit namespace;
+        inherit namespace puzzlelib;
       };
     };
 
     perClass = class: {
       modules = [
-        # Import modules based on current classname.
-        ../${class}
-
-        (inputs.nixpkgs.lib.optionals (class == "nixos") [
+        (lib.optionals (class == "nixos") [
           inputs.home-manager.nixosModules.default
         ])
-      ];
+      ] ++ (puzzlelib.dirToModuleList ../${class}); # Import modules based on current classname.
     };
   };
 }
