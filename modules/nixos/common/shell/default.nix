@@ -4,8 +4,9 @@
   config,
   pkgs,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.common.shell;
 in {
   options.${namespace}.common.shell = {
@@ -13,8 +14,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.shells = with pkgs; [ fish ];
-    users.defaultUserShell = pkgs.fish;
+    environment.shells = with pkgs; [ nushell fish ];
+    users.defaultUserShell = pkgs.nushell;
     programs.fish.enable = true;
   };
 }
