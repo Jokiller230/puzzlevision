@@ -3,8 +3,9 @@
   namespace,
   config,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.common.audio;
 in {
   options.${namespace}.common.audio = { enable = mkEnableOption "whether to enable common audio support and tweaks"; };

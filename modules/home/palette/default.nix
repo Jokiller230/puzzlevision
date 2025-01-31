@@ -1,15 +1,15 @@
 {
   lib,
-  namespace,
   config,
   pkgs,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkOption;
   palette = (pkgs.lib.importJSON (config.catppuccin.sources.palette + "/palette.json")).${config.catppuccin.flavor}.colors;
 in
 {
-  options.palette = mkOption { type = types.attrsOf types.raw; };
+  options.palette = mkOption { type = lib.types.attrsOf lib.types.raw; };
 
   config = {
     inherit palette;

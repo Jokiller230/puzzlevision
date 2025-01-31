@@ -4,8 +4,9 @@
   config,
   host,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.services.vaultwarden;
 in {
   options.${namespace}.services.vaultwarden = { enable = mkEnableOption "Enable Vaultwarden, a self-hostable password manager."; };

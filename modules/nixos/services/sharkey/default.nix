@@ -4,8 +4,9 @@
   config,
   host,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.services.sharkey;
 in {
   options.${namespace}.services.sharkey = { enable = mkEnableOption "Enable Sharkey, the activitypub-based microblogging service."; };

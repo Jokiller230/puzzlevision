@@ -3,14 +3,15 @@
   namespace,
   config,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf mkOption;
   cfg = config.${namespace}.services.traefik;
 in {
   options.${namespace}.services.traefik = {
     enable = mkEnableOption "Enable the Traefik service.";
     cloudflareEmail = mkOption {
-      type = types.str;
+      type = lib.types.str;
       default = config.${namespace}.admin.email;
       example = "system@thevoid.cafe";
       description = "Specify the E-Mail associated with your Cloudflare account for ACME.";

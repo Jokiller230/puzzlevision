@@ -4,8 +4,9 @@
   namespace,
   config,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.common.bluetooth;
 in {
   options.${namespace}.common.bluetooth = { enable = mkEnableOption "Enable bluetooth support on your current system"; };

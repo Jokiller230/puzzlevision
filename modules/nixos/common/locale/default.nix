@@ -3,29 +3,30 @@
   namespace,
   config,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf mkOption;
   cfg = config.${namespace}.common.locale;
 in {
   options.${namespace}.common.locale = {
     enable = mkEnableOption "whether to enable common locale tweaks";
 
     language = mkOption {
-      type = types.str;
+      type = lib.types.str;
       default = "en_US";
       example = "en_US";
       description = "Sets the language for most text, doesn't include monetary or measurement settings";
     };
 
     country = mkOption {
-      type = types.str;
+      type = lib.types.str;
       default = "de_DE";
       example = "de_DE";
       description = "Sets the language used for monetary or measurement settings (USD vs Euro, etc...)";
     };
 
     keymap = mkOption {
-      type = types.str;
+      type = lib.types.str;
       default = "de";
       example = "de";
       description = "Sets the keymap to be used by the system";

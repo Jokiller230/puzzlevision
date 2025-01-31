@@ -3,8 +3,9 @@
   namespace,
   config,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.archetypes.workstation;
 in {
   options.${namespace}.archetypes.workstation = { enable = mkEnableOption "Enable the workstation archetype for your current system"; };

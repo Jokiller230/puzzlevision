@@ -3,8 +3,9 @@
   namespace,
   config,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.desktop.plasma;
 in {
   options.${namespace}.desktop.plasma = { enable = mkEnableOption "Whether to enable the KDE Plasma desktop environment"; };

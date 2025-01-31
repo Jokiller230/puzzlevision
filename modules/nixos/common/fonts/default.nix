@@ -4,11 +4,12 @@
   namespace,
   config,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf mkOption;
   cfg = config.${namespace}.common.fonts;
 in {
-  options.${namespace}.common.fonts = with types; {
+  options.${namespace}.common.fonts = with lib.types; {
     enable = mkEnableOption "Enable system font management";
     fonts = mkOption {
       type = listOf package;

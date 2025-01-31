@@ -1,9 +1,7 @@
 {
-  lib,
   pkgs,
-  namespace,
   ...
-}: with lib; with lib.${namespace};
+}:
 {
   # Declare user packages.
   home.packages = with pkgs; [

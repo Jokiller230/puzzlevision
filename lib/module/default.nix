@@ -1,8 +1,11 @@
 {
   lib,
   ...
-}: with lib;
-rec {
+}:
+let
+  inherit (lib) mkOption;
+in
+{
   ## Create a NixOS module option. (Stolen from Jake Hamilton)
   ##
   ## ```nix

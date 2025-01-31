@@ -4,12 +4,13 @@
   config,
   namespace,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf mkOption;
   cfg = config.${namespace}.security.yubikey;
 in
 {
-  options.${namespace}.security.yubikey = with types; {
+  options.${namespace}.security.yubikey = with lib.types; {
     enable = mkEnableOption "Enable the Yubikey as a security device.";
     key-id = mkOption {
       type = listOf str;

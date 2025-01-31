@@ -4,8 +4,9 @@
   namespace,
   config,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.common.nix;
 in {
   options.${namespace}.common.nix = {

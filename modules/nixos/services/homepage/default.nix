@@ -4,9 +4,11 @@
   config,
   host,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.services.homepage;
+
   homepageConfigDirectory = lib.snowfall.fs.get-file "resources/services/homepage";
 in {
   options.${namespace}.services.homepage = { enable = mkEnableOption "Enable Homepage, an intuitive dashboard for your services."; };

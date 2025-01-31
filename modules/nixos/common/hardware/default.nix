@@ -3,8 +3,9 @@
   namespace,
   config,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.common.hardware;
 in {
   options.${namespace}.common.hardware = { enable = mkEnableOption "whether to enable common hardware support"; };

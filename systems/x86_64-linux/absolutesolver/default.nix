@@ -2,9 +2,8 @@
   lib,
   pkgs,
   inputs,
-  namespace,
   ...
-}: with lib; with lib.${namespace};
+}:
 {
   imports = [
     ./hardware-configuration.nix

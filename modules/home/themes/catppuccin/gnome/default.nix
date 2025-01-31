@@ -4,8 +4,10 @@
   config,
   pkgs,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
+
   # Stolen from Oli @ git.gay, basically just themes default libadwaita components.
   css = pkgs.writeTextFile {
     name = "gtk-css";

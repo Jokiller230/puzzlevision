@@ -5,12 +5,14 @@
   osConfig,
   namespace,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkIf mkOption;
+  inherit (lib.${namespace}) mkOpt;
   cfg = config.${namespace}.desktop.gnome;
 in
 {
-  options.${namespace}.desktop.gnome = with types; {
+  options.${namespace}.desktop.gnome = with lib.types; {
     enabled-extensions = mkOption {
       type = listOf package;
       default = with pkgs.gnomeExtensions; [ dash-to-dock user-themes blur-my-shell appindicator unite color-picker clipboard-history ];
@@ -19,7 +21,7 @@ in
     };
     favorite-apps = mkOption {
       type = listOf str;
-      default = ["org.gnome.Nautilus.desktop" "obsidian.desktop" "zen.desktop" "dev.zed.Zed.desktop"];
+      default = ["org.gnome.Nautilus.desktop" "obsidian.desktop" "firefox.desktop" "dev.zed.Zed.desktop"];
       example = ["org.gnome.Nautilus.desktop" "obsidian.desktop"];
       description = "Specify your favorite apps (sorted left to right).";
     };
@@ -42,7 +44,7 @@ in
         enable-blur = mkOpt bool false "Whether to enable blur-my-shell application blur.";
       };
     };
-    wallpaper = mkOpt str (builtins.toString ./wallpapers/abstract/amber-d.jxl) "Specify the path of your prefered Gnome wallpaper.";
+    wallpaper = mkOpt str (builtins.toString ./wallpapers/arcane/jinx_flare.jpg) "Specify the path of your prefered Gnome wallpaper.";
   };
 
   config = mkIf osConfig.${namespace}.desktop.gnome.enable {
@@ -51,7 +53,7 @@ in
     dconf.settings = {
       "org/gnome/shell" = {
         favorite-apps = cfg.favorite-apps;
-        enabled-extensions = forEach cfg.enabled-extensions (x: x.extensionUuid);
+        enabled-extensions = lib.forEach cfg.enabled-extensions (x: x.extensionUuid);
         disabled-extensions = []; # Make sure none of our extensions are disabled on system rebuild
       };
       "org/gnome/shell/extensions/unite" = mkIf (builtins.elem pkgs.gnomeExtensions.unite cfg.enabled-extensions) {

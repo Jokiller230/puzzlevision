@@ -4,8 +4,9 @@
   config,
   host,
   ...
-}: with lib; with lib.${namespace};
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.services.duckdns;
 in {
   options.${namespace}.services.duckdns = {
