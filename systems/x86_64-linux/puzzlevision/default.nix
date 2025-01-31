@@ -2,17 +2,15 @@
   lib,
   pkgs,
   inputs,
-  namespace,
   config,
   ...
-}: with lib; with lib.${namespace};
+}:
 {
   imports = [
     ./hardware-configuration.nix
     inputs.hardware.nixosModules.common-pc-laptop
     inputs.hardware.nixosModules.common-cpu-intel
     inputs.hardware.nixosModules.common-pc-laptop-ssd
-    inputs.elanmoc2.nixosModules.elanmoc2
   ];
 
   # Configure Sops
@@ -29,7 +27,7 @@
   boot = {
     # Configure additional kernel modules.
     extraModulePackages = [
-      pkgs.linuxPackages_latest.rtl8821ce # Use custom network-card driver.
+      pkgs.linuxKernel.packages.linux_6_12.rtl8821ce # Use custom network-card driver.
     ];
 
     blacklistedKernelModules = [
@@ -46,15 +44,14 @@
   # Enable printing.
   services.printing.enable = true;
 
-  # Enable fingerprint support for ElanTech scanner 04f3:0c00
-  services.fprintd.elanmoc2.enable = true;
-
   # Enable docker
   virtualisation.docker.enable = true;
 
   # Set system configuration
   puzzlevision = {
     archetypes.workstation.enable = true;
+    common.kernel.version = "linuxPackages_6_12";
+
     security.yubikey = {
       enable = true;
       enable-agent = true;
@@ -67,10 +64,15 @@
   # Set trusted users (Primarily used for cachix)
   nix.settings.trusted-users = [ "root" "jo" ];
 
+  # Configure additional groups
+  users.groups.www-data = {
+    gid = 33;
+  };
+
   # Configure users.
   snowfallorg.users.jo.admin = true;
   users.users.jo.isNormalUser = true;
-  users.users.jo.extraGroups = [ "dialout" "docker" ];
+  users.users.jo.extraGroups = [ "dialout" "docker" "www-data" ];
   users.users.jo.hashedPasswordFile = config.sops.secrets."user/jo/password_hash".path;
 
   # Configure home-manager
