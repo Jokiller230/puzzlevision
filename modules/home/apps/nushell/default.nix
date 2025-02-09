@@ -25,13 +25,13 @@ in {
           $env.config = {
             completions: {
               case_sensitive: false # case-sensitive completions
-              quick: true    # set to false to prevent auto-selecting completions
-              partial: true    # set to false to prevent partial filling of the prompt
+              quick: true    # auto complete selections
+              partial: true    # partial filling of prompts
               algorithm: "fuzzy"    # prefix or fuzzy
               external: {
-                # set to false to prevent nushell looking into $env.PATH to find more suggestions
+                # discover completions using $env.PATH
                 enable: true
-                # set to lower can improve completion performance at the cost of omitting some options
+                # lowering can improve completion performance at the cost of omitting some options
                 max_results: 200
                 completer: $carapace_completer # check 'carapace_completer'
               }
