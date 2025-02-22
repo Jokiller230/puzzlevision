@@ -3,12 +3,11 @@
   namespace,
   config,
   ...
-}:
-let
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.desktop.plasma;
 in {
-  options.${namespace}.desktop.plasma = { enable = mkEnableOption "Whether to enable the KDE Plasma desktop environment"; };
+  options.${namespace}.desktop.plasma = {enable = mkEnableOption "Whether to enable the KDE Plasma desktop environment";};
 
   config = mkIf cfg.enable {
     services.xserver.enable = true;

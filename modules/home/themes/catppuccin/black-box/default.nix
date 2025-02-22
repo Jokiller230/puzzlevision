@@ -3,12 +3,10 @@
   config,
   namespace,
   ...
-}:
-let
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.themes.catppuccin.black-box;
-in
-{
+in {
   options.${namespace}.themes.catppuccin.black-box = {
     enable = mkEnableOption "Whether to enable the catppuccin theme for black-box.";
   };

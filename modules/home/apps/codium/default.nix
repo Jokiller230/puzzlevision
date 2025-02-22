@@ -55,6 +55,7 @@ in {
       userSettings = {
         "files.autoSave" = "on";
         "workbench.colorTheme" = "Catppuccin Macchiato";
+        "window.titleBarStyle" = "custom";
 
         "[nix]" = {
           "editor.tabSize" = 2;

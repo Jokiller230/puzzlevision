@@ -5,18 +5,16 @@
   osConfig,
   namespace,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkOption;
   inherit (lib.${namespace}) mkOpt;
   cfg = config.${namespace}.desktop.gnome;
-in
-{
+in {
   options.${namespace}.desktop.gnome = with lib.types; {
     enabled-extensions = mkOption {
       type = listOf package;
-      default = with pkgs.gnomeExtensions; [ dash-to-dock user-themes blur-my-shell appindicator unite color-picker clipboard-history ];
-      example = [ dash-to-dock blur-my-shell ];
+      default = with pkgs.gnomeExtensions; [dash-to-dock user-themes blur-my-shell appindicator unite color-picker clipboard-history];
+      example = [dash-to-dock blur-my-shell];
       description = "Specify gnome extensions to install.";
     };
     favorite-apps = mkOption {
@@ -44,7 +42,7 @@ in
         enable-blur = mkOpt bool false "Whether to enable blur-my-shell application blur.";
       };
     };
-    wallpaper = mkOpt str (builtins.toString ./wallpapers/arcane/jinx_flare.jpg) "Specify the path of your prefered Gnome wallpaper.";
+    wallpaper = mkOpt str (builtins.toString ./wallpapers/retro/snowy-map.png) "Specify the path of your prefered Gnome wallpaper.";
   };
 
   config = mkIf osConfig.${namespace}.desktop.gnome.enable {

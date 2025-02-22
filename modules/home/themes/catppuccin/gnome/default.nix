@@ -4,16 +4,15 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkEnableOption mkIf;
 
   # Stolen from Oli @ git.gay, basically just themes default libadwaita components.
   css = pkgs.writeTextFile {
     name = "gtk-css";
     text = ''
-      @define-color accent_color ${config.palette.maroon.hex};
-      @define-color accent_bg_color ${config.palette.maroon.hex};
+      @define-color accent_color ${config.palette.blue.hex};
+      @define-color accent_bg_color ${config.palette.blue.hex};
       @define-color accent_fg_color ${config.palette.base.hex};
       @define-color destructive_color ${config.palette.red.hex};
       @define-color destructive_bg_color ${config.palette.red.hex};
@@ -104,9 +103,8 @@ let
   };
 
   cfg = config.${namespace}.themes.catppuccin.gtk;
-in
-{
-  options.${namespace}.themes.catppuccin.gtk = { enable = mkEnableOption "Enable the Catppuccin theme for GTK"; };
+in {
+  options.${namespace}.themes.catppuccin.gtk = {enable = mkEnableOption "Enable the Catppuccin theme for GTK";};
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
@@ -148,8 +146,8 @@ in
       gtk = {
         icon = {
           enable = true;
-          accent = "maroon";
-          flavor = "mocha";
+          accent = "blue";
+          flavor = "macchiato";
         };
       };
     };

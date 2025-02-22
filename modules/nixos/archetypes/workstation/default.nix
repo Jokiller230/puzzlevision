@@ -3,12 +3,11 @@
   namespace,
   config,
   ...
-}:
-let
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.archetypes.workstation;
 in {
-  options.${namespace}.archetypes.workstation = { enable = mkEnableOption "Enable the workstation archetype for your current system"; };
+  options.${namespace}.archetypes.workstation = {enable = mkEnableOption "Enable the workstation archetype for your current system";};
 
   config = mkIf cfg.enable {
     environment.sessionVariables = {

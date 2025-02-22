@@ -4,8 +4,7 @@
   inputs,
   config,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     inputs.hardware.nixosModules.common-pc-laptop
@@ -27,7 +26,7 @@
   boot = {
     # Configure additional kernel modules.
     extraModulePackages = [
-      pkgs.linuxKernel.packages.linux_6_12.rtl8821ce # Use custom network-card driver.
+      pkgs.linuxPackages_latest.rtl8821ce # Use custom network-card driver.
     ];
 
     blacklistedKernelModules = [
@@ -50,7 +49,7 @@
   # Set system configuration
   puzzlevision = {
     archetypes.workstation.enable = true;
-    common.kernel.version = "linuxPackages_6_12";
+    common.kernel.version = "linuxPackages_latest";
 
     security.yubikey = {
       enable = true;
@@ -62,7 +61,7 @@
   services.flatpak.enable = true;
 
   # Set trusted users (Primarily used for cachix)
-  nix.settings.trusted-users = [ "root" "jo" ];
+  nix.settings.trusted-users = ["root" "jo"];
 
   # Configure additional groups
   users.groups.www-data = {
@@ -72,7 +71,7 @@
   # Configure users.
   snowfallorg.users.jo.admin = true;
   users.users.jo.isNormalUser = true;
-  users.users.jo.extraGroups = [ "dialout" "docker" "www-data" ];
+  users.users.jo.extraGroups = ["dialout" "docker" "www-data"];
   users.users.jo.hashedPasswordFile = config.sops.secrets."user/jo/password_hash".path;
 
   # Configure home-manager

@@ -1,14 +1,10 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   puzzlevision = {
     themes.catppuccin = {
       gtk.enable = true;
     };
 
-    apps.nushell.enable = true;
+    apps.nushell.enable = false;
     apps.vscodium.enable = true;
   };
 
