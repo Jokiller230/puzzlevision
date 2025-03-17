@@ -2,7 +2,7 @@ keys:
   - &jo age1gudgza8lv02nwec0pejqpp5t7zu0tzjsfkmvgvy3ckfscr9f4qrq2sl5dv
   - &server_absolutesolver age1qcjcwh9tq8pzf2yr7m3hm2n3n3y5rlc30fpkr0eytju9w57ucgcsgcy79d
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini|cfg)$
     key_groups:
       - age:
           - *jo

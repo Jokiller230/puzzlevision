@@ -17,55 +17,63 @@ in {
       alejandra
     ];
 
+    sops.secrets.wakatime-cfg = {
+      format = "binary";
+      sopsFile = lib.snowfall.fs.get-file "secrets/wakatime.cfg";
+      path = "/home/jo/.wakatime.cfg";
+    };
+
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium;
-
-      enableUpdateCheck = false;
-      enableExtensionUpdateCheck = false;
       mutableExtensionsDir = false;
 
-      extensions = with pkgs; [
-        ### Theming
-        vscode-extensions.pkief.material-icon-theme
-        vscode-extensions.catppuccin.catppuccin-vsc
+      profiles.default = {
+        enableUpdateCheck = false;
+        enableExtensionUpdateCheck = false;
 
-        ### General
-        vscode-extensions.usernamehw.errorlens
-        vscode-extensions.leonardssh.vscord
-        vscode-extensions.davidlday.languagetool-linter
-        vscode-extensions.christian-kohler.path-intellisense
-        vscode-extensions.wakatime.vscode-wakatime
+        extensions = with pkgs; [
+          ### Theming
+          vscode-extensions.pkief.material-icon-theme
+          vscode-extensions.catppuccin.catppuccin-vsc
 
-        ### Language specific
-        # Nushell
-        vscode-extensions.thenuprojectcontributors.vscode-nushell-lang
+          ### General
+          vscode-extensions.usernamehw.errorlens
+          vscode-extensions.leonardssh.vscord
+          vscode-extensions.davidlday.languagetool-linter
+          vscode-extensions.christian-kohler.path-intellisense
+          vscode-extensions.wakatime.vscode-wakatime
 
-        # Nix
-        vscode-extensions.kamadorueda.alejandra
-        vscode-extensions.jnoortheen.nix-ide
+          ### Language specific
+          # Nushell
+          vscode-extensions.thenuprojectcontributors.vscode-nushell-lang
 
-        # Env
-        vscode-extensions.irongeek.vscode-env
+          # Nix
+          vscode-extensions.kamadorueda.alejandra
+          vscode-extensions.jnoortheen.nix-ide
 
-        # Deno (JavaScript)
-        vscode-extensions.denoland.vscode-deno
-      ];
+          # Env
+          vscode-extensions.irongeek.vscode-env
 
-      userSettings = {
-        "files.autoSave" = "on";
-        "workbench.colorTheme" = "Catppuccin Macchiato";
-        "window.titleBarStyle" = "custom";
+          # Deno (JavaScript)
+          vscode-extensions.denoland.vscode-deno
+        ];
 
-        "[nix]" = {
-          "editor.tabSize" = 2;
-          "formatterPath" = "alejandra";
+        userSettings = {
+          "files.autoSave" = "on";
+          "workbench.colorTheme" = "Catppuccin Macchiato";
+          "window.titleBarStyle" = "custom";
 
-          "enableLanguageServer" = true;
-          "serverPath" = "nixd";
-          "serverSettings" = {
-            "nixd" = {
-              "formatting.command" = ["alejandra"];
+          "[nix]" = {
+            "editor.tabSize" = 2;
+            "formatterPath" = "alejandra";
+
+            "enableLanguageServer" = true;
+            "serverPath" = "nixd";
+            "serverSettings" = {
+              "nixd" = {
+                "formatting.command" = ["alejandra"];
+              };
             };
           };
         };
