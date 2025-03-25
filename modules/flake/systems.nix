@@ -4,9 +4,8 @@
   namespace,
   puzzlelib,
   ...
-}:
-{
-  imports = [ inputs.easy-hosts.flakeModule ];
+}: {
+  imports = [inputs.easy-hosts.flakeModule];
 
   easyHosts = {
     autoConstruct = true;
@@ -19,11 +18,11 @@
     };
 
     perClass = class: {
-      modules = [
+      modules =
         (lib.optionals (class == "nixos") [
           inputs.home-manager.nixosModules.default
         ])
-      ] ++ (puzzlelib.dirToModuleList ../${class}); # Import modules based on current classname.
+        ++ (puzzlelib.dirToModuleList ../${class}); # Import modules based on current classname.
     };
   };
 }

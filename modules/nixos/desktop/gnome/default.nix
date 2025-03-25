@@ -3,13 +3,11 @@
   config,
   namespace,
   ...
-}:
-let
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.${namespace}.desktop.gnome;
-in
-{
-  options.${namespace}.desktop.gnome = { enable = mkEnableOption "Enable the gnome desktop environment ${namespace}"; };
+in {
+  options.${namespace}.desktop.gnome = {enable = mkEnableOption "Enable the gnome desktop environment ${namespace}";};
 
   config = mkIf cfg.enable {
     services.xserver.enable = true;

@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   imports = [
     ./hardware.nix
   ];
@@ -14,7 +10,6 @@
   # System configuration
   puzzlevision = {
     # Todo: pass a set of users to enable from within easy-hosts and automatically map the corresponding home-manager configurations
-    # mainUser = "jo";
     # users = [ "jo" ];
 
     desktop.gnome.enable = true;
@@ -22,6 +17,8 @@
 
   environment.systemPackages = with pkgs; [
     ghostty
+    firefox
+    vscodium
   ];
 
   system.stateVersion = "25.05";

@@ -11,5 +11,8 @@
 
     # Automagically imports systems from "/systems/arch-classname/system-name".
     ./systems.nix
+
+    # Automagically imports homes from "/homes/user-name".
+    ./homes.nix
   ];
 }
