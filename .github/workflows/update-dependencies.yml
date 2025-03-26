@@ -1,0 +1,14 @@
+name: update-dependencies
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *" # daily at 1 am EST/2 am EDT
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v12
+      - id: update
+        uses: DeterminateSystems/update-flake-lock@v23
