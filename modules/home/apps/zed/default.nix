@@ -25,7 +25,7 @@ in {
 
     programs.zed-editor = {
       enable = true;
-      extensions = ["nix" "catppuccin" "wakatime" "discord_presence"];
+      extensions = ["nix" "catppuccin" "wakatime" "discord_presence" "deno"];
 
       userSettings = {
         icon_theme = "Catppuccin Macchiato";
