@@ -6,6 +6,7 @@
 
     apps.nushell.enable = false;
     apps.vscodium.enable = true;
+    apps.zed.enable = true;
   };
 
   home.file."~/.config/Yubico/u2f_keys".text = ''
