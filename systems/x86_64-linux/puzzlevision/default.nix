@@ -12,6 +12,9 @@
     inputs.hardware.nixosModules.common-pc-laptop-ssd
   ];
 
+  # Configure SWAP
+  swapDevices = [{ device = "/swapfile"; size = 8 * 1024; }]; # 8 GB swap partition
+
   # Configure Sops
   sops.defaultSopsFile = lib.snowfall.fs.get-file "secrets/default.yaml";
   sops.age.keyFile = "/var/lib/sops-nix/key.txt"; # The main AGE key is expected in this location, it is only needed for this system.
@@ -63,15 +66,10 @@
   # Set trusted users (Primarily used for cachix)
   nix.settings.trusted-users = ["root" "jo"];
 
-  # Configure additional groups
-  users.groups.www-data = {
-    gid = 33;
-  };
-
   # Configure users.
   snowfallorg.users.jo.admin = true;
   users.users.jo.isNormalUser = true;
-  users.users.jo.extraGroups = ["dialout" "docker" "www-data"];
+  users.users.jo.extraGroups = ["dialout" "docker"];
   users.users.jo.hashedPasswordFile = config.sops.secrets."user/jo/password_hash".path;
 
   # Configure home-manager
@@ -91,5 +89,5 @@
     gnupg
   ];
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "25.05";
 }

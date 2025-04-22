@@ -26,9 +26,9 @@
       @define-color error_color ${config.palette.red.hex};
       @define-color error_bg_color ${config.palette.red.hex};
       @define-color error_fg_color ${config.palette.base.hex};
-      @define-color window_bg_color ${config.palette.base.hex};
+      @define-color window_bg_color ${config.palette.mantle.hex};
       @define-color window_fg_color ${config.palette.text.hex};
-      @define-color view_bg_color ${config.palette.base.hex};
+      @define-color view_bg_color ${config.palette.mantle.hex};
       @define-color view_fg_color ${config.palette.text.hex};
       @define-color headerbar_bg_color ${config.palette.mantle.hex};
       @define-color headerbar_fg_color ${config.palette.text.hex};
@@ -36,7 +36,7 @@
       @define-color headerbar_backdrop_color @window_bg_color;
       @define-color headerbar_shade_color rgba(0, 0, 0, 0.07);
       @define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.07);
-      @define-color sidebar_bg_color ${config.palette.mantle.hex};
+      @define-color sidebar_bg_color ${config.palette.base.hex};
       @define-color sidebar_fg_color ${config.palette.text.hex};
       @define-color sidebar_backdrop_color @window_bg_color;
       @define-color sidebar_shade_color rgba(0, 0, 0, 0.07);
@@ -44,7 +44,7 @@
       @define-color secondary_sidebar_fg_color @sidebar_fg_color;
       @define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
       @define-color secondary_sidebar_shade_color @sidebar_shade_color;
-      @define-color card_bg_color ${config.palette.mantle.hex};
+      @define-color card_bg_color ${config.palette.base.hex};
       @define-color card_fg_color ${config.palette.text.hex};
       @define-color card_shade_color rgba(0, 0, 0, 0.07);
       @define-color dialog_bg_color ${config.palette.mantle.hex};
