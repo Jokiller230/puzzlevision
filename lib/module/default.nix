@@ -1,4 +1,4 @@
-{lib, ...}: {
+{ lib, self, ... }: {
   # Create a NixOS module option on a single line.
   mkOpt = type: default: description:
     lib.mkOption {inherit type default description;};
@@ -9,5 +9,21 @@
       type = lib.types.bool;
     };
 
-  # Todo: add mkIfElse function
+  # Create a module compliant with the NixOS module system.
+  mkModule =
+    {
+      name ? "puzzlevision",
+      class,
+      modules,
+    }: {
+      _class = class;
+
+      # Template: "[path-to-flake]/flake.nix#[class-name]Modules.[module-name]"
+      # Example: "[path-to-flake]/flake.nix#nixosModules.system.audio"
+      _file = "${self.outPath}/flake.nix#${class}Modules.${name}";
+
+      imports = modules;
+    };
+
+  # TODO: add mkIfElse function
 }

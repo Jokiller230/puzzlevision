@@ -1,6 +1,6 @@
 {
   lib,
-  puzzlelib,
+  self,
   ...
 }: let
   # Utility function to read a directory and return its contents.
@@ -41,10 +41,9 @@
       # Files return attribute sets with their resulting expressions, directories return the result of multiple file handling operations.
         acc // (filesystemEntityToAttrSet directory importArgs name (builtins.getAttr name readDir))
     ) {} (builtins.attrNames readDir);
+
+  puzzlelib = dirToAttrSet ../../lib {inherit lib self;} // {inherit dirToAttrSet dirToModuleList filesystemEntityToList filesystemEntityToAttrSet;};
 in {
-  # Add lib.${namespace} attribute to module arguments, for easy access.
-  # Additionally, pass on dirToAttrSet method on lib.${namespace} for reusability in other modules.
-  _module.args = {
-    puzzlelib = dirToAttrSet ../../lib {inherit lib puzzlelib;} // {inherit dirToAttrSet dirToModuleList filesystemEntityToList filesystemEntityToAttrSet;};
-  };
+  # Expose custom library on flake "lib" output
+  flake.lib = puzzlelib;
 }

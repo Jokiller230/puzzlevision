@@ -1,18 +1,18 @@
 {
   imports = [
-    # Applies some useful arguments, like namespace, to all flake modules.
-    ./arguments.nix
+    # Exposes nixosModules and homeModules on flake outputs.
+    ./modules.nix
 
-    # Automagically imports libs from "/lib/lib-name" and applies them to the `lib.${namespace}` or `puzzlevision.lib` module argument.
+    # Automagically imports libs from "/lib/lib-name" and exposes them to the `flake.lib` output.
     ./lib.nix
 
-    # Recursively imports overlays from "/overlays/overlay-name" and applies them to the `pkgs` or `puzzlevision.pkgs` module argument.
-    # ./overlays.nix
+    # Recursively imports overlays from "/overlays/overlay-name" and exposes them to the `flake.overlays` output.
+    #./overlays.nix
 
     # Automagically imports systems from "/systems/arch-classname/system-name".
     ./systems.nix
 
     # Automagically imports homes from "/homes/user-name".
-    ./homes.nix
+    #./homes.nix
   ];
 }

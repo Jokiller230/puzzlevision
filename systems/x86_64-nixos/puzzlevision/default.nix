@@ -9,8 +9,13 @@
 
   # System configuration
   puzzlevision = {
-    # Todo: pass a set of users to enable from within easy-hosts and automatically map the corresponding home-manager configurations
-    # users = [ "jo" ];
+    # TODO: improve home-manager configuration loading as development continues and make sure everything works correctly.
+    users = {
+      jo = {
+        enable = true;
+        initialPassword = "balls";
+      };
+    };
 
     desktop.gnome.enable = true;
   };
