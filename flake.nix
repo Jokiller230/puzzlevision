@@ -40,7 +40,6 @@
 
     nixcord = {
       url = "github:kaylorben/nixcord";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -86,7 +85,7 @@
       # Apply some home-manager modules globally.
       homes.modules = with inputs; [
         nix-flatpak.homeManagerModules.nix-flatpak
-        catppuccin.homeManagerModules.catppuccin
+        catppuccin.homeModules.catppuccin
         sops-nix.homeManagerModules.sops
       ];
     };

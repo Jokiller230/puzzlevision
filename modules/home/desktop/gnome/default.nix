@@ -42,7 +42,7 @@ in {
         enable-blur = mkOpt bool false "Whether to enable blur-my-shell application blur.";
       };
     };
-    wallpaper = mkOpt str (builtins.toString ./wallpapers/retro/snowy-map.png) "Specify the path of your prefered Gnome wallpaper.";
+    wallpaper = mkOpt str (builtins.toString ./wallpapers/mountain_tower_sunset.jpg) "Specify the path of your prefered Gnome wallpaper.";
   };
 
   config = mkIf osConfig.${namespace}.desktop.gnome.enable {
