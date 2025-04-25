@@ -4,3 +4,9 @@
 
 ### Jetbrains
 /.idea
+
+### Zed Editor
+/.zed
+
+### VSCode
+/.vscode

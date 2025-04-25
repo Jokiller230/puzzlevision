@@ -21,13 +21,13 @@ in {
   };
 
   config = mkIf osConfig.${namespace}.desktop.gnome.enable {
-      home.packages = cfg.enabled-extensions;
+    home.packages = cfg.enabled-extensions;
 
-      dconf.settings = {
-        "org/gnome/shell" = {
-            enabled-extensions = lib.forEach cfg.enabled-extensions (x: x.extensionUuid);
-            disabled-extensions = []; # Make sure none of our extensions are disabled on system rebuild
-          };
+    dconf.settings = {
+      "org/gnome/shell" = {
+        enabled-extensions = lib.forEach cfg.enabled-extensions (x: x.extensionUuid);
+        disabled-extensions = []; # Make sure none of our extensions are disabled on system rebuild
       };
+    };
   };
 }
