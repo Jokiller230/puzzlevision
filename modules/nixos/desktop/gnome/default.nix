@@ -9,7 +9,9 @@
 
   cfg = config.${namespace}.desktop.gnome;
 in {
-  options.${namespace}.desktop.gnome = {enable = mkEnableOption "Enable the gnome desktop environment ${namespace}";};
+  options.${namespace}.desktop.gnome = {
+    enable = mkEnableOption "the gnome desktop environment";
+  };
 
   config = mkIf cfg.enable {
     services.xserver.enable = true;

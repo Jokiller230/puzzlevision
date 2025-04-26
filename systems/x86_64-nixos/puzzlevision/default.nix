@@ -1,24 +1,17 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware.nix
   ];
 
   puzzlevision = {
-    # TODO: improve home-manager configuration loading as development continues and make sure everything works correctly.
-    users = {
-      jo = {
-        enable = true;
-        initialPassword = "balls";
-        extraGroups = [ "wheel" ];
-      };
+    users.cyn = {
+      enable = true;
+      password = "cynical"; # For testing only, replace with sops secret before production use
+      extraGroups = ["wheel"];
     };
 
     desktop.gnome.enable = true;
-    utils.vm.enable = true;
-    common.grub.enable = true;
+    system.grub.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

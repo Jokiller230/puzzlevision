@@ -1,10 +1,12 @@
 {
   lib,
-  inputs,
   self,
+  inputs,
   ...
 }: {
-  imports = [ inputs.easy-hosts.flakeModule ];
+  imports = [
+    inputs.easy-hosts.flakeModule
+  ];
 
   easyHosts = {
     autoConstruct = true;
