@@ -1,30 +1,43 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware.nix
   ];
 
   puzzlevision = {
-    # TODO: improve home-manager configuration loading as development continues and make sure everything works correctly.
-    users = {
-      jo = {
-        enable = true;
-        initialPassword = "balls";
-        extraGroups = [ "wheel" ];
-      };
+    users.cyn = {
+      enable = true;
+      password = "cynical"; # For testing only, replace with sops secret before production use
+      extraGroups = ["wheel"];
     };
 
-    desktop.gnome.enable = true;
-    utils.vm.enable = true;
-    common.grub.enable = true;
+    users.jo = {
+      enable = true;
+      password = "jo"; # For testing only, replace with sops secret before production use
+      extraGroups = ["wheel"];
+    };
+
+    archetypes.workstation.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    ghostty
-    firefox
+  # Configure 8GB SWAP partition
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 8 * 1024;
+    }
   ];
 
+  boot = {
+    # Configure additional kernel modules.
+    extraModulePackages = [
+      pkgs.linuxPackages_latest.rtl8821ce # Use custom network-card driver.
+    ];
+
+    blacklistedKernelModules = [
+      "rtw88_8821ce" # Block the default network-card driver.
+    ];
+  };
+
+  networking.hostName = "puzzlevision";
   system.stateVersion = "25.05";
 }

@@ -1,10 +1,10 @@
-{ self, ... }:
-{
+{self, ...}: {
   flake = {
-    #nixosModules.puzzlevision = self.lib.mkModule {
-    #  class = "nixos";
-    #  modules = self.lib.dirToModuleList ../nixos;
-    #};
+    # TODO: figure out why this isn't working correctly
+    nixosModules.puzzlevision = self.lib.mkModule {
+      class = "nixos";
+      modules = self.lib.dirToModuleList ../nixos;
+    };
 
     homeModules.puzzlevision = self.lib.mkModule {
       class = "home";

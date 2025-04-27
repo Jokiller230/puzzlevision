@@ -1,81 +1,78 @@
 {
   lib,
-  config,
   self,
   pkgs,
+  config,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib) types mkEnableOption mkOption mkIf;
   inherit (self) namespace;
-  inherit (self.lib) mkOpt dirToModuleList;
-
-  cfg = config.${namespace}.users;
+  inherit (self.lib) dirToModuleList;
 
   # The identifier of the current system type, e.g. "x86_64-linux" or "aarch64-darwin"
   system = pkgs.system;
+  cfg = config.${namespace}.users;
 
-  # Type for a user configuration
-  userType = types.submodule {
+  userSubmodule = types.submodule {
     options = {
-      enable = mkEnableOption "this user";
-      initialPassword = mkOpt (types.nullOr types.str) null "Initial password for the user";
-      password = mkOpt (types.nullOr types.str) null "Plaintext password for the user";
-      hashedPassword = mkOpt (types.nullOr types.str) null "Hashed password for the user";
-      isNormalUser = mkOpt types.bool true "Whether this user is a normal user";
-      extraGroups = mkOpt (types.listOf types.str) [] "Extra groups for the user";
+      enable = mkEnableOption "this user.";
+      isNormalUser = self.lib.mkBool true "Whether this user is considered a normal user.";
+      isSystemUser = self.lib.mkBool false "Whether this user is considered a system user.";
+      initialPassword = self.lib.mkOpt (types.nullOr types.str) null "Plaintext insecure initial user password, only recommended for testing.";
+      password = self.lib.mkOpt (types.nullOr types.str) null "Plaintext insecure user password, only recommended for testing.";
+      extraGroups = self.lib.mkOpt (types.listOf types.str) [] "List of additional groups this user belongs to.";
     };
   };
 
-  # Function to get home configuration path for a username
   getHomeConfigPath = username: "${self.outPath}/homes/${system}/${username}";
+  homeConfigExists = username: let
+    path = getHomeConfigPath username;
+  in
+    builtins.pathExists "${path}/default.nix";
 
-  # Function to check if a home configuration exists for a username
-  homeConfigExists = username:
-    let path = getHomeConfigPath username;
-    in builtins.pathExists "${path}/default.nix";
-
-  # Import all home-manager modules
   homeModules = dirToModuleList "${self.outPath}/modules/home";
 in {
   options.${namespace}.users = mkOption {
-    type = types.attrsOf userType;
+    type = types.attrsOf userSubmodule;
     default = {};
-    description = "User configurations with auto-imported home-manager setup";
+    description = "List of users to create. Also handles home configurations, placed in self.outPath/homes/[x86_64-linux, aarch64-linux, etc...], through home-manager.";
   };
 
   config = {
-    # Ensure users are fully managed by NixOS
-    users.mutableUsers = false;
+    # TODO: fix this
+    #nix.settings.trusted-users = ["root" (lib.forEach cfg (username: toString username))];
 
-    # Create the actual system users
+    # Manage users declaratively and map userConfig to users.users by name;
+    users.mutableUsers = false;
     users.users = lib.mapAttrs (username: userConfig:
       mkIf userConfig.enable {
         name = username;
-        inherit (userConfig) extraGroups initialPassword hashedPassword isNormalUser password;
-      }
-    ) cfg;
+        inherit (userConfig) isNormalUser isSystemUser initialPassword password extraGroups;
+      })
+    cfg;
 
-    # Configure home-manager with auto-imported user configuration
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
 
       extraSpecialArgs = {
-        inherit self;
+        inherit self system;
         namespace = self.namespace;
       };
 
-      users = lib.mapAttrs (username: userConfig:
-        mkIf (userConfig.enable && homeConfigExists username) (
-          { ... }: {
-            imports = [
-              (getHomeConfigPath username) # Import the user's specific home configuration
-            ]; #++ homeModules; # Include all generalized home modules
+      users =
+        lib.mapAttrs (
+          username: userConfig:
+            mkIf (userConfig.enable && homeConfigExists username) (
+              {osConfig, ...}: {
+                # Import user home configuration and general home modules
+                imports = [(getHomeConfigPath username)] ++ homeModules;
 
-            home.stateVersion = lib.mkDefault config.system.stateVersion;
-          }
+                home.stateVersion = lib.mkDefault osConfig.system.stateVersion;
+              }
+            )
         )
-      ) cfg;
+        cfg;
     };
   };
 }
