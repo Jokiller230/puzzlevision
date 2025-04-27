@@ -6,22 +6,30 @@
 <br>
 
 ## 🚧 State of development
-Version 2.0 is still very much an experiment and not ready to be used in a production
-environment. If you must, try running it within a VM using the provided deployment
-instructions.
+All the basic functionality of v2 should be working correctly, including:
+
+- The custom lib implementation at self.lib, recursively built from the contents of the `lib` directory.
+- Loading of systems from the `systems` directory, using easy-hosts.
+  - A basic workstation archetype for desktop systems.
+- Creating users in your systems through ${self.namespace}.users,
+automatically maps home-manager configurations from the `homes` directory to their corresponding users.
+
+Nonetheless, one should still consider this implementation experimental,
+once I start using this on my laptop,
+I'll aim for production grade stability.
 
 ## 🚀 Deployment
 To deploy a system run the following command in your terminal of choice.
 
 ```sh
-sudo nixos-rebuild switch --flake .#hostname
+sudo nixos-rebuild switch --flake .#hostname --accept-flake-config
 ```
 
 If you're interested in a quick way to experiment with this configuration,
 you may use the following command to build a VM.
 
 ```sh
-sudo nixos-rebuild build-vm --flake .#hostname
+sudo nixos-rebuild build-vm --flake .#hostname --accept-flake-config
 ```
 
 ## 📝 Goals and improvements

@@ -1,10 +1,7 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
-    vscodium
-    cmatrix
+    zed-editor
+    firefox
   ];
 
   home.stateVersion = "25.05";
