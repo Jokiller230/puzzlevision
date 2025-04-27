@@ -1,0 +1,20 @@
+keys:
+  - &jo age1qcjcwh9tq8pzf2yr7m3hm2n3n3y5rlc30fpkr0eytju9w57ucgcsgcy79d
+  - &absolutesolver age1ajkq0lalyc75tjhdtpx2yshw5y3wt85fwjy24luf69rvpavg33vqw6c3tc
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini|cfg)$
+    key_groups:
+    - age:
+      - *jo
+      - *absolutesolver
+
+  - path_regex: systems/[^/]+/absolutesolver/secrets/.*\.(yaml|env|json|ini|cfg)$
+    key_groups:
+    - age:
+      - *jo
+      - *absolutesolver
+
+  - path_regex: systems/[^/]+/puzzlevision/secrets/.*\.(yaml|env|json|ini|cfg)$
+    key_groups:
+    - age:
+      - *jo

@@ -32,6 +32,30 @@ you may use the following command to build a VM.
 sudo nixos-rebuild build-vm --flake .#hostname --accept-flake-config
 ```
 
+## 🔑 Secrets Management
+Secrets are managed by the [sops-nix](https://github.com/Mic92/sops-nix) nixos/home-manager modules respectively.
+
+- General secrets are stored within the `secrets` directory.
+- System specific secrets are stored within their respective `systems/<system_type>/<system_name>/secrets` directory.
+
+The following command may be used to convert the SSH host key of a new machine to an age key:
+
+```sh
+nix-shell -p ssh-to-age --run 'ssh-keyscan example.com | ssh-to-age'
+```
+
+Additionally, the following command may be used to create a new sops secret file:
+
+```sh
+nix-shell -p sops --run "sops secrets/example.yaml"
+```
+
+Lastly, when adding new systems, make sure to update any required secret files with the following command:
+
+```sh
+nix-shell -p sops --run "sops updatekeys secrets/example.yaml"
+```
+
 ## 📝 Goals and improvements
 The main goals of this rewritten flake are:
 
