@@ -16,7 +16,7 @@
       extraGroups = ["wheel"];
     };
 
-    archetypes.workstation.enable = true;
+    archetypes.laptop.enable = true;
   };
 
   # Configure 8GB SWAP partition
