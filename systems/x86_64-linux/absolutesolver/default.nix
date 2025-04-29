@@ -47,7 +47,7 @@
       vaultwarden.enable = true;
       homepage.enable = true;
       duckdns.enable = true;
-      bluesky.pds.enable = true;
+      bluesky.pds.enable = false;
     };
   };
 
@@ -56,6 +56,7 @@
     systemCronJobs = [
       "*/5 * * * * cyn docker exec -u www-data nextcloud-nextcloud-1 php /var/www/html/cron.php"
       "*/15 * * * * cyn docker exec -u www-data nextcloud-nextcloud-1 php /var/www/nextcloud/occ preview:pre-generate"
+      "* 3 * * * cyn cd /home/cyn/docker/compose/satisfactory && docker compose up -d --force-recreate"
       #"*/30 * * * * cyn /home/jo/tools/FediFetcher/FediFetcher.sh"
     ];
   };
@@ -64,6 +65,7 @@
   snowfallorg.users.cyn.admin = true;
   users.users.cyn.isNormalUser = true;
   users.users.cyn.extraGroups = [ "dialout" "docker" ];
+  
 
   # Configure home-manager
   home-manager = {
@@ -75,6 +77,7 @@
     ### General
     nano
     vim
+    git
 
     ## Runtimes
     nodejs_22

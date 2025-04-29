@@ -40,6 +40,9 @@ in {
         "/var/lib/containers/homepage/images:/app/public/images:rw"
         "/var/run/docker.sock:/var/run/docker.sock:ro" # Optional, used for docker integration.
       ];
+      environment = {
+        "HOMEPAGE_ALLOWED_HOSTS" = "home.thevoid.cafe";
+      };
       extraOptions = ["--network=proxy"];
     };
   };
