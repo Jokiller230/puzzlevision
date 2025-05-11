@@ -18,7 +18,7 @@ in {
   config = mkIf cfg.enable {
     sops.secrets.wakatime-cfg = {
       format = "binary";
-      sopsFile = "${self.outPath}/${osConfig.networking.hostname}/secrets/wakatime.cfg";
+      sopsFile = "${self.outPath}/x86_64-nixos/${osConfig.networking.hostname}/secrets/wakatime.cfg";
       path = "/home/${config.home.homeDirectory}/.wakatime.cfg";
     };
 

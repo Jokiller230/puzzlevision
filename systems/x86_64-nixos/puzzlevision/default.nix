@@ -4,12 +4,6 @@
   ];
 
   puzzlevision = {
-    users.cyn = {
-      enable = true;
-      password = "cynical"; # For testing only, replace with sops secret before production use
-      extraGroups = ["wheel"];
-    };
-
     users.jo = {
       enable = true;
       password = "jo"; # For testing only, replace with sops secret before production use
