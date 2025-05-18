@@ -13,7 +13,7 @@ in {
   options.${namespace}.desktop.gnome = with lib.types; {
     enabled-extensions = mkOption {
       type = listOf package;
-      default = with pkgs.gnomeExtensions; [dash-to-dock user-themes blur-my-shell appindicator unite color-picker clipboard-history];
+      default = with pkgs.gnomeExtensions; [user-themes blur-my-shell appindicator unite color-picker clipboard-history];
       example = [dash-to-dock blur-my-shell];
       description = "Specify gnome extensions to install.";
     };

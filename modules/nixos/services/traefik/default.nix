@@ -3,8 +3,7 @@
   namespace,
   config,
   ...
-}:
-let
+}: let
   inherit (lib) mkEnableOption mkIf mkOption;
   cfg = config.${namespace}.services.traefik;
 in {

@@ -44,22 +44,21 @@ in {
           copilot = false;
         };
 
+        formatter = {
+          external = {
+            command = "alejandra";
+            arguments = ["--quiet"];
+            language = ["nix"];
+          };
+        };
+
+        format_on_save = "on";
+
         ### Language specific configurations
         languages = {
           ### Nix language
           Nix = {
             language_servers = [ "nixd" "!nil" ];
-          };
-        };
-
-        ### LSP configurations
-        lsp = {
-          nixd = {
-            initialization_options = {
-              formatting = {
-                command = ["alejandra" "--quiet" "--"];
-              };
-            };
           };
         };
       };

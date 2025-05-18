@@ -15,6 +15,13 @@
   # Configure SWAP
   swapDevices = [{ device = "/swapfile"; size = 8 * 1024; }]; # 8 GB swap partition
 
+  # Add Steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
   # Configure Sops
   sops.defaultSopsFile = lib.snowfall.fs.get-file "secrets/default.yaml";
   sops.age.keyFile = "/var/lib/sops-nix/key.txt"; # The main AGE key is expected in this location, it is only needed for this system.
@@ -83,6 +90,7 @@
     nano
     inputs.ghostty.packages.x86_64-linux.default
     vlc
+    arduino-ide
 
     ## Security
     pinentry-tty

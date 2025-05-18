@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    inputs.nixcord.homeManagerModules.nixcord
+    inputs.nixcord.homeModules.nixcord
   ];
 
   puzzlevision = {
@@ -44,6 +44,7 @@
     steam
     ungoogled-chromium
     firefox
+    thunderbird
 
     ### Development
     #avra
@@ -54,7 +55,6 @@
     devenv
     nixd
     deno
-    nh
 
     ### Work
     teams-for-linux
