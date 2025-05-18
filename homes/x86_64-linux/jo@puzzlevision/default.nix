@@ -45,6 +45,7 @@
     ungoogled-chromium
     firefox
     thunderbird
+    youtube-music
 
     ### Development
     #avra
