@@ -46,6 +46,7 @@
     firefox
     thunderbird
     youtube-music
+    kando
 
     ### Development
     #avra
@@ -56,6 +57,9 @@
     devenv
     nixd
     deno
+
+    ### GTK Apps
+    refine
 
     ### Work
     teams-for-linux
