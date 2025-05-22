@@ -1,8 +1,14 @@
 <br>
-<div align="center"><img src="assets/puzzlevision.png" width="120px" height="auto"></div>
+<div align="center"><img src=".github/assets/puzzlevision.png" width="120px" height="auto"></div>
 
 <h1 align="center">✨ Puzzlevision ✨<br></h1>
 <div align="center">Non-stop entertainment! The wackiest NixOS configuration to-date.</div>
+<div align="center">
+    <img src=".github/assets/powered-by-nixos.gif" width="88px" height="31px">
+    <img src=".github/assets/i-love-reproducing-nix-btw.gif" width="88px" height="31px">
+    <img src=".github/assets/anything-but-windows.gif" width="88px" height="31px">
+    <img src=".github/assets/code-with-zed.webp" width="88px" height="31px">
+</div>
 <br>
 
 ## 🚧 State of development
