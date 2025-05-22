@@ -27,4 +27,4 @@ jobs:
             experimental-features = flakes nix-command recursive-nix pipe-operator
 
       - name: Validate Flake
-        run: nix flake check --option allow-import-from-derivation false
+        run: nix flake check
