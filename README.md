@@ -3,6 +3,7 @@
 
 <h1 align="center">✨ Puzzlevision ✨<br></h1>
 <div align="center">Non-stop entertainment! The wackiest NixOS configuration to-date.</div>
+<br>
 <div align="center">
     <img src=".github/assets/powered-by-nixos.gif" width="88px" height="31px">
     <img src=".github/assets/i-love-reproducing-nix-btw.gif" width="88px" height="31px">
