@@ -1,0 +1,30 @@
+name: "Nix: validate flake"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "**.nix"
+      - "**.lock"
+      - ".github/workflows/**.yml"
+
+jobs:
+  check-flake:
+    name: Validate x86_64-linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: |
+            experimental-features = flakes nix-command recursive-nix pipe-operator
+
+      - name: Validate Flake
+        run: nix flake check --option allow-import-from-derivation false

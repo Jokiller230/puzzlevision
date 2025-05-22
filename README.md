@@ -14,9 +14,13 @@ All the basic functionality of v2 should be working correctly, including:
 - Creating users in your systems through ${self.namespace}.users,
 automatically maps home-manager configurations from the `homes` directory to their corresponding users.
 
-Nonetheless, one should still consider this implementation experimental,
-once I start using this on my laptop,
-I'll aim for production grade stability.
+Since I am actively using this configuration on my main workstation, things are evolving quickly,
+leftover issues are actively being resolved and the list of modules is ever-growing.
+Nonetheless, one should still consider this implementation experimental.
+
+My next goal is to setup an attic binary cache,
+with a build/release workflow that runs in regular intervals.
+(similar to isabelroses's workflow setup)
 
 ## 🚀 Deployment
 To deploy a system run the following command in your terminal of choice.
@@ -65,6 +69,27 @@ Lastly, when adding new systems, make sure to update any required secret files w
 ```sh
 nix-shell -p sops --run "sops updatekeys secrets/example.yaml"
 ```
+
+## 👷 CI/CD coverage
+Currently, this repository houses 2 workflows, which are executed when pushing to the v2 branch.
+
+#### ↪️ `Nix: check for unused code`
+This workflow can be found in `.github/workflows/deadnix.yaml`,
+and should be pretty self-explanatory.
+
+Here's what it does:
+1. Checks out current branch
+2. Finds any unused variables/imports etc...
+3. Creates a new commit, instantly removing any unused code
+
+#### ↪️ `Nix: validate flake`
+This workflow can be found in `.github/workflows/validate.yaml`.
+It simply validates a flake using `nix flake check`.
+
+To be specific, it does the following:
+1. Checks out current branch
+2. Installs nix with some experimental features (flakes, nix-command, recursive-nix, pipe-operator)
+3. Runs `nix flake check` on the codebase
 
 ## 📝 Goals and improvements
 The main goals of this rewritten flake are:
