@@ -5,6 +5,7 @@
 }: {
   puzzlevision = {
     themes.catppuccin.enable = true;
+    apps.zed.enable = true;
   };
 
   sops.secrets.wakatime-cfg = {
@@ -26,8 +27,6 @@
     ungoogled-chromium
 
     ## EDITORS
-    nano
-    zed-editor
     apostrophe
     jetbrains.phpstorm
     arduino-ide

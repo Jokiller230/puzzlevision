@@ -1,6 +1,7 @@
 {
   lib,
   self,
+  pkgs,
   config,
   ...
 }: let
@@ -33,6 +34,7 @@ in {
         nix = {
           enable = true;
           use-lix = true;
+          use-nixld =  true;
         };
       };
 
@@ -42,6 +44,10 @@ in {
       # Desktop environment
       desktop.gnome.enable = true;
     };
+
+    environment.systemPackages = with pkgs; [
+      nano
+    ];
 
     time.timeZone = mkDefault "Europe/Berlin";
   };

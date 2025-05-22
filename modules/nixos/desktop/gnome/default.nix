@@ -29,6 +29,7 @@ in {
       gnome-console
       gnome-terminal
       gnome-music
+      totem # Gnome videos
       hitori # Sudoku game
       gnome-contacts
       gnome-initial-setup
@@ -39,7 +40,8 @@ in {
     services.gnome.gnome-keyring.enable = true;
 
     environment.systemPackages = with pkgs; [
-      gnome-tweaks
+      refine
+      showtime
       resources
     ];
   };
