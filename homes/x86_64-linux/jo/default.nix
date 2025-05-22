@@ -3,6 +3,10 @@
   config,
   ...
 }: {
+  imports = [
+    ./apps/discord
+  ];
+
   puzzlevision = {
     themes.catppuccin.enable = true;
     apps.zed.enable = true;
@@ -17,7 +21,6 @@
   home.packages = with pkgs; [
     ## GENERAL
     youtube-music
-    discord
     ghostty
     teams-for-linux
     enpass
