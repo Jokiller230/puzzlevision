@@ -38,6 +38,8 @@ in {
       package = mkIf cfg.use-lix pkgs.lix; # Enable LIX
     };
 
+    nixpkgs.config.allowUnfree = true;
+
     # Dynamic libraries for unpackaged programs
     programs.nix-ld = mkIf cfg.use-nixld {
       enable = true;

@@ -3,7 +3,6 @@
   pkgs,
   self,
   config,
-  osConfig,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
@@ -16,12 +15,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets.wakatime-cfg = {
-      format = "binary";
-      sopsFile = "${self.outPath}/x86_64-nixos/${osConfig.networking.hostname}/secrets/wakatime.cfg";
-      path = "/home/${config.home.homeDirectory}/.wakatime.cfg";
-    };
-
     home.packages = with pkgs; [
       alejandra
     ];

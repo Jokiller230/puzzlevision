@@ -14,6 +14,11 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.sessionVariables = {
+      MOZ_ENABLE_WAYLAND = "1"; # Firefox native Wayland support
+      NIXOS_OZONE_WL = "1"; # Native Wayland in Chromium and Electron based applications
+    };
+
     ${namespace} = {
       # Basic system functionality
       system = {

@@ -21,6 +21,7 @@
       isSystemUser = self.lib.mkBool false "Whether this user is considered a system user.";
       initialPassword = self.lib.mkOpt (types.nullOr types.str) null "Plaintext insecure initial user password, only recommended for testing.";
       password = self.lib.mkOpt (types.nullOr types.str) null "Plaintext insecure user password, only recommended for testing.";
+      hashedPasswordFile = self.lib.mkOpt (types.nullOr types.str) null "Secure, hashed user password stored in a separate file, recommended for production.";
       extraGroups = self.lib.mkOpt (types.listOf types.str) [] "List of additional groups this user belongs to.";
     };
   };
@@ -48,6 +49,7 @@ in {
     users.users = lib.mapAttrs (username: userConfig:
       mkIf userConfig.enable {
         name = username;
+        hashedPasswordFile = userConfig.hashedPasswordFile;
         inherit (userConfig) isNormalUser isSystemUser initialPassword password extraGroups;
       })
     cfg;

@@ -50,6 +50,16 @@ Additionally, the following command may be used to create a new sops secret file
 nix-shell -p sops --run "sops secrets/example.yaml"
 ```
 
+You may also encrypt arbitrary binary formats, like .cfg, using the following command:
+
+> [!IMPORTANT]
+> The original file location also HAS to match one of the sops creation rules, not just the output.
+> Yes, I know this is stupid, and yes, I've wasted way too much time dealing with this :3
+
+```sh
+nix-shell -p sops --run "sops -e original_file.cfg > secrets/encrypted_file.cfg"
+```
+
 Lastly, when adding new systems, make sure to update any required secret files with the following command:
 
 ```sh

@@ -1,6 +1,16 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   puzzlevision = {
     themes.catppuccin.enable = true;
+  };
+
+  sops.secrets.wakatime-cfg = {
+    format = "binary";
+    sopsFile = ./secrets/wakatime.cfg;
+    path = "${config.home.homeDirectory}/.wakatime.cfg";
   };
 
   home.packages = with pkgs; [
