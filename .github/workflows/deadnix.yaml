@@ -1,0 +1,17 @@
+name: "Nix: check for unused code"
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  deadnix:
+    name: Run deadnix
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v25
+      - uses: cachix/cachix-action@v14
+        with:
+          name: deadnix
+      - uses: phucleeuwu/deadnix-action@v1
