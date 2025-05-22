@@ -49,8 +49,7 @@ in {
     users.users = lib.mapAttrs (username: userConfig:
       mkIf userConfig.enable {
         name = username;
-        hashedPasswordFile = userConfig.hashedPasswordFile;
-        inherit (userConfig) isNormalUser isSystemUser initialPassword password extraGroups;
+        inherit (userConfig) isNormalUser isSystemUser initialPassword hashedPasswordFile password extraGroups;
       })
     cfg;
 
