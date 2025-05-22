@@ -1,0 +1,6 @@
+/* mocha */
+@import url("https://youtubemusic.catppuccin.com/src/mocha.css");
+
+html:not(.style-scope) {
+    --ctp-accent: var(--ctp-blue) !important;
+}

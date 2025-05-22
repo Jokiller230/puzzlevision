@@ -1,0 +1,6 @@
+/* latte */
+@import url("https://youtubemusic.catppuccin.com/src/latte.css");
+
+html:not(.style-scope) {
+    --ctp-accent: var(--ctp-blue) !important;
+}

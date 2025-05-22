@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./apps/discord
+    ./apps/youtube-music
   ];
 
   puzzlevision = {
@@ -20,7 +21,6 @@
 
   home.packages = with pkgs; [
     ## GENERAL
-    youtube-music
     ghostty
     teams-for-linux
     enpass

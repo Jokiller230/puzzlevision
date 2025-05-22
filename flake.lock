@@ -89,6 +89,27 @@
         "type": "github"
       }
     },
+    "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
+          "youtube-music",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1747439237,
+        "narHash": "sha256-5rCGrnkglKKj4cav1U3HC+SIUNJh08pqOK4spQv9RjA=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "ae755329092c87369b9e9a1510a8cf1ce2b1c708",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "nixcord": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -166,7 +187,8 @@
         "home-manager": "home-manager",
         "nixcord": "nixcord",
         "nixpkgs": "nixpkgs_2",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "youtube-music": "youtube-music"
       }
     },
     "sops-nix": {
@@ -219,6 +241,27 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "youtube-music": {
+      "inputs": {
+        "home-manager": "home-manager_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1747498370,
+        "narHash": "sha256-mJ7fLdL/A4cWHMm0n3/dcQ72Ijm+uTu/snl8iqgtbtc=",
+        "owner": "h-banii",
+        "repo": "youtube-music-nix",
+        "rev": "410071c47bb39a5abb672cd5c1a59bc5f853d908",
+        "type": "github"
+      },
+      "original": {
+        "owner": "h-banii",
+        "repo": "youtube-music-nix",
         "type": "github"
       }
     }

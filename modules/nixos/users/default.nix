@@ -69,7 +69,13 @@ in {
             mkIf (userConfig.enable && homeConfigExists username) (
               {osConfig, ...}: {
                 # Import user home configuration and general home modules
-                imports = [(getHomeConfigPath username) inputs.sops-nix.homeManagerModules.sops inputs.catppuccin.homeModules.default inputs.nixcord.homeModules.nixcord] ++ homeModules;
+                imports = [
+                  (getHomeConfigPath username)
+                  inputs.sops-nix.homeManagerModules.sops
+                  inputs.catppuccin.homeModules.default
+                  inputs.nixcord.homeModules.nixcord
+                  inputs.youtube-music.homeManagerModules.default
+                ] ++ homeModules;
 
                 home.stateVersion = lib.mkDefault osConfig.system.stateVersion;
               }
