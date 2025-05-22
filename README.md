@@ -74,7 +74,7 @@ nix-shell -p sops --run "sops updatekeys secrets/example.yaml"
 Currently, this repository houses 2 workflows, which are executed when pushing to the v2 branch.
 
 #### ↪️ `Nix: check for unused code`
-This workflow can be found in `.github/workflows/deadnix.yaml`,
+This workflow can be found in `.github/workflows/deadnix.yml`,
 and should be pretty self-explanatory.
 
 Here's what it does:
@@ -83,7 +83,7 @@ Here's what it does:
 3. Creates a new commit, instantly removing any unused code
 
 #### ↪️ `Nix: validate flake`
-This workflow can be found in `.github/workflows/validate.yaml`.
+This workflow can be found in `.github/workflows/validate.yml`.
 It simply validates a flake using `nix flake check`.
 
 To be specific, it does the following:
