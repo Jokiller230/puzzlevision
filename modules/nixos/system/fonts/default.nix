@@ -14,7 +14,22 @@ in {
     enable = mkEnableOption "system font management";
     fonts = mkOption {
       type = listOf package;
-      default = with pkgs; [noto-fonts noto-fonts-cjk-sans noto-fonts-cjk-serif noto-fonts-emoji nerd-fonts.bigblue-terminal nerd-fonts.zed-mono monocraft];
+      default = with pkgs; [
+        corefonts
+
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
+
+        inter
+
+        nerd-fonts.zed-mono
+        monocraft
+
+        noto-fonts-emoji
+        material-icons
+        material-design-icons
+      ];
       example = [noto-fonts noto-fonts-emoji];
       description = "Install additional font packages";
     };
