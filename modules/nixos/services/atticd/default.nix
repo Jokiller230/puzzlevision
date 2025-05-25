@@ -6,6 +6,7 @@
 }: let
   inherit (lib) mkEnableOption mkIf;
   inherit (self) namespace;
+  inherit (self.lib) mkOpt;
 
   cfg = config.${namespace}.services.atticd;
 in {
