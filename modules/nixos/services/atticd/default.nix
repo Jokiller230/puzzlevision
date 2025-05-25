@@ -38,6 +38,13 @@ in {
           avg-size = 64 * 1024; # 64 KiB
           max-size = 256 * 1024; # 256 KiB
         };
+
+        compression = {
+          type = "zstd";
+          level = 12;
+        };
+
+        garbage-collection.interval = "8 hours";
       };
     };
 
