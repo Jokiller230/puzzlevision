@@ -34,5 +34,8 @@ in {
 
     # Enable SSH for remote login
     services.openssh.enable = true;
+
+    # SSH rate-limiting and bans
+    services.fail2ban.enable = true;
   };
 }
