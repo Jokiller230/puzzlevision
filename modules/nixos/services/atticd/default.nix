@@ -43,9 +43,10 @@ in {
 
     services.traefik.dynamicConfigOptions = {
       http = {
-        services.atticd.loadBalancer.server.url = "http://localhost:3900";
+        services.atticd.loadBalancer.servers = [ { url = "http://localhost:3900"; } ];
         routers.atticd = {
-          entrypoints = ["websecure"];
+          entryPoints = ["websecure"];
+          service = "atticd";
           rule = "Host(`${cfg.subdomain}.${config.${namespace}.services.domain}`)";
         };
       };
