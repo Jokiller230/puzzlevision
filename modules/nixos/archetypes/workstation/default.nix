@@ -34,7 +34,7 @@ in {
         nix = {
           enable = true;
           use-lix = true;
-          use-nixld =  true;
+          use-nixld = true;
         };
       };
 

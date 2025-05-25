@@ -38,6 +38,7 @@
     ## RUNTIMES and CLIs for development
     bun
     git
+    attic-client
   ];
 
   home.stateVersion = "25.05";
