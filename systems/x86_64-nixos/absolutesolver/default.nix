@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  imports = [
+    ./hardware.nix
+  ];
+
   # Setup Sops
   sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
   sops.age.keyFile = "/var/lib/sops-nix/key.txt";
@@ -35,6 +39,12 @@
       homepage = {
         enable = true;
         configDir = ./resources/homepage-config;
+      };
+
+      atticd = {
+        enable = true;
+        sopsFile = ./secrets/atticd.env;
+        sopsFormat = "dotenv";
       };
     };
   };

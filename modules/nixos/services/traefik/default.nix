@@ -4,14 +4,15 @@
   config,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf types;
   inherit (self) namespace;
+  inherit (self.lib) mkOpt;
 
   cfg = config.${namespace}.services.traefik;
 in {
   options.${namespace}.services.traefik = {
     enable = mkEnableOption "the Traefik service.";
-    sopsFile = mkOpt types.str null "The location of the sops secret file for the Traefik service.";
+    sopsFile = mkOpt types.path null "The location of the sops secret file for the Traefik service.";
     sopsFormat = mkOpt types.str null "The format of the sops secret file for the Traefik service.";
   };
 
@@ -57,7 +58,7 @@ in {
         certificatesResolvers = {
           letsencrypt = {
             acme = {
-              email = cfg.cloudflareEmail;
+              email = config.${namespace}.services.mail;
               storage = "/var/lib/traefik/acme.json";
               #caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"; # Uncomment this when testing stuff!
               dnsChallenge = {

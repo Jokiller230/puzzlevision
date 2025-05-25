@@ -12,7 +12,7 @@
 in {
   options.${namespace}.services.duckdns = {
     enable = mkEnableOption "DuckDNS, the dynamic dns service. Will periodically refresh your IP.";
-    sopsFile = mkOpt types.str null "The location of the sops secret file for the DuckDNS service.";
+    sopsFile = mkOpt types.path null "The location of the sops secret file for the DuckDNS service.";
     sopsFormat = mkOpt types.str null "The format of the sops secret file for the DuckDNS service.";
   };
 
@@ -25,7 +25,7 @@ in {
     virtualisation.oci-containers.containers.duckdns = {
       image = "lscr.io/linuxserver/duckdns:latest";
       autoStart = true;
-      hostname = config.networking.hostname;
+      hostname = config.networking.hostName;
       environmentFiles = [
         config.sops.secrets.duckdns.path
       ];

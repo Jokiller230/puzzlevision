@@ -13,7 +13,7 @@ in {
   options.${namespace}.services.homepage = {
     enable = mkEnableOption "Homepage, an intuitive dashboard for your services.";
     subdomain = mkOpt types.str "home" "The subdomain, of the system domain, the service should be exposed on.";
-    configDir = mkOpt types.str null "The config directory, which will be copied to the Homepage directory during compilation.";
+    configDir = mkOpt types.path null "The config directory, which will be copied to the Homepage directory during compilation.";
   };
 
   config = mkIf cfg.enable {
@@ -31,11 +31,11 @@ in {
     virtualisation.oci-containers.containers.homepage = {
       image = "ghcr.io/gethomepage/homepage:latest";
       autoStart = true;
-      hostname = config.networking.hostname;
+      hostname = config.networking.hostName;
       labels = {
         "traefik.enable" = "true";
         "traefik.http.routers.homepage.entrypoints" = "websecure";
-        "traefik.http.routers.homepage.rule" = "Host(`${cfg.subdomain}.${config.services.domain}`)";
+        "traefik.http.routers.homepage.rule" = "Host(`${cfg.subdomain}.${config.${namespace}.services.domain}`)";
         "traefik.http.services.homepage.loadbalancer.server.port" = "3000";
       };
       volumes = [
@@ -46,7 +46,7 @@ in {
         "/var/run/docker.sock:/var/run/docker.sock:ro"
       ];
       environment = {
-        "HOMEPAGE_ALLOWED_HOSTS" = "${cfg.subdomain}.${config.services.domain}";
+        "HOMEPAGE_ALLOWED_HOSTS" = "${cfg.subdomain}.${config.${namespace}.services.domain}";
       };
       extraOptions = ["--network=proxy"];
     };

@@ -5,8 +5,9 @@
   config,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf types;
   inherit (self) namespace;
+  inherit (self.lib) mkOpt;
 
   cfg = config.${namespace}.system.nix;
 in {
@@ -14,6 +15,7 @@ in {
     enable = mkEnableOption "Nix configuration overrides.";
     use-lix = mkEnableOption "Lix as an alternative to CppNix.";
     use-nixld = mkEnableOption "the use of dynamically linked executables on nix based systems.";
+    trusted-users = mkOpt (types.listOf types.str) ["@wheel"] "List of trusted users for this NixOS system.";
   };
 
   config = mkIf cfg.enable {
@@ -26,6 +28,7 @@ in {
         keep-outputs = true;
         max-jobs = "auto";
         warn-dirty = false;
+        trusted-users = cfg.trusted-users;
       };
 
       # Garbage collection configuration.

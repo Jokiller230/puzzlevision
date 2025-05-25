@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf types;
   inherit (self) namespace;
   inherit (self.lib) mkOpt;
 
@@ -12,13 +12,13 @@
 in {
   options.${namespace}.services.atticd = {
     enable = mkEnableOption "the attic service, a multi-tenant nix binary cache.";
-    sopsFile = mkOpt types.str null "The location of the sops secret file for the Atticd service.";
+    sopsFile = mkOpt types.path null "The location of the sops secret file for the Atticd service.";
     sopsFormat = mkOpt types.str null "The format of the sops secret file for the Atticd service.";
     subdomain = mkOpt types.str "cache" "The subdomain, of the system domain, the service should be exposed on.";
   };
 
   config = mkIf cfg.enable {
-    config.sops.secrets."services/atticd" = {
+    sops.secrets."services/atticd" = {
       sopsFile = cfg.sopsFile;
       format = cfg.sopsFormat;
     };
@@ -46,7 +46,7 @@ in {
         services.atticd.loadBalancer.server.url = "http://localhost:3900";
         routers.atticd = {
           entrypoints = ["websecure"];
-          rule = "Host(`${cfg.subdomain}.${config.services.domain}`)";
+          rule = "Host(`${cfg.subdomain}.${config.${namespace}.services.domain}`)";
         };
       };
     };
