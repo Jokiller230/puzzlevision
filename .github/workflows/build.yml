@@ -31,4 +31,4 @@ jobs:
           token: ${{ secrets.ATTIC_TOKEN }}
 
       - name: Build flake
-        run: nix build
+        run: nix build .#nixosConfigurations.puzzlevision.config.system.build.toplevel
