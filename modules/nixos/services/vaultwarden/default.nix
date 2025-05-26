@@ -3,18 +3,24 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf types;
   inherit (self) namespace;
   inherit (self.lib) mkOpt;
 
   cfg = config.${namespace}.services.vaultwarden;
-in {
+in
+{
   options.${namespace}.services.vaultwarden = {
     enable = mkEnableOption "Vaultwarden, a self-hostable password manager.";
-    sopsFile = mkOpt types.path null "The location of the sops secret file for the Vaultwarden service.";
+    sopsFile =
+      mkOpt types.path null
+        "The location of the sops secret file for the Vaultwarden service.";
     sopsFormat = mkOpt types.str null "The format of the sops secret file for the Vaultwarden service.";
-    subdomain = mkOpt types.str "vault" "The subdomain, of the system domain, the service should be exposed on.";
+    subdomain =
+      mkOpt types.str "vault"
+        "The subdomain, of the system domain, the service should be exposed on.";
   };
 
   config = mkIf cfg.enable {
@@ -35,7 +41,9 @@ in {
       labels = {
         "traefik.enable" = "true";
         "traefik.http.routers.vaultwarden.entrypoints" = "websecure";
-        "traefik.http.routers.vaultwarden.rule" = "Host(`${cfg.subdomain}.${config.${namespace}.services.domain}`)";
+        "traefik.http.routers.vaultwarden.rule" = "Host(`${cfg.subdomain}.${
+          config.${namespace}.services.domain
+        }`)";
       };
       volumes = [
         "/var/lib/containers/vaultwarden/data:/data:rw"
@@ -43,7 +51,7 @@ in {
       environmentFiles = [
         config.sops.secrets."services/vaultwarden".path
       ];
-      extraOptions = ["--network=proxy"];
+      extraOptions = [ "--network=proxy" ];
     };
   };
 }

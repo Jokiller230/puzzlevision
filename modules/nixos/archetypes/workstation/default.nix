@@ -4,12 +4,14 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf mkDefault;
   inherit (self) namespace;
 
   cfg = config.${namespace}.archetypes.workstation;
-in {
+in
+{
   options.${namespace}.archetypes.workstation = {
     enable = mkEnableOption "the workstation archetype.";
   };

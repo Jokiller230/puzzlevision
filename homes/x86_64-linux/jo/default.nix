@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./apps/discord
     ./apps/youtube-music

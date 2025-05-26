@@ -3,18 +3,22 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf types;
   inherit (self) namespace;
   inherit (self.lib) mkOpt;
 
   cfg = config.${namespace}.services.atticd;
-in {
+in
+{
   options.${namespace}.services.atticd = {
     enable = mkEnableOption "the attic service, a multi-tenant nix binary cache.";
     sopsFile = mkOpt types.path null "The location of the sops secret file for the Atticd service.";
     sopsFormat = mkOpt types.str null "The format of the sops secret file for the Atticd service.";
-    subdomain = mkOpt types.str "cache" "The subdomain, of the system domain, the service should be exposed on.";
+    subdomain =
+      mkOpt types.str "cache"
+        "The subdomain, of the system domain, the service should be exposed on.";
   };
 
   config = mkIf cfg.enable {
@@ -30,7 +34,7 @@ in {
 
       settings = {
         listen = "[::]:3900";
-        jwt = {};
+        jwt = { };
 
         chunking = {
           nar-size-threshold = 64 * 1024; # 64 KiB
@@ -50,9 +54,9 @@ in {
 
     services.traefik.dynamicConfigOptions = {
       http = {
-        services.atticd.loadBalancer.servers = [{url = "http://localhost:3900";}];
+        services.atticd.loadBalancer.servers = [ { url = "http://localhost:3900"; } ];
         routers.atticd = {
-          entryPoints = ["websecure"];
+          entryPoints = [ "websecure" ];
           service = "atticd";
           rule = "Host(`${cfg.subdomain}.${config.${namespace}.services.domain}`)";
         };

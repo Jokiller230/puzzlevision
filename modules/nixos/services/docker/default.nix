@@ -3,12 +3,14 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   inherit (self) namespace;
 
   cfg = config.${namespace}.services.docker;
-in {
+in
+{
   options.${namespace}.services.docker = {
     enable = mkEnableOption "the docker service.";
   };

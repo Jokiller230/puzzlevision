@@ -3,12 +3,14 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
   inherit (self) namespace;
 
   cfg = config.${namespace}.archetypes.server;
-in {
+in
+{
   options.${namespace}.archetypes.server = {
     enable = mkEnableOption "the server archetype for your current system";
   };

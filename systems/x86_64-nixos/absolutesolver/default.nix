@@ -1,10 +1,11 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./hardware.nix
   ];
 
   # Setup Sops
-  sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   sops.age.keyFile = "/var/lib/sops-nix/key.txt";
   sops.age.generateKey = true;
 
@@ -12,7 +13,10 @@
     users.cyn = {
       enable = true;
       hashedPassword = "$6$mvK9bT756Aok54Vt$vBRnT66Vb3HL0Y5rEMJlHvKkvzVQ.KUciInTmW3FCBFT00IuFMpz3q9RhXPLTLMRPho65bTg9hMnFPb84I774.";
-      extraGroups = ["wheel" "docker"];
+      extraGroups = [
+        "wheel"
+        "docker"
+      ];
     };
 
     archetypes.server.enable = true;

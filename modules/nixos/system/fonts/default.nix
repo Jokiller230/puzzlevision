@@ -4,12 +4,14 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf mkOption;
   inherit (self) namespace;
 
   cfg = config.${namespace}.system.fonts;
-in {
+in
+{
   options.${namespace}.system.fonts = with lib.types; {
     enable = mkEnableOption "system font management";
     fonts = mkOption {
@@ -30,13 +32,16 @@ in {
         material-icons
         material-design-icons
       ];
-      example = [noto-fonts noto-fonts-emoji];
+      example = [
+        noto-fonts
+        noto-fonts-emoji
+      ];
       description = "Install additional font packages";
     };
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [font-manager];
+    environment.systemPackages = with pkgs; [ font-manager ];
 
     fonts.packages = cfg.fonts;
   };

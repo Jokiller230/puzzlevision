@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   # Todo: rewrite as recursive operation, based on ${namespace}.users
   system.userActivationScripts = {
     removeConflictingHomeManagerBackups = {

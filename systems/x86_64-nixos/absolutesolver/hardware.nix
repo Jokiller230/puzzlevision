@@ -6,26 +6,36 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "uas" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "usbhid"
+    "uas"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/5d4f9f57-085f-44a0-b987-bad24ff58769";
     fsType = "btrfs";
-    options = ["subvol=@"];
+    options = [ "subvol=@" ];
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/8D0F-2821";
     fsType = "vfat";
-    options = ["fmask=0077" "dmask=0077"];
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
   };
 
   fileSystems."/mnt/storage" = {
@@ -34,7 +44,7 @@
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/42fc926f-f066-48e8-8c07-3627b2ba3cd4";}
+    { device = "/dev/disk/by-uuid/42fc926f-f066-48e8-8c07-3627b2ba3cd4"; }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

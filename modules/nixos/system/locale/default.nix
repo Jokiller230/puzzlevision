@@ -3,12 +3,14 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf mkOption;
   inherit (self) namespace;
 
   cfg = config.${namespace}.system.locale;
-in {
+in
+{
   options.${namespace}.system.locale = {
     enable = mkEnableOption "system locale tweaks.";
 

@@ -5,8 +5,14 @@
   config,
   inputs,
   ...
-}: let
-  inherit (lib) types mkEnableOption mkOption mkIf;
+}:
+let
+  inherit (lib)
+    types
+    mkEnableOption
+    mkOption
+    mkIf
+    ;
   inherit (self) namespace;
   inherit (self.lib) dirToModuleList;
 
@@ -19,25 +25,38 @@
       enable = mkEnableOption "this user.";
       isNormalUser = self.lib.mkBool true "Whether this user is considered a normal user.";
       isSystemUser = self.lib.mkBool false "Whether this user is considered a system user.";
-      initialPassword = self.lib.mkOpt (types.nullOr types.str) null "Plaintext insecure initial user password, only recommended for testing.";
-      password = self.lib.mkOpt (types.nullOr types.str) null "Plaintext insecure user password, only recommended for testing.";
-      hashedPasswordFile = self.lib.mkOpt (types.nullOr types.str) null "Secure, hashed user password stored in a separate file, recommended for production.";
-      hashedPassword = self.lib.mkOpt (types.nullOr types.str) null "Secure, hashed password, stored in plaintext, fine to use.";
-      extraGroups = self.lib.mkOpt (types.listOf types.str) [] "List of additional groups this user belongs to.";
+      initialPassword =
+        self.lib.mkOpt (types.nullOr types.str) null
+          "Plaintext insecure initial user password, only recommended for testing.";
+      password =
+        self.lib.mkOpt (types.nullOr types.str) null
+          "Plaintext insecure user password, only recommended for testing.";
+      hashedPasswordFile =
+        self.lib.mkOpt (types.nullOr types.str) null
+          "Secure, hashed user password stored in a separate file, recommended for production.";
+      hashedPassword =
+        self.lib.mkOpt (types.nullOr types.str) null
+          "Secure, hashed password, stored in plaintext, fine to use.";
+      extraGroups =
+        self.lib.mkOpt (types.listOf types.str) [ ]
+          "List of additional groups this user belongs to.";
     };
   };
 
   getHomeConfigPath = username: "${self.outPath}/homes/${system}/${username}";
-  homeConfigExists = username: let
-    path = getHomeConfigPath username;
-  in
+  homeConfigExists =
+    username:
+    let
+      path = getHomeConfigPath username;
+    in
     builtins.pathExists "${path}/default.nix";
 
   homeModules = dirToModuleList "${self.outPath}/modules/home";
-in {
+in
+{
   options.${namespace}.users = mkOption {
     type = types.attrsOf userSubmodule;
-    default = {};
+    default = { };
     description = "List of users to create. Also handles home configurations, placed in self.outPath/homes/[x86_64-linux, aarch64-linux, etc...], through home-manager.";
   };
 
@@ -47,12 +66,21 @@ in {
 
     # Manage users declaratively and map userConfig to users.users by name;
     users.mutableUsers = false;
-    users.users = lib.mapAttrs (username: userConfig:
+    users.users = lib.mapAttrs (
+      username: userConfig:
       mkIf userConfig.enable {
         name = username;
-        inherit (userConfig) isNormalUser isSystemUser initialPassword hashedPasswordFile hashedPassword password extraGroups;
-      })
-    cfg;
+        inherit (userConfig)
+          isNormalUser
+          isSystemUser
+          initialPassword
+          hashedPasswordFile
+          hashedPassword
+          password
+          extraGroups
+          ;
+      }
+    ) cfg;
 
     home-manager = {
       useGlobalPkgs = true;
@@ -63,25 +91,24 @@ in {
         namespace = self.namespace;
       };
 
-      users =
-        lib.mapAttrs (
-          username: userConfig:
-            mkIf (userConfig.enable && homeConfigExists username) (
-              {osConfig, ...}: {
-                # Import user home configuration and general home modules
-                imports = [
-                  (getHomeConfigPath username)
-                  inputs.sops-nix.homeManagerModules.sops
-                  inputs.catppuccin.homeModules.default
-                  inputs.nixcord.homeModules.nixcord
-                  inputs.youtube-music.homeManagerModules.default
-                ] ++ homeModules;
+      users = lib.mapAttrs (
+        username: userConfig:
+        mkIf (userConfig.enable && homeConfigExists username) (
+          { osConfig, ... }:
+          {
+            # Import user home configuration and general home modules
+            imports = [
+              (getHomeConfigPath username)
+              inputs.sops-nix.homeManagerModules.sops
+              inputs.catppuccin.homeModules.default
+              inputs.nixcord.homeModules.nixcord
+              inputs.youtube-music.homeManagerModules.default
+            ] ++ homeModules;
 
-                home.stateVersion = lib.mkDefault osConfig.system.stateVersion;
-              }
-            )
+            home.stateVersion = lib.mkDefault osConfig.system.stateVersion;
+          }
         )
-        cfg;
+      ) cfg;
     };
   };
 }

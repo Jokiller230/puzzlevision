@@ -4,18 +4,20 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
   inherit (self) namespace;
 
   cfg = config.${namespace}.system.bluetooth;
-in {
+in
+{
   options.${namespace}.system.bluetooth = {
     enable = mkEnableOption "bluetooth support.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [bluez];
+    environment.systemPackages = with pkgs; [ bluez ];
 
     hardware.bluetooth = {
       enable = true;

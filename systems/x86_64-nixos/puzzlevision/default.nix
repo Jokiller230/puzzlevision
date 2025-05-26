@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./hardware.nix
   ];
@@ -12,7 +13,7 @@
     users.jo = {
       enable = true;
       hashedPassword = "$6$mvK9bT756Aok54Vt$vBRnT66Vb3HL0Y5rEMJlHvKkvzVQ.KUciInTmW3FCBFT00IuFMpz3q9RhXPLTLMRPho65bTg9hMnFPb84I774.";
-      extraGroups = ["wheel"];
+      extraGroups = [ "wheel" ];
     };
 
     archetypes.laptop.enable = true;

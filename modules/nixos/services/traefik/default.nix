@@ -3,13 +3,15 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf types;
   inherit (self) namespace;
   inherit (self.lib) mkOpt;
 
   cfg = config.${namespace}.services.traefik;
-in {
+in
+{
   options.${namespace}.services.traefik = {
     enable = mkEnableOption "the Traefik service.";
     sopsFile = mkOpt types.path null "The location of the sops secret file for the Traefik service.";
@@ -17,7 +19,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [80 8080 443]; # http, dashboard, https
+    networking.firewall.allowedTCPPorts = [
+      80
+      8080
+      443
+    ]; # http, dashboard, https
 
     sops.secrets."services/traefik" = {
       sopsFile = cfg.sopsFile;
@@ -26,7 +32,7 @@ in {
 
     systemd.services.traefik = {
       serviceConfig = {
-        EnvironmentFile = [config.sops.secrets."services/traefik".path];
+        EnvironmentFile = [ config.sops.secrets."services/traefik".path ];
       };
     };
 
@@ -84,11 +90,11 @@ in {
             domains = [
               {
                 main = "thevoid.cafe";
-                sans = ["*.thevoid.cafe"];
+                sans = [ "*.thevoid.cafe" ];
               }
               {
                 main = "rhysbot.co.uk";
-                sans = ["*.rhysbot.co.uk"];
+                sans = [ "*.rhysbot.co.uk" ];
               }
             ];
           };

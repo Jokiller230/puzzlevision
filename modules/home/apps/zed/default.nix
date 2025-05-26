@@ -4,12 +4,14 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf mkForce;
   inherit (self) namespace;
 
   cfg = config.${namespace}.apps.zed;
-in {
+in
+{
   options.${namespace}.apps.zed = {
     enable = mkEnableOption "zed, the graphical editor from the future";
   };
@@ -67,11 +69,14 @@ in {
         ### Language specific configurations
         languages = {
           Nix = {
-            language_servers = ["nixd" "!nil"];
+            language_servers = [
+              "nixd"
+              "!nil"
+            ];
             formatter = {
               external = {
-                command = "alejandra";
-                arguments = ["--quiet"];
+                command = "nixfmt";
+                arguments = [ "--quiet" ];
               };
             };
           };
@@ -123,6 +128,7 @@ in {
         ### Nix
         nixd
         alejandra
+        nixfmt-rfc-style
 
         ### Python
         python3Packages.python-lsp-server

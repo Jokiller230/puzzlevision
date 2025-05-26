@@ -6,19 +6,25 @@
   osConfig,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption types mkIf;
   inherit (self.lib) mkOpt;
 
-  palette = (pkgs.lib.importJSON (config.catppuccin.sources.palette + "/palette.json")).${config.catppuccin.flavor}.colors;
+  palette =
+    (pkgs.lib.importJSON (config.catppuccin.sources.palette + "/palette.json"))
+    .${config.catppuccin.flavor}.colors;
 
   cfg = config.${namespace}.themes.catppuccin;
-in {
+in
+{
   options.${namespace}.themes.catppuccin = {
     enable = mkEnableOption "the Catppuccin theme, globally.";
     accent = mkOpt types.str "blue" "The accent colour to use.";
     flavor = mkOpt types.str "macchiato" "The flavor to use.";
-    palette = mkOpt (lib.types.attrsOf lib.types.raw) palette "a reference to the current active Catppuccin palette.";
+    palette =
+      mkOpt (lib.types.attrsOf lib.types.raw) palette
+        "a reference to the current active Catppuccin palette.";
   };
 
   config = mkIf cfg.enable {

@@ -3,12 +3,14 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
   inherit (self) namespace;
 
   cfg = config.${namespace}.archetypes.laptop;
-in {
+in
+{
   options.${namespace}.archetypes.laptop = {
     enable = mkEnableOption "the laptop archetype.";
   };

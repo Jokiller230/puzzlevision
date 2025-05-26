@@ -4,9 +4,11 @@
   osConfig,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
-in {
+in
+{
   programs.youtube-music = {
     enable = true;
     options = {

@@ -48,13 +48,14 @@
     };
   };
 
-  outputs = {flake-parts, ...} @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    { flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./modules/flake
       ];
 
-      systems = ["x86_64-linux"];
+      systems = [ "x86_64-linux" ];
       flake = {
         # Exposing the flake namespace
         namespace = "puzzlevision";

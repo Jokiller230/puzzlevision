@@ -3,13 +3,15 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf types;
   inherit (self) namespace;
   inherit (self.lib) mkOpt;
 
   cfg = config.${namespace}.services.duckdns;
-in {
+in
+{
   options.${namespace}.services.duckdns = {
     enable = mkEnableOption "DuckDNS, the dynamic dns service. Will periodically refresh your IP.";
     sopsFile = mkOpt types.path null "The location of the sops secret file for the DuckDNS service.";

@@ -1,4 +1,5 @@
-{self, ...}: {
+{ self, ... }:
+{
   flake = {
     # TODO: figure out why this isn't working correctly
     nixosModules.puzzlevision = self.lib.mkModule {

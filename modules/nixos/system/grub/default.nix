@@ -3,12 +3,14 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
   inherit (self) namespace;
 
   cfg = config.${namespace}.system.grub;
-in {
+in
+{
   options.${namespace}.system.grub = {
     enable = mkEnableOption "the grub bootloader.";
   };
@@ -18,7 +20,7 @@ in {
 
     boot.loader.grub = {
       enable = true;
-      devices = ["nodev"];
+      devices = [ "nodev" ];
       efiInstallAsRemovable = true;
       efiSupport = true;
 

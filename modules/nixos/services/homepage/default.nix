@@ -3,17 +3,23 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf types;
   inherit (self) namespace;
   inherit (self.lib) mkOpt;
 
   cfg = config.${namespace}.services.homepage;
-in {
+in
+{
   options.${namespace}.services.homepage = {
     enable = mkEnableOption "Homepage, an intuitive dashboard for your services.";
-    subdomain = mkOpt types.str "home" "The subdomain, of the system domain, the service should be exposed on.";
-    configDir = mkOpt types.path null "The config directory, which will be copied to the Homepage directory during compilation.";
+    subdomain =
+      mkOpt types.str "home"
+        "The subdomain, of the system domain, the service should be exposed on.";
+    configDir =
+      mkOpt types.path null
+        "The config directory, which will be copied to the Homepage directory during compilation.";
   };
 
   config = mkIf cfg.enable {
@@ -35,7 +41,9 @@ in {
       labels = {
         "traefik.enable" = "true";
         "traefik.http.routers.homepage.entrypoints" = "websecure";
-        "traefik.http.routers.homepage.rule" = "Host(`${cfg.subdomain}.${config.${namespace}.services.domain}`)";
+        "traefik.http.routers.homepage.rule" = "Host(`${cfg.subdomain}.${
+          config.${namespace}.services.domain
+        }`)";
         "traefik.http.services.homepage.loadbalancer.server.port" = "3000";
       };
       volumes = [
@@ -48,7 +56,7 @@ in {
       environment = {
         "HOMEPAGE_ALLOWED_HOSTS" = "${cfg.subdomain}.${config.${namespace}.services.domain}";
       };
-      extraOptions = ["--network=proxy"];
+      extraOptions = [ "--network=proxy" ];
     };
   };
 }

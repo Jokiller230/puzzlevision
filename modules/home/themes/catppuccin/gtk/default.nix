@@ -4,7 +4,8 @@
   config,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   catppuccinCfg = config.${namespace}.themes.catppuccin;
@@ -104,16 +105,19 @@
   };
 
   cfg = config.${namespace}.themes.catppuccin.gtk;
-in {
-  options.${namespace}.themes.catppuccin.gtk = {enable = mkEnableOption "Enable the Catppuccin theme for GTK";};
+in
+{
+  options.${namespace}.themes.catppuccin.gtk = {
+    enable = mkEnableOption "Enable the Catppuccin theme for GTK";
+  };
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       (colloid-gtk-theme.override {
-        themeVariants = ["default"];
-        colorVariants = ["dark"];
-        sizeVariants = ["standard"];
-        tweaks = ["catppuccin"];
+        themeVariants = [ "default" ];
+        colorVariants = [ "dark" ];
+        sizeVariants = [ "standard" ];
+        tweaks = [ "catppuccin" ];
       })
     ];
 

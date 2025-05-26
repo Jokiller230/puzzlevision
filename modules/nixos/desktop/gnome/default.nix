@@ -4,12 +4,14 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
   inherit (self) namespace;
 
   cfg = config.${namespace}.desktop.gnome;
-in {
+in
+{
   options.${namespace}.desktop.gnome = {
     enable = mkEnableOption "the gnome desktop environment";
   };

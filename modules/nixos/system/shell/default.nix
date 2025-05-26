@@ -4,16 +4,18 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf types;
   inherit (self) namespace;
   inherit (self.lib) mkOpt;
 
   cfg = config.${namespace}.system.shell;
-in {
+in
+{
   options.${namespace}.system.shell = {
     enable = mkEnableOption "custom user shells.";
-    installed = mkOpt (types.listOf types.package) [pkgs.fish] "List of shell packages to install";
+    installed = mkOpt (types.listOf types.package) [ pkgs.fish ] "List of shell packages to install";
     default = mkOpt types.str "fish" "Set a custom shell as the default for all users.";
   };
 

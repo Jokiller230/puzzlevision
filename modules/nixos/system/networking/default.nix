@@ -3,12 +3,14 @@
   self,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
   inherit (self) namespace;
 
   cfg = config.${namespace}.system.networking;
-in {
+in
+{
   options.${namespace}.system.networking = {
     enable = mkEnableOption "networking.";
   };

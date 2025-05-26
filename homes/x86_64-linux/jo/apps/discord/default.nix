@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
-in {
+in
+{
   # Enable arRPC for discord Rich Presence stuffs
   services.arrpc.enable = true;
 
