@@ -1,0 +1,34 @@
+name: "Nix: build and cache outputs"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "**.nix"
+      - "**.lock"
+      - ".github/workflows/build.yml"
+
+jobs:
+  build-flake:
+    name: Build (x86_64-linux)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          persist-credentials: false
+
+      - name: Install Lix
+        uses: ./.github/actions/install-lix
+
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@v0.3.2
+        with:
+          endpoint: https://cache.thevoid.cafe
+          cache: puzzlevision
+          token: ${{ secrets.ATTIC_TOKEN }}
+
+      - name: Build flake
+        run: nix build
