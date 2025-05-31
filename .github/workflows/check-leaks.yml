@@ -26,12 +26,11 @@ jobs:
 
       - id: trufflehog
         name: TruffleHog scan
-        uses: trufflesecurity/trufflehog@v3.88.35
+        uses: trufflesecurity/trufflehog@main
         continue-on-error: true
         with:
           path: ./
           base: "${{ github.event.repository.default_branch }}"
-          head: HEAD
           extra_args: --debug --only-verified
 
       - name: Scan Results Status
