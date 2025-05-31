@@ -12,9 +12,17 @@ jobs:
     name: Run deadnix
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v25
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          persist-credentials: false
+
+      - name: Install lix
+        uses: ./.github/actions/install-lix
+
       - uses: cachix/cachix-action@v14
         with:
           name: deadnix
+
       - uses: phucleeuwu/deadnix-action@v1

@@ -6,7 +6,7 @@ on:
     paths:
       - "**.nix"
       - "**.lock"
-      - ".github/workflows/**.yml"
+      - ".github/workflows/validate.yml"
 
 jobs:
   check-flake:
@@ -21,10 +21,7 @@ jobs:
           persist-credentials: false
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-        with:
-          extra-conf: |
-            experimental-features = flakes nix-command recursive-nix pipe-operator
+        uses: ./.github/actions/install-lix
 
       - name: Validate Flake
         run: nix flake check
