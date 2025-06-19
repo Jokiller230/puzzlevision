@@ -1,6 +1,7 @@
 name: "Trufflehog: check for exposed secrets"
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     paths:
@@ -18,10 +19,8 @@ jobs:
     name: Run trufflehog
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@main
         with:
-          ref: ${{ github.ref_name }}
           fetch-depth: 0
 
       - id: trufflehog
