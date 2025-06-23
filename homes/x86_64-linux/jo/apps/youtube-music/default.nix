@@ -10,7 +10,7 @@ let
 in
 {
   programs.youtube-music = {
-    enable = true;
+    enable = false;
     options = {
       tray = true;
       trayClickPlayPause = true;

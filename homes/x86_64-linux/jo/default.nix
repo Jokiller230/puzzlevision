@@ -38,6 +38,7 @@
     ghostty
     teams-for-linux
     enpass
+    youtube-music
 
     ## WEB
     ungoogled-chromium

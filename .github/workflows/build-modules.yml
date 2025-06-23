@@ -1,0 +1,37 @@
+name: "Nix: build nixos-/home modules"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "modules/**.nix"
+      - "**.lock"
+      - ".github/workflows/build-modules.yml"
+
+jobs:
+  check-flake:
+    name: Validate x86_64-linux
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        outputs: [nixosModules, homeModules]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          persist-credentials: false
+
+      - name: Install Lix
+        uses: ./.github/actions/install-lix
+
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@v0.3.2
+        with:
+          endpoint: https://cache.thevoid.cafe
+          cache: puzzlevision
+          token: ${{ secrets.ATTIC_TOKEN }}
+
+      - name: Buid flake
+        run: nix build .#nixosModules.puzzlevision
