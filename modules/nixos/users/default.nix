@@ -61,9 +61,6 @@ in
   };
 
   config = {
-    # TODO: fix this
-    #nix.settings.trusted-users = ["root" (lib.forEach cfg (username: toString username))];
-
     # Manage users declaratively and map userConfig to users.users by name;
     users.mutableUsers = false;
     users.users = lib.mapAttrs (
