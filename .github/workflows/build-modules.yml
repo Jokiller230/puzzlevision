@@ -2,11 +2,11 @@ name: "Nix: build nixos-/home modules"
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "modules/**.nix"
-      - "**.lock"
-      - ".github/workflows/build-modules.yml"
+  # push:
+  #   paths:
+  #     - "modules/**.nix"
+  #     - "**.lock"
+  #     - ".github/workflows/build-modules.yml"
 
 jobs:
   check-flake:
