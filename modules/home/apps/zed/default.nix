@@ -40,9 +40,13 @@ in
 
         ### Remove useless features and stuff
         show_call_status_icon = false;
-        agent.button = false;
         collaboration_panel.button = false;
-        chat_panel.button = false;
+        chat_panel.button = "never";
+
+        agent = {
+          version = "2";
+          button = false;
+        };
 
         features = {
           inline_completion_provider = "none";
@@ -90,6 +94,7 @@ in
           svelte = true;
           ejs = true;
           scss = true;
+          biome = true; # Formatting and utility tool, like ESlint, prettier, etc...
 
           # Languages
           nix = true;
@@ -127,7 +132,6 @@ in
       extraPackages = with pkgs; [
         ### Nix
         nixd
-        alejandra
         nixfmt-rfc-style
 
         ### Python
