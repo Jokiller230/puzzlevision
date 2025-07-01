@@ -96,6 +96,10 @@ in
                 main = "rhysbot.co.uk";
                 sans = [ "*.rhysbot.co.uk" ];
               }
+              {
+                main = "jo-dev.com";
+                sans = ["*.jo-dev.com"];
+              }
             ];
           };
         };
