@@ -8,7 +8,6 @@
     <img src=".github/assets/powered-by-nixos.gif" width="88px" height="31px">
     <img src=".github/assets/i-love-reproducing-nix-btw.gif" width="88px" height="31px">
     <img src=".github/assets/anything-but-windows.gif" width="88px" height="31px">
-    <img src=".github/assets/code-with-zed.webp" width="88px" height="31px">
 </div>
 <br>
 
