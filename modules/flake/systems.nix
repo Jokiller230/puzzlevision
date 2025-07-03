@@ -9,7 +9,7 @@
     inputs.easy-hosts.flakeModule
   ];
 
-  easyHosts = {
+  easy-hosts = {
     autoConstruct = true;
     path = ../../systems;
 
