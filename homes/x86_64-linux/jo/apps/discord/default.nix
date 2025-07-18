@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
@@ -9,6 +10,8 @@ in
 {
   # Enable arRPC for discord Rich Presence stuffs
   services.arrpc.enable = true;
+
+  home.packages = with pkgs; [ arrpc ];
 
   programs.nixcord = {
     enable = true;

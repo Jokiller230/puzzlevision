@@ -6,6 +6,7 @@
 {
   imports = [
     ./apps/discord
+    ./apps/firefox
     ./apps/youtube-music
   ];
 
