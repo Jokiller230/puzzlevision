@@ -99,7 +99,6 @@ in
               inputs.sops-nix.homeManagerModules.sops
               inputs.catppuccin.homeModules.default
               inputs.nixcord.homeModules.nixcord
-              inputs.youtube-music.homeManagerModules.default
             ] ++ homeModules;
 
             home.stateVersion = lib.mkDefault osConfig.system.stateVersion;

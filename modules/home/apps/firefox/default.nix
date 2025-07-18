@@ -34,6 +34,10 @@ in
           }
         ) { } cfg.extensions;
       };
+
+      profiles.default = {
+        extensions.force = true;
+      };
     };
   };
 }

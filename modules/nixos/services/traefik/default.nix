@@ -98,7 +98,7 @@ in
               }
               {
                 main = "jo-dev.com";
-                sans = ["*.jo-dev.com"];
+                sans = [ "*.jo-dev.com" ];
               }
             ];
           };

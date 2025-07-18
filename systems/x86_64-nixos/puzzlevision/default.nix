@@ -9,6 +9,9 @@
   sops.defaultSopsFile = ./secrets/users.yaml;
   sops.age.keyFile = "/var/lib/sops-nix/key.txt";
 
+  programs.steam.enable = true;
+  programs.steam.remotePlay.openFirewall = true;
+
   puzzlevision = {
     users.jo = {
       enable = true;
@@ -36,12 +39,12 @@
   '';
 
   # Configure 8GB SWAP partition
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 8 * 1024;
-    }
-  ];
+  # swapDevices = [
+  #   {
+  #     device = "/swapfile";
+  #     size = 8 * 1024;
+  #   }
+  # ];
 
   boot = {
     # Configure additional kernel modules.
