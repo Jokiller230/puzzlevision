@@ -41,11 +41,6 @@
     nixcord = {
       url = "github:kaylorben/nixcord";
     };
-
-    youtube-music = {
-      url = "github:h-banii/youtube-music-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
