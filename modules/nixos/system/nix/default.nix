@@ -31,10 +31,13 @@ in
           "nix-command"
           "flakes"
         ];
+
         keep-derivations = true;
         keep-outputs = true;
+
         max-jobs = "auto";
         warn-dirty = false;
+
         trusted-users = cfg.trusted-users;
       };
 
