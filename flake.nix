@@ -21,8 +21,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     easy-hosts.url = "github:tgirlcloud/easy-hosts";
-    sops-nix.url = "github:Mic92/sops-nix";
-    minegrub-theme.url = "github:Lxtharia/minegrub-theme";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -41,6 +44,13 @@
 
     nixcord = {
       url = "github:kaylorben/nixcord";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    minegrub-theme = {
+      url = "github:Lxtharia/minegrub-theme";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
