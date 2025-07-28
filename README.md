@@ -11,7 +11,7 @@
 </div>
 <br>
 
-## 💡 Why the need for a second version? | What's the status? | Is this stable?
+## 💡 Why the need for a second version?
 At its core, version 2 of my NixOS flake was aimed at improving the following regions of my previous setup:
 
 - Implementing my own custom library at self.lib, recursively built from the contents of the `lib` directory.
