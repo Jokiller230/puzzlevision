@@ -73,7 +73,7 @@ nix-shell -p sops --run "sops updatekeys secrets/example.yaml"
 ```
 
 ## 👷 CI/CD coverage
-Currently, this repository houses 2 workflows, which are executed when pushing to the v2 branch.
+Currently, this repository houses 4 workflows, which are executed when pushing to the v2 branch.
 
 #### ↪️ `Nix: check for unused code`
 This workflow can be found in `.github/workflows/deadnix.yml`,
@@ -96,12 +96,17 @@ To be specific, it does the following:
 #### ↪️ `Nix: validate flake.lock`
 This workflow can be found in `.github/workflows/validate-lock.yml`.
 It simply scans flake lockfiles for duplicate entries using `nix run github:tgirlcloud/pkgs#locker`.
-Under the hood it makes use of the locker lockfile linter, created by the [tgirlcloud](https://github.com/tgirlcloud) team (mostly [isabelroses](https://github.com/isabelroses).
+Under the hood it makes use of the locker lockfile linter, created by the [tgirlcloud](https://github.com/tgirlcloud) team (mostly [isabelroses](https://github.com/isabelroses)).
 
 To be specific, it does the following:
 1. Checks out current branch
 2. Installs nix with some experimental features (flakes, nix-command)
 3. Runs `nix run github:tgirlcloud/pkgs#locker` on the codebase
+
+#### ↪️ `Trufflehog: check for exposed secrets`
+This workflow can be found in `.github/workflows/check-leaks.yml`.
+It runs the Trufflehog security tools on the entire repository, and tries to detect any leaked credentials.
+This is a last barrier of defense to minimise damage, in case of an emergency.
 
 ## 📝 Future goals and improvements (2025-07-28)
 Some of my future goals for this flake are:
