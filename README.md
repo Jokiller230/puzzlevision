@@ -11,22 +11,18 @@
 </div>
 <br>
 
-## 🚧 State of development
-All the basic functionality of v2 should be working correctly, including:
+## 💡 How does this work?
+At its core, version 2 of my NixOS flake was aimed at improving the following regions of my previous setup:
 
-- The custom lib implementation at self.lib, recursively built from the contents of the `lib` directory.
+- Implementing my own custom library at self.lib, recursively built from the contents of the `lib` directory.
 - Loading of systems from the `systems` directory, using easy-hosts.
-  - A basic workstation archetype for desktop systems.
-- Creating users in your systems through ${self.namespace}.users,
-automatically maps home-manager configurations from the `homes` directory to their corresponding users.
+  - Archetypes for various systems, as seen in [Jake Hamilton's](https://github.com/jakehamilton) flake.
+- Creating users in my systems through a unified NixOS module, with automated home-manager setups derived from the `homes` directory.
 
-Since I am actively using this configuration on my main workstation, things are evolving quickly,
-leftover issues are actively being resolved and the list of modules is ever-growing.
-Nonetheless, one should still consider this implementation experimental.
+Since I am actively using this configuration on my main workstation and Server, things have mostly stabilized,
+leftover issues are sparse and the list of modules is nearing completion (for my purposes that is).
 
-My next goal is to setup an attic binary cache,
-with a build/release workflow that runs in regular intervals.
-(similar to isabelroses's workflow setup)
+As such, I personally consider this flake production ready.
 
 ## 🚀 Deployment
 To deploy a system run the following command in your terminal of choice.
@@ -97,15 +93,23 @@ To be specific, it does the following:
 2. Installs nix with some experimental features (flakes, nix-command, recursive-nix, pipe-operator)
 3. Runs `nix flake check` on the codebase
 
-## 📝 Goals and improvements
-The main goals of this rewritten flake are:
+#### ↪️ `Nix: validate flake.lock`
+This workflow can be found in `.github/workflows/validate-lock.yml`.
+It simply scans flake lockfiles for duplicate entries using `nix run github:tgirlcloud/pkgs#locker`.
+Under the hood it makes use of the locker lockfile linter, created by the [tgirlcloud](https://github.com/tgirlcloud) team (mostly [isabelroses](https://github.com/isabelroses).
 
-- using flake-parts in place of Snowfall lib
-- significantly improving the re-usability of all modules
-- avoiding anti-patterns, such as `with lib; with lib.${namespace};`
-- improved secrets management
-- keeping external assets closer to their related nix file, e.g. wallpapers in
-the desktop modules folder
+To be specific, it does the following:
+1. Checks out current branch
+2. Installs nix with some experimental features (flakes, nix-command)
+3. Runs `nix run github:tgirlcloud/pkgs#locker` on the codebase
+
+## 📝 Future goals and improvements (2025-07-28)
+Some of my future goals for this flake are:
+
+- Implementing an automated release workflow with semver versioning, e.g. 2.3.0.
+- Experimenting with various window-managers, especially Niri, though not set in stone yet.
+- Researching performance best-practices for hardware and implementing patches based on those.
+- Further refining my usage of the Nix language, through language best-practices and CLI dev tools.
 
 ## 🏗️ Structure
 The structure this flake aims to build on is relatively simple to grasp.
@@ -131,5 +135,6 @@ and documentations such as:
 
 - [flake-parts](https://flake.parts)
 - [NixOS and Flakes book](https://nixos-and-flakes.thiscute.world)
+- [The official NixOS wiki](https://wiki.nixos.org)
 
 many thanks to their hard work!
