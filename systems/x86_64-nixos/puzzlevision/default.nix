@@ -34,17 +34,13 @@
     archetypes.laptop.enable = true;
   };
 
-  networking.extraHosts = ''
-    127.0.0.1 dev.bl-projekte.de
-  '';
-
   # Configure 8GB SWAP partition
-  # swapDevices = [
-  #   {
-  #     device = "/swapfile";
-  #     size = 8 * 1024;
-  #   }
-  # ];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 8 * 1024;
+    }
+  ];
 
   boot = {
     # Configure additional kernel modules.
