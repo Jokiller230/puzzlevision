@@ -22,6 +22,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     easy-hosts.url = "github:tgirlcloud/easy-hosts";
     sops-nix.url = "github:Mic92/sops-nix";
+    minegrub-theme.url = "github:Lxtharia/minegrub-theme";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

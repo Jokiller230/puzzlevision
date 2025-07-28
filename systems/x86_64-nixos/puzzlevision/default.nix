@@ -51,6 +51,17 @@
     blacklistedKernelModules = [
       "rtw88_8821ce" # Block the default network-card driver.
     ];
+
+    # Grub configuration
+    loader.grub = {
+      # Minecraft bootloader theme
+      minegrub-theme = {
+        enable = true;
+        splash = "100% Flakes!";
+        background = "background_options/1.18 - [Caves And Cliffs 2].png";
+        boot-options-count = 4;
+      };
+    };
   };
 
   networking.hostName = "puzzlevision";
