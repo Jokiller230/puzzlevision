@@ -1,0 +1,22 @@
+name: "Nix: validate flake.lock"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "**.lock"
+
+jobs:
+  check-flake:
+    name: Check Lockfile
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Lix
+        uses: ./.github/actions/install-lix
+
+      - name: Check flake.lock
+        run: nix run github:tgirlcloud/locker
