@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
-      
-      - name: Install lix
+
+      - name: Install Lix
         uses: ./.github/actions/install-lix
 
       - uses: phucleeuwu/deadnix-action@v1

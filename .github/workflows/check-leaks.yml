@@ -7,6 +7,8 @@ on:
     paths:
       - "**.nix"
       - ".github/workflows/check-leaks.yml"
+      - "**.yaml"
+      - "**.md"
 
 permissions:
   contents: read

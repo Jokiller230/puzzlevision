@@ -1,4 +1,4 @@
-# Taken from: https://github.com/isabelroses/dotfiles/blob/9335e5728eaaa9bdcb0d5c3130a5d7c8dddbb6e3/.github/actions/install-lix/action.yml :3
+# Derived from: https://github.com/isabelroses/dotfiles/blob/9335e5728eaaa9bdcb0d5c3130a5d7c8dddbb6e3/.github/actions/install-lix/action.yml :3
 name: Install Lix
 description: "Install Lix for the specified system"
 
