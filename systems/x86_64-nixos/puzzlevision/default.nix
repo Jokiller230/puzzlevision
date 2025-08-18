@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, ... }:
 {
   imports = [
     ./hardware.nix
@@ -32,6 +32,8 @@
     };
 
     archetypes.laptop.enable = true;
+
+    system.kernel.version = "linuxPackages_6_15";
   };
 
   # Configure 8GB SWAP partition
@@ -43,9 +45,11 @@
   ];
 
   boot = {
+    kernelModules = [ "8821ce" ];
+
     # Configure additional kernel modules.
-    extraModulePackages = [
-      pkgs.linuxPackages_latest.rtl8821ce # Use custom network-card driver.
+    extraModulePackages = with config.boot.kernelPackages; [
+      rtl8821ce
     ];
 
     blacklistedKernelModules = [
