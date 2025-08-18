@@ -65,7 +65,7 @@ in
       };
     };
     wallpaper =
-      mkOpt str (builtins.toString ../wallpapers/catppuccin/howard-chen-mao-mao-forest-campsite.jpg)
+      mkOpt path ../wallpapers/building_top_sit_dusk.jpg
         "Specify the path of your prefered Gnome wallpaper.";
   };
 
@@ -106,8 +106,8 @@ in
             dynamic-opacity = false;
           };
       "org/gnome/desktop/background" = {
-        picture-uri = cfg.wallpaper;
-        picture-uri-dark = cfg.wallpaper;
+        picture-uri = "file://${cfg.wallpaper}";
+        picture-uri-dark = "file://${cfg.wallpaper}";
       };
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
