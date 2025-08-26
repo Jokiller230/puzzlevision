@@ -15,5 +15,6 @@ in
       @import "onebar/onebar.css";
     '';
 
-  home.file.".mozilla/firefox/default/chrome/onebar/onebar.css".source = ./onebar.css;
+  home.file.".mozilla/firefox/default/chrome/onebar/onebar.css".source =
+    mkIf config.programs.firefox.enable ./onebar.css;
 }

@@ -7,7 +7,6 @@
   imports = [
     ./apps/discord
     ./apps/firefox
-    ./apps/youtube-music
   ];
 
   puzzlevision = {
@@ -34,6 +33,10 @@
     path = "${config.home.homeDirectory}/.wakatime.cfg";
   };
 
+  programs.git = {
+    enable = true;
+  };
+
   home.packages = with pkgs; [
     ## GENERAL
     ghostty
@@ -53,6 +56,7 @@
     ## RUNTIMES and CLIs for development
     bun
     git
+    git-credential-oauth
     attic-client
   ];
 

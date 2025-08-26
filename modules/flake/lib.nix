@@ -26,6 +26,18 @@ let
     else
       [ ];
 
+  filesystemEntityToPackage =
+    directory: pkgs: pkgArgs: name: type:
+    if type == "directory" then
+      dirToPkgAttrSet "${directory}/${name}" pkgs pkgArgs
+    else if name == "default.nix" then
+      {
+        ${builtins.unsafeDiscardStringContext (builtins.baseNameOf directory)} =
+          pkgs.callPackage "${directory}/${name}" pkgArgs;
+      }
+    else
+      { };
+
   dirToModuleList =
     directory:
     let
@@ -50,12 +62,25 @@ let
       acc // (filesystemEntityToAttrSet directory importArgs name (builtins.getAttr name readDir))
     ) { } (builtins.attrNames readDir);
 
+  dirToPkgAttrSet =
+    directory: pkgs: pkgArgs:
+    let
+      # Read provided directory only once at the very start and save the result.
+      readDir = readDirectory directory;
+    in
+    builtins.foldl' (
+      acc: name:
+      acc // (filesystemEntityToPackage directory pkgs pkgArgs name (builtins.getAttr name readDir))
+    ) { } (builtins.attrNames readDir);
+
   puzzlelib = dirToAttrSet ../../lib { inherit lib self; } // {
     inherit
       dirToAttrSet
+      dirToPkgAttrSet
       dirToModuleList
       filesystemEntityToList
       filesystemEntityToAttrSet
+      filesystemEntityToPackage
       ;
   };
 in

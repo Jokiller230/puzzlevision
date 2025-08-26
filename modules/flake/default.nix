@@ -5,5 +5,8 @@
 
     # Automagically imports systems from "/systems/arch-classname/system-name".
     ./systems.nix
+
+    # Automagically import custom packages defined in "/pkgs/pkg-name/default.nix"
+    ./packages.nix
   ];
 }
