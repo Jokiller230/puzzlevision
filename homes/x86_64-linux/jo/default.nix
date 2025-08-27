@@ -7,6 +7,7 @@
   imports = [
     ./apps/discord
     ./apps/firefox
+    ./apps/vicinae
   ];
 
   puzzlevision = {
@@ -31,10 +32,6 @@
     format = "binary";
     sopsFile = ./secrets/wakatime.cfg;
     path = "${config.home.homeDirectory}/.wakatime.cfg";
-  };
-
-  programs.git = {
-    enable = true;
   };
 
   home.packages = with pkgs; [

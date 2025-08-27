@@ -99,7 +99,9 @@ in
               inputs.sops-nix.homeManagerModules.sops
               inputs.catppuccin.homeModules.default
               inputs.nixcord.homeModules.nixcord
-            ] ++ homeModules;
+              inputs.vicinae.homeManagerModules.default
+            ]
+            ++ homeModules;
 
             home.stateVersion = lib.mkDefault osConfig.system.stateVersion;
           }
