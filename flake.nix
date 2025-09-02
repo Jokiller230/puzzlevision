@@ -21,6 +21,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     easy-hosts.url = "github:tgirlcloud/easy-hosts";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";

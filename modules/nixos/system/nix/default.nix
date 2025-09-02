@@ -24,8 +24,12 @@ in
 
   config = mkIf cfg.enable {
     nix = {
+      optimise = {
+        automatic = true;
+        dates = [ "03:45" ];
+      };
+
       settings = {
-        auto-optimise-store = true;
         builders-use-substitutes = true;
         experimental-features = [
           "nix-command"
@@ -35,7 +39,8 @@ in
         keep-derivations = true;
         keep-outputs = true;
 
-        max-jobs = "auto";
+        cores = 2;
+        max-jobs = 8;
         warn-dirty = false;
 
         trusted-users = cfg.trusted-users;
@@ -44,7 +49,7 @@ in
       # Garbage collection configuration.
       gc = {
         automatic = true;
-        dates = "daily";
+        dates = "weekly";
         options = "--delete-older-than 3d";
       };
 

@@ -28,6 +28,9 @@
     };
   };
 
+  # Notify on systembus events
+  services.systembus-notify.enable = true;
+
   sops.secrets.wakatime-cfg = {
     format = "binary";
     sopsFile = ./secrets/wakatime.cfg;

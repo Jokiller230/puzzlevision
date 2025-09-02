@@ -1,7 +1,8 @@
-{ config, ... }:
+{ ... }:
 {
   imports = [
     ./hardware.nix
+    ./hardware-generated.nix
   ];
 
   # Todo: automate this globally for all workstation and server archetypes!
@@ -32,30 +33,25 @@
     };
 
     archetypes.laptop.enable = true;
-
-    system.kernel.version = "linuxPackages_6_15";
+    system.kernel.version = "linuxPackages_zen";
   };
 
-  # Configure 8GB SWAP partition
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 8 * 1024;
-    }
-  ];
+  # Configure some last-resort aggressive nix-daemon OOM protection
+  systemd = {
+    # Create a separate slice for nix-daemon that is
+    # memory-managed by the userspace systemd-oomd killer
+    slices."nix-daemon".sliceConfig = {
+      ManagedOOMMemoryPressure = "kill";
+      ManagedOOMMemoryPressureLimit = "50%";
+    };
+    services."nix-daemon".serviceConfig.Slice = "nix-daemon.slice";
+
+    # If a kernel-level OOM event does occur anyway,
+    # strongly prefer killing nix-daemon child processes
+    services."nix-daemon".serviceConfig.OOMScoreAdjust = 1000;
+  };
 
   boot = {
-    kernelModules = [ "8821ce" ];
-
-    # Configure additional kernel modules.
-    extraModulePackages = with config.boot.kernelPackages; [
-      rtl8821ce
-    ];
-
-    blacklistedKernelModules = [
-      "rtw88_8821ce" # Block the default network-card driver.
-    ];
-
     # Grub configuration
     loader.grub = {
       # Minecraft bootloader theme
