@@ -43,6 +43,7 @@ Secrets are managed by the [sops-nix](https://github.com/Mic92/sops-nix) nixos/h
 
 - General secrets are stored within the `secrets` directory.
 - System specific secrets are stored within their respective `systems/<system_type>/<system_name>/secrets` directory.
+- User secrets are stored within their respective `homes/<system_type>/<user_name>/secrets` directory.
 
 The following command may be used to convert the SSH host key of a new machine to an age key:
 
@@ -66,7 +67,7 @@ You may also encrypt arbitrary binary formats, like .cfg, using the following co
 nix-shell -p sops --run "sops -e original_file.cfg > secrets/encrypted_file.cfg"
 ```
 
-Lastly, when adding new systems, make sure to update any required secret files with the following command:
+Finally, when adding new systems, make sure to update any required secret files with the following command:
 
 ```sh
 nix-shell -p sops --run "sops updatekeys secrets/example.yaml"
@@ -117,7 +118,7 @@ Some of my future goals for this flake are:
 - Further refining my usage of the Nix language, through language best-practices and CLI dev tools.
 
 ## 🏗️ Structure
-The structure this flake aims to build on is relatively simple to grasp.
+This flake follows an opinionated directory structure, described below.
 
 ```
 flake.nix  --> The flake.
