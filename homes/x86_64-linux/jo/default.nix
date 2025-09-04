@@ -8,6 +8,7 @@
     ./apps/discord
     ./apps/firefox
     ./apps/vicinae
+    ./apps/packettracer
   ];
 
   puzzlevision = {
@@ -27,9 +28,6 @@
       ];
     };
   };
-
-  # Notify on systembus events
-  services.systembus-notify.enable = true;
 
   sops.secrets.wakatime-cfg = {
     format = "binary";
