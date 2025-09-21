@@ -41,18 +41,9 @@ in
         ### Remove useless features and stuff
         show_call_status_icon = false;
         collaboration_panel.button = false;
-        chat_panel.button = "never";
 
-        agent = {
-          version = "2";
-          button = false;
-        };
-
-        features = {
-          inline_completion_provider = "none";
-          edit_prediction_provider = "none";
-          copilot = false;
-        };
+        ### Disable AI features entirely
+        disable_ai = true;
 
         ### Formatting and saving settings
         formatter = "language_server";
@@ -92,7 +83,6 @@ in
           # Web dev
           html = true;
           svelte = true;
-          ejs = true;
           scss = true;
           biome = true; # Formatting and utility tool, like ESlint, prettier, etc...
 

@@ -55,7 +55,7 @@
     };
 
     vicinae = {
-      url = "github:tomromeo/vicinae-nix";
+      url = "github:vicinaehq/vicinae";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

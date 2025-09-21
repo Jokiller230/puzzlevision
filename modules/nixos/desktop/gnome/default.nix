@@ -20,6 +20,7 @@ in
     services.displayManager.gdm.enable = true;
     services.desktopManager.gnome.enable = true;
 
+    # Exclude various Gnome core applications
     environment.gnome.excludePackages = with pkgs; [
       gnome-tour
       gedit
@@ -43,7 +44,7 @@ in
     environment.systemPackages = with pkgs; [
       refine
       showtime
-      resources
+      mission-center
     ];
   };
 }

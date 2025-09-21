@@ -65,7 +65,7 @@ in
       };
     };
     wallpaper =
-      mkOpt path ../wallpapers/building_top_sit_dusk.jpg
+      mkOpt path ../wallpapers/scenic-landscape-blurred.jpg
         "Specify the path of your prefered Gnome wallpaper.";
   };
 
