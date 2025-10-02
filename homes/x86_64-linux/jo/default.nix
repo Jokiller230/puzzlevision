@@ -29,6 +29,10 @@
     };
   };
 
+  programs = {
+    ghostty.enable = true;
+  };
+
   sops.secrets.wakatime-cfg = {
     format = "binary";
     sopsFile = ./secrets/wakatime.cfg;
@@ -37,7 +41,6 @@
 
   home.packages = with pkgs; [
     ## GENERAL
-    ghostty
     teams-for-linux
     enpass
     youtube-music
