@@ -59,11 +59,64 @@ in
     nixpkgs.config.allowUnfree = true;
 
     # Dynamic libraries for unpackaged programs
+    # Use nix run github:mic92/nix-index-database libName.so to find the correct Nix packages
     programs.nix-ld = mkIf cfg.use-nixld {
       enable = true;
       libraries = with pkgs; [
+        # Core
         glibc
         libcxx
+        expat
+        nspr
+        nss
+
+        # Rendering / graphics
+        mesa
+        libglvnd
+        libdrm
+        libgbm
+        xorg.libxshmfence
+
+        # X11 stack
+        xorg.libX11
+        xorg.libxcb
+        xorg.libXext
+        xorg.libXfixes
+        xorg.libXrandr
+        xorg.libXcomposite
+        xorg.libXdamage
+        xorg.libXcursor
+        xorg.libXinerama
+        xorg.libXi
+        xorg.libXtst
+
+        # Input / keyboard
+        libxkbcommon
+
+        # Wayland (optional)
+        wayland
+
+        # GTK / accessibility stack
+        glib
+        dbus
+        at-spi2-core
+        at-spi2-atk
+        gtk3
+        gdk-pixbuf
+        pango
+        cairo
+
+        # Printing
+        cups
+
+        # Fonts / text
+        freetype
+        fontconfig
+        harfbuzz
+
+        # Sound
+        alsa-lib
+        pulseaudio
       ];
     };
   };
