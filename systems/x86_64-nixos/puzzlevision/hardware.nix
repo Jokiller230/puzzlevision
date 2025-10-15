@@ -77,7 +77,6 @@
     # Kill processes before they can cause an OOM exception
     earlyoom = {
       enable = true;
-      enableNotifications = true;
     };
 
     # Enable Thermald for improved overheating protection
