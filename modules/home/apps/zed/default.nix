@@ -58,7 +58,7 @@ in
         };
 
         hard_tabs = true;
-        tab_size = 2;
+        tab_size = 4;
         soft_wrap = "preferred_line_length";
 
         ### Language specific configurations
@@ -72,6 +72,20 @@ in
               external = {
                 command = "nixfmt";
                 arguments = [ "--quiet" ];
+              };
+            };
+
+            tab_size = 2;
+          };
+          PHP = {
+            language_servers = [
+              "phpactor"
+              "!intelephense"
+              "!tailwind-language-server"
+            ];
+            formatter = {
+              external = {
+                command = "pretty-php";
               };
             };
           };
@@ -126,6 +140,11 @@ in
 
         ### Python
         python3Packages.python-lsp-server
+
+        ### PHP
+        php
+        phpPackages.composer
+        pretty-php
       ];
     };
   };
