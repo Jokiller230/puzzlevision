@@ -9,6 +9,8 @@
     ./apps/firefox
     ./apps/vicinae
     ./apps/packettracer
+
+    ./desktop/gnome
   ];
 
   puzzlevision = {
@@ -61,6 +63,11 @@
     git
     git-credential-oauth
     attic-client
+
+    ## PHP/Shopware
+    php84
+    php84Packages.composer
+    shopware-cli
   ];
 
   home.stateVersion = "25.05";
