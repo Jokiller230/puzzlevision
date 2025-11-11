@@ -22,7 +22,7 @@
     };
 
     archetypes.laptop.enable = true;
-    system.kernel.version = "linuxPackages_6_16";
+    system.kernel.version = "linuxPackages_6_17";
   };
 
   boot = {

@@ -28,13 +28,13 @@ in
         nerd-fonts.zed-mono
         monocraft
 
-        noto-fonts-emoji
+        noto-fonts-color-emoji
         material-icons
         material-design-icons
       ];
       example = [
         noto-fonts
-        noto-fonts-emoji
+        noto-fonts-color-emoji
       ];
       description = "Install additional font packages";
     };

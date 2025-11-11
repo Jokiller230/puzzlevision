@@ -10,3 +10,7 @@
 
 ### VSCode
 /.vscode
+
+### User provided binaries
+# Cisco Packet Tracer
+/homes/x86_64-linux/*/apps/packettracer/*.deb
