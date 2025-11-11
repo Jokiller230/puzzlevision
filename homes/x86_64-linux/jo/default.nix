@@ -67,6 +67,7 @@
     ## PHP/Shopware
     php84
     php84Packages.composer
+    pretty-php
     shopware-cli
   ];
 
