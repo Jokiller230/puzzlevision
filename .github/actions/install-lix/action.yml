@@ -1,4 +1,4 @@
-# Derived from: https://github.com/isabelroses/dotfiles/blob/9335e5728eaaa9bdcb0d5c3130a5d7c8dddbb6e3/.github/actions/install-lix/action.yml :3
+# Derived from: https://github.com/isabelroses/dotfiles/blob/d3149ba27ec531b53de9e13c815ea1741c835299/.github/actions/install-lix/action.yml :3
 name: Install Lix
 description: "Install Lix for the specified system"
 
@@ -6,7 +6,7 @@ runs:
   using: composite
 
   steps:
-    - uses: DeterminateSystems/nix-installer-action@main
+    - uses: DeterminateSystems/nix-installer-action@v20
       with:
         source-url: 'https://install.lix.systems/lix/lix-installer-${{ fromJSON(''{"X64":"x86_64","X86":"i686","ARM64":"aarch64","ARM":"armv7l"}'')[runner.arch] }}-${{ fromJSON(''{"Linux":"linux","macOS":"darwin","Windows":"windows"}'')[runner.os] }}'
         logger: pretty
