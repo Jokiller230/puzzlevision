@@ -1,9 +1,12 @@
 {
-  pkgs,
+  lib,
   inputs,
   config,
   ...
 }:
+let
+  inherit (lib) mkIf;
+in
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
@@ -26,31 +29,27 @@
     blacklistedKernelModules = [
       "rtw88_8821ce" # Block the default network-card driver.
     ];
+
+    # Increase swappiness, if ZRAM swap is enabled,
+    # as it doesn't come with the same "speed" caveats as standard swap.
+    kernel.sysctl = mkIf config.zramSwap.enable {
+      "vm.swappiness" = 140;
+    };
   };
 
-  # Enable OpenGL and install additional drivers for intel video acceleration
+  # Broader firmware and hardware support
   hardware = {
-    graphics = {
-      enable = true;
-      extraPackages = with pkgs; [
-        intel-ocl
-        intel-media-driver
-        libva-vdpau-driver
-        libvdpau-va-gl
-      ];
-    };
-
-    # Broader firmware and hardware support
     enableAllFirmware = true;
     enableAllHardware = true;
   };
 
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";
+  # Enable ZRAM
+  zramSwap = {
+    enable = true;
+    priority = 100;
   };
 
-  # Enable ZRAM and disable standard SWAP
-  zramSwap.enable = true;
+  # Disable standard swap
   swapDevices = [ ];
 
   services = {
@@ -67,7 +66,7 @@
         CPU_MIN_PERF_ON_AC = 0;
         CPU_MAX_PERF_ON_AC = 100;
         CPU_MIN_PERF_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 30;
+        CPU_MAX_PERF_ON_BAT = 40;
       };
     };
 
@@ -75,17 +74,9 @@
     power-profiles-daemon.enable = false;
 
     # Kill processes before they can cause an OOM exception
-    earlyoom = {
-      enable = true;
-    };
+    earlyoom.enable = true;
 
     # Enable Thermald for improved overheating protection
     thermald.enable = true;
-
-    # Instruct XServer to use the correct video drivers
-    xserver.videoDrivers = [
-      "i915"
-      "intel"
-    ];
   };
 }

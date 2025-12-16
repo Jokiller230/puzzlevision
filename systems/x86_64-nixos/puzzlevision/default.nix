@@ -11,6 +11,12 @@
 
   programs.steam.enable = true;
 
+  # Create some helpful groups for development
+  # and permission related reasons.
+  users.groups = {
+    www-data.gid = 33;
+  };
+
   puzzlevision = {
     users.jo = {
       enable = true;
@@ -18,24 +24,19 @@
       extraGroups = [
         "wheel"
         "docker"
+        "www-data"
       ];
     };
 
     archetypes.laptop.enable = true;
-    system.kernel.version = "linuxPackages_6_17";
   };
 
-  boot = {
-    # Grub configuration
-    loader.grub = {
-      # Minecraft bootloader theme
-      minegrub-theme = {
-        enable = true;
-        splash = "100% Flakes!";
-        background = "background_options/1.18 - [Caves And Cliffs 2].png";
-        boot-options-count = 4;
-      };
-    };
+  # Minecraft bootloader theme
+  boot.loader.grub.minegrub-theme = {
+    enable = true;
+    splash = "100% Flakes!";
+    background = "background_options/1.18 - [Caves And Cliffs 2].png";
+    boot-options-count = 4;
   };
 
   networking.hostName = "puzzlevision";
