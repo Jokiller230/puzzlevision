@@ -17,7 +17,7 @@ let
   inherit (self.lib) dirToModuleList;
 
   # The identifier of the current system type, e.g. "x86_64-linux" or "aarch64-darwin"
-  system = pkgs.system;
+  system = pkgs.stdenv.hostPlatform.system;
   cfg = config.${namespace}.users;
 
   userSubmodule = types.submodule {
