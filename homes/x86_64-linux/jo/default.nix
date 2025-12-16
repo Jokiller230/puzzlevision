@@ -9,23 +9,15 @@
     ./apps/firefox
     ./apps/vicinae
     ./apps/packettracer
+    ./apps/ghostty
+    ./apps/zed
 
     ./desktop/gnome
   ];
 
   puzzlevision = {
     themes.catppuccin.enable = true;
-    apps = {
-      zed.enable = true;
-    };
-
-    cli = {
-      direnv.enable = true;
-    };
-  };
-
-  programs = {
-    ghostty.enable = true;
+    cli.direnv.enable = true;
   };
 
   sops.secrets.wakatime-cfg = {
@@ -36,12 +28,11 @@
 
   home.packages = with pkgs; [
     ## GENERAL
-    teams-for-linux
     enpass
     youtube-music
+    teams-for-linux
 
     ## EDITORS
-    apostrophe
     jetbrains.phpstorm
     obsidian
 
@@ -55,5 +46,5 @@
     shopware-cli
   ];
 
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 }

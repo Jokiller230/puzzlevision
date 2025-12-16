@@ -13,7 +13,10 @@ let
 in
 {
   options.${namespace}.apps.zed = {
-    enable = mkEnableOption "zed, the graphical editor from the future";
+    enable = mkEnableOption "Zed, the graphical editor from the future, with a sane base configuration.";
+    enable-nix = mkEnableOption "support for the Nix language, based on nixd, in Zed.";
+    enable-php = mkEnableOption "support for the PHP language, based on phpactor and pretty-php, in Zed.";
+    enable-python = mkEnableOption "support for the Python language, based on pylsp, in Zed.";
   };
 
   config = mkIf cfg.enable {
@@ -21,6 +24,19 @@ in
       enable = true;
 
       userSettings = {
+        ### Disable telemetry
+        telemetry = {
+          diagnostics = false;
+          metrics = false;
+        };
+
+        ### Disable collaborative features
+        show_call_status_icon = false;
+        collaboration_panel.button = false;
+
+        ### Disable AI features
+        disable_ai = true;
+
         ### Theme settings
         icon_theme = mkForce {
           dark = mkIf config.catppuccin.enable "Catppuccin Macchiato";
@@ -31,19 +47,6 @@ in
           dark = mkIf config.catppuccin.enable "Catppuccin Macchiato (blue)";
           light = mkIf config.catppuccin.enable "Catppuccin Latte (blue)";
         };
-
-        ### Disable telemetry
-        telemetry = {
-          diagnostics = false;
-          metrics = false;
-        };
-
-        ### Remove useless features and stuff
-        show_call_status_icon = false;
-        collaboration_panel.button = false;
-
-        ### Disable AI features entirely
-        disable_ai = true;
 
         ### Formatting and saving settings
         formatter = "language_server";
@@ -63,7 +66,7 @@ in
 
         ### Language specific configurations
         languages = {
-          Nix = {
+          Nix = mkIf cfg.enable-nix {
             language_servers = [
               "nixd"
               "!nil"
@@ -77,7 +80,7 @@ in
 
             tab_size = 2;
           };
-          PHP = {
+          PHP = mkIf cfg.enable-php {
             language_servers = [
               "phpactor"
               "!intelephense"
@@ -101,11 +104,11 @@ in
           oxc = true;
 
           # Languages
-          nix = true;
-          php = true;
+          nix = mkIf cfg.enable-nix true;
+          php = mkIf cfg.enable-php true;
           sql = true;
           toml = true;
-          pylsp = true; # Python
+          pylsp = mkIf cfg.enable-python true; # Python
           fish = true;
 
           # Docker
@@ -134,16 +137,22 @@ in
 
       extraPackages = with pkgs; [
         ### Nix
-        nixd
-        nixfmt-rfc-style
+        (mkIf cfg.enable-nix [
+          nixd
+          nixfmt-rfc-style
+        ])
 
         ### Python
-        python3Packages.python-lsp-server
+        (mkIf cfg.enable-python [
+          python3Packages.python-lsp-server
+        ])
 
         ### PHP
-        php
-        phpPackages.composer
-        pretty-php
+        (mkIf cfg.enable-php [
+          php
+          phpPackages.composer
+          pretty-php
+        ])
 
         ### TypeScript/JavaScript
         oxlint
