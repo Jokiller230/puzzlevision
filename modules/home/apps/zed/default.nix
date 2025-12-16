@@ -98,7 +98,7 @@ in
           html = true;
           svelte = true;
           scss = true;
-          biome = true; # Formatting and utility tool, like ESlint, prettier, etc...
+          oxc = true;
 
           # Languages
           nix = true;
@@ -117,8 +117,7 @@ in
           catppuccin-icons = mkIf config.catppuccin.enable true;
 
           # Other
-          discord-presence = true;
-          git-firefly = true;
+          discord-presence = mkIf config.programs.nixcord.enable true;
           wakatime = true;
         };
       };
@@ -145,6 +144,9 @@ in
         php
         phpPackages.composer
         pretty-php
+
+        ### TypeScript/JavaScript
+        oxlint
       ];
     };
   };
