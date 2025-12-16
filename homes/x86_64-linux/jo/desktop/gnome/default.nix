@@ -5,6 +5,12 @@
 {
   puzzlevision.desktop.gnome = {
     enabled-extensions = with pkgs.gnomeExtensions; [
+      user-themes
+      blur-my-shell
+      appindicator
+      unite
+      color-picker
+      clipboard-history
       vicinae
     ];
 
