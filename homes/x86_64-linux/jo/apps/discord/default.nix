@@ -41,13 +41,13 @@ in
 
         betterSettings.enable = true;
         betterUploadButton.enable = true;
-        blurNSFW.enable = true;
-        clearURLs.enable = true;
+        blurNsfw.enable = true;
+        clearUrLs.enable = true;
         callTimer.enable = true;
         consoleJanitor.enable = true;
         copyEmojiMarkdown.enable = true;
         userMessagesPronouns.enable = true;
-        reviewDB.enable = true;
+        reviewDb.enable = true;
 
         # Vesktop exclusive
         webRichPresence.enable = true;
