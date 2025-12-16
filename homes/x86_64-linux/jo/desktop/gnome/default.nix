@@ -1,6 +1,13 @@
-{ ... }:
+{
+  pkgs,
+  ...
+}:
 {
   puzzlevision.desktop.gnome = {
+    enabled-extensions = with pkgs.gnomeExtensions; [
+      vicinae
+    ];
+
     favorite-apps = [
       "org.gnome.Nautilus.desktop"
       "obsidian.desktop"
