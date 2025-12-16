@@ -135,28 +135,21 @@ in
         }
       ];
 
-      extraPackages = with pkgs; [
-        ### Nix
-        (mkIf cfg.enable-nix [
+      extraPackages =
+        with pkgs;
+        [ oxlint ]
+        ++ lib.optionals cfg.enable-nix [
           nixd
           nixfmt-rfc-style
-        ])
-
-        ### Python
-        (mkIf cfg.enable-python [
+        ]
+        ++ lib.optionals cfg.enable-python [
           python3Packages.python-lsp-server
-        ])
-
-        ### PHP
-        (mkIf cfg.enable-php [
+        ]
+        ++ lib.optionals cfg.enable-php [
           php
           phpPackages.composer
           pretty-php
-        ])
-
-        ### TypeScript/JavaScript
-        oxlint
-      ];
+        ];
     };
   };
 }
