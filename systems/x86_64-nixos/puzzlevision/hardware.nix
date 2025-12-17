@@ -33,7 +33,7 @@ in
     # Increase swappiness, if ZRAM swap is enabled,
     # as it doesn't come with the same "speed" caveats as standard swap.
     kernel.sysctl = mkIf config.zramSwap.enable {
-      "vm.swappiness" = 140;
+      "vm.swappiness" = 10;
     };
   };
 
@@ -46,7 +46,7 @@ in
   # Enable ZRAM
   zramSwap = {
     enable = true;
-    priority = 100;
+    priority = 0;
   };
 
   # Disable standard swap
