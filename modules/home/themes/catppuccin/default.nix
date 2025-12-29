@@ -30,6 +30,7 @@ in
   config = mkIf cfg.enable {
     catppuccin = {
       enable = true;
+      cache.enable = true;
       accent = cfg.accent;
       flavor = cfg.flavor;
 

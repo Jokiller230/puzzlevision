@@ -29,7 +29,7 @@
   home.packages = with pkgs; [
     ## GENERAL
     enpass
-    youtube-music
+    pear-desktop
     teams-for-linux
 
     ## EDITORS

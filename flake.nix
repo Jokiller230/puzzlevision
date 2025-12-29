@@ -10,18 +10,20 @@
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
       "https://catppuccin.cachix.org"
+      "https://vicinae.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
+      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
     ];
   };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    easy-hosts.url = "github:tgirlcloud/easy-hosts";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    easy-hosts.url = "github:tgirlcloud/easy-hosts";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -38,13 +40,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catppuccin = {
-      url = "github:catppuccin/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixcord = {
-      url = "github:kaylorben/nixcord";
+      url = "github:FlameFlag/nixcord";
       inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -56,7 +53,10 @@
 
     vicinae = {
       url = "github:vicinaehq/vicinae";
-      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    catppuccin = {
+      url = "github:catppuccin/nix";
     };
   };
 
