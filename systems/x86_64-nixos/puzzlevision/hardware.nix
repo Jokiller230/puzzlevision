@@ -33,8 +33,15 @@ in
     # Increase swappiness, if ZRAM swap is enabled,
     # as it doesn't come with the same "speed" caveats as standard swap.
     kernel.sysctl = mkIf config.zramSwap.enable {
-      "vm.swappiness" = 10;
+      "vm.swappiness" = 50;
     };
+
+    # Apply a few kernel parameters to combat system freezes
+    kernelParams = [
+      "intel_idle.max_cstate=1" # avoids deep C-state freezes
+      "processor.max_cstate=1" # same effect, some kernels honor one better than the other
+      "usbcore.autosuspend=-1"
+    ];
   };
 
   # Broader firmware and hardware support
@@ -49,9 +56,6 @@ in
     priority = 0;
   };
 
-  # Disable standard swap
-  swapDevices = [ ];
-
   services = {
     # Enable TLP for power management profiles on AC and Battery
     tlp = {
@@ -61,12 +65,14 @@ in
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "powersave";
 
-        CPU_MIN_PERF_ON_AC = 0;
+        CPU_MIN_PERF_ON_AC = 70;
         CPU_MAX_PERF_ON_AC = 100;
-        CPU_MIN_PERF_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 40;
+        CPU_MIN_PERF_ON_BAT = 20;
+        CPU_MAX_PERF_ON_BAT = 50;
+
+        USB_AUTOSUSPEND = 0;
       };
     };
 
@@ -75,8 +81,5 @@ in
 
     # Kill processes before they can cause an OOM exception
     earlyoom.enable = true;
-
-    # Enable Thermald for improved overheating protection
-    thermald.enable = true;
   };
 }
