@@ -50,8 +50,8 @@ in
         };
 
         api = {
-          dashboard = true;
-          insecure = true;
+          dashboard = false;
+          insecure = false;
         };
 
         providers = {
@@ -91,14 +91,6 @@ in
               {
                 main = "thevoid.cafe";
                 sans = [ "*.thevoid.cafe" ];
-              }
-              {
-                main = "rhysbot.co.uk";
-                sans = [ "*.rhysbot.co.uk" ];
-              }
-              {
-                main = "jo-dev.com";
-                sans = [ "*.jo-dev.com" ];
               }
             ];
           };
