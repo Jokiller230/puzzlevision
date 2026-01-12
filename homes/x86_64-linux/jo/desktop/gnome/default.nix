@@ -10,7 +10,6 @@
       appindicator
       unite
       color-picker
-      clipboard-history
       vicinae
     ];
 
