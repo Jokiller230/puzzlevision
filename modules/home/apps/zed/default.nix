@@ -104,11 +104,11 @@ in
           oxc = true;
 
           # Languages
-          nix = mkIf cfg.enable-nix true;
-          php = mkIf cfg.enable-php true;
+          nix = cfg.enable-nix;
+          php = cfg.enable-php;
           sql = true;
           toml = true;
-          pylsp = mkIf cfg.enable-python true; # Python
+          pylsp = cfg.enable-python; # Python
           fish = true;
 
           # Docker
@@ -116,11 +116,11 @@ in
           docker-compose = true;
 
           # Theming
-          catppuccin = mkIf config.catppuccin.enable true;
-          catppuccin-icons = mkIf config.catppuccin.enable true;
+          catppuccin = config.catppuccin.enable;
+          catppuccin-icons = config.catppuccin.enable;
 
           # Other
-          discord-presence = mkIf config.programs.nixcord.enable true;
+          discord-presence = config.programs.nixcord.enable;
           wakatime = true;
         };
       };
