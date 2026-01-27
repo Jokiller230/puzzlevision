@@ -17,6 +17,7 @@ in
     enable-nix = mkEnableOption "support for the Nix language, based on nixd, in Zed.";
     enable-php = mkEnableOption "support for the PHP language, based on phpactor and pretty-php, in Zed.";
     enable-python = mkEnableOption "support for the Python language, based on pylsp, in Zed.";
+    enable-typescript = mkEnableOption "support for the TypeScript language, based on bun and oxc, in Zed.";
   };
 
   config = mkIf cfg.enable {
@@ -92,6 +93,15 @@ in
               };
             };
           };
+          TypeScript = mkIf cfg.enable-typescript {
+            language_servers = [
+              "vtsls"
+              "oxlint"
+              "oxfmt"
+              "!eslint"
+            ];
+            formatter = "language_server";
+          };
         };
 
         ### Base editor configurations
@@ -137,10 +147,13 @@ in
 
       extraPackages =
         with pkgs;
-        [ oxlint ]
+        [
+          oxlint
+          oxfmt
+        ]
         ++ lib.optionals cfg.enable-nix [
           nixd
-          nixfmt-rfc-style
+          nixfmt
         ]
         ++ lib.optionals cfg.enable-python [
           python3Packages.python-lsp-server

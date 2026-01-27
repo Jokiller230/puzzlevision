@@ -5,5 +5,6 @@
     enable-nix = true;
     enable-php = true;
     enable-python = true;
+    enable-typescript = true;
   };
 }
